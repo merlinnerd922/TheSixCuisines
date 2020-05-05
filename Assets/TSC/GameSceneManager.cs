@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Extend;
 using UnityEngine;
 
 /// <summary>
@@ -66,7 +67,7 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void ShowGameMenu()
     {
-        this.menuManager.gameObject.SetActive(true);
+        this.menuManager.Activate();
     }
 
     /// <summary>
@@ -74,7 +75,7 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void HideGameMenu()
     {
-        this.menuManager.gameObject.SetActive(false);
+        this.menuManager.Deactivate();
     }
 
 }

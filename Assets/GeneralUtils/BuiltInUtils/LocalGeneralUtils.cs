@@ -97,7 +97,7 @@ public static class LocalGeneralUtils
 	/// <param name="keyValuePair">The KeyValuePair to convert into a Tuple of Strings.</param>
 	/// <typeparam name="K">The Key in the pair.</typeparam>
 	/// <typeparam name="V">The value in the pair.</typeparam>
-	/// <returns>The Tuple reprsentation of the provided key/value pair.</returns>
+	/// <returns>The Tuple representation of the provided key/value pair.</returns>
 	public static Tuple<string, string> ToStringTuple<K, V>(this KeyValuePair<K, V> keyValuePair)
 	{
 		return Tuple.Create(keyValuePair.Key.ToString(), keyValuePair.Value.ToString());

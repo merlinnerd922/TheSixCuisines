@@ -827,6 +827,24 @@ namespace Extend
             monoBehaviour.transform.position = positionToSet;
         }
 
+        /// <summary>
+        /// Deactivate the GameObject attached to this MonoBehaviour.
+        /// </summary>
+        /// <param name="monoBehaviour">The MonoBehaviour whose GameObject should be deactivated.</param>
+        public static void Deactivate(this MonoBehaviour monoBehaviour)
+        {
+            monoBehaviour.gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// Activate the GameObject attached to this script.
+        /// </summary>
+        /// <param name="monoBehaviour">The MonoBehaviour whose GameObject should be activated.</param>
+        public static void Activate(this MonoBehaviour monoBehaviour)
+        {
+            monoBehaviour.gameObject.SetActive(true);
+        }
+
     }
 
 }

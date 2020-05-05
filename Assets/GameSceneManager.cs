@@ -7,6 +7,12 @@ using UnityEngine;
 /// </summary>
 public class GameSceneManager : MonoBehaviour
 {
+
+    /// <summary>
+    /// The manager for the in-game menu.
+    /// </summary>
+    public GameMenuManager menuManager;
+    
     /// <summary>
     /// The current state of the game.
     /// </summary>
@@ -53,6 +59,22 @@ public class GameSceneManager : MonoBehaviour
     {
         turnNumber = turnToSet;
         turnDisplay.SetTurnNumber(turnToSet);
+    }
+
+    /// <summary>
+    /// Show the game menu.
+    /// </summary>
+    public void ShowGameMenu()
+    {
+        this.menuManager.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Hide the game menu.
+    /// </summary>
+    public void HideGameMenu()
+    {
+        this.menuManager.gameObject.SetActive(false);
     }
 
 }

@@ -56,11 +56,49 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CollectionUtils\DualKeyDictionary.cs" />
+     <Compile Include="Assets\CollectionUtils\LocalCollectionUtils.cs" />
+     <Compile Include="Assets\CollectionUtils\LocalDictionaryUtils.cs" />
+     <Compile Include="Assets\CollectionUtils\SerializableDictionary.cs" />
+     <Compile Include="Assets\GameMenuHamburgerButton.cs" />
+     <Compile Include="Assets\GameMenuManager.cs" />
      <Compile Include="Assets\GameSceneManager.cs" />
      <Compile Include="Assets\GameState.cs" />
+     <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalGeneralUtils.cs" />
+     <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalMemberUtils.cs" />
+     <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalStringUtils.cs" />
+     <Compile Include="Assets\GeneralUtils\Color\HSBColor.cs" />
+     <Compile Include="Assets\GeneralUtils\Color\LocalColorUtils.cs" />
+     <Compile Include="Assets\GeneralUtils\EqualityComparer.cs" />
+     <Compile Include="Assets\GeneralUtils\PathInst.cs" />
+     <Compile Include="Assets\GeneralUtils\RuntimeException.cs" />
+     <Compile Include="Assets\MathUtils\GeometryUtils\Axis3D.cs" />
+     <Compile Include="Assets\MathUtils\GeometryUtils\Direction.cs" />
+     <Compile Include="Assets\MathUtils\GeometryUtils\LocalVector2Utils.cs" />
+     <Compile Include="Assets\MathUtils\GeometryUtils\LocalVector3Utils.cs" />
+     <Compile Include="Assets\MathUtils\GeometryUtils\RectangularAlignment.cs" />
+     <Compile Include="Assets\MathUtils\GeometryUtils\Sphere.cs" />
+     <Compile Include="Assets\MathUtils\GeometryUtils\Vector2Int.cs" />
+     <Compile Include="Assets\MathUtils\LocalMathUtils.cs" />
+     <Compile Include="Assets\MathUtils\NumberRandomizer.cs" />
      <Compile Include="Assets\MenuButton.cs" />
      <Compile Include="Assets\TurnButton.cs" />
      <Compile Include="Assets\TurnDisplay.cs" />
+     <Compile Include="Assets\UnityUtils\Handlers\IDragHandlerThorough.cs" />
+     <Compile Include="Assets\UnityUtils\Handlers\IHoverHandler.cs" />
+     <Compile Include="Assets\UnityUtils\MonoBehaviour\CustomCursorHoverHandler.cs" />
+     <Compile Include="Assets\UnityUtils\MonoBehaviour\DraggableImageMonoBehaviour.cs" />
+     <Compile Include="Assets\UnityUtils\MonoBehaviour\DragHandler.cs" />
+     <Compile Include="Assets\UnityUtils\MonoBehaviour\MonoItemIncrementer.cs" />
+     <Compile Include="Assets\UnityUtils\MonoBehaviour\TextFlasherMonoBehaviour.cs" />
+     <Compile Include="Assets\UnityUtils\Sandbox\ImageLabelObject.cs" />
+     <Compile Include="Assets\UnityUtils\Sandbox\MapPath.cs" />
+     <Compile Include="Assets\UnityUtils\Sandbox\PathFollower.cs" />
+     <Compile Include="Assets\UnityUtils\Sandbox\SampleClickDetector.cs" />
+     <Compile Include="Assets\UnityUtils\SaveGameManager.cs" />
+     <Compile Include="Assets\UnityUtils\UtilsClass\LocalGameObjectFamilyUtils.cs" />
+     <Compile Include="Assets\UnityUtils\UtilsClass\LocalGameObjectUtils.cs" />
+     <Compile Include="Assets\UnityUtils\UtilsClass\LocalUnityUtils.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

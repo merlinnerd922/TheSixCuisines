@@ -44,6 +44,11 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void Start()
     {
+        // TODO
+        if (this.menuManager.isActiveAndEnabled)
+        {
+            this.HideGameMenu();
+        }
 
         // Create a new game state, and set the current turn to 1.
         gameState = GameState.CreateNew();
@@ -68,6 +73,10 @@ public class GameSceneManager : MonoBehaviour
     public void ShowGameMenu()
     {
         this.menuManager.Activate();
+        
+        // TODO
+        this.menuManager.saveGameMenu.Deactivate();
+        this.menuManager.ActivateMenu(this.menuManager.optionsSummaryMenu);
     }
 
     /// <summary>

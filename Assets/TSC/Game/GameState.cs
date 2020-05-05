@@ -1,7 +1,10 @@
 ﻿
+using System;
+
 /// <summary>
 /// The state of a game.
 /// </summary>
+[Serializable]
 public class GameState
 {
     /// <summary>

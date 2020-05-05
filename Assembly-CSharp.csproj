@@ -60,10 +60,6 @@
      <Compile Include="Assets\CollectionUtils\LocalCollectionUtils.cs" />
      <Compile Include="Assets\CollectionUtils\LocalDictionaryUtils.cs" />
      <Compile Include="Assets\CollectionUtils\SerializableDictionary.cs" />
-     <Compile Include="Assets\GameMenuHamburgerButton.cs" />
-     <Compile Include="Assets\GameMenuManager.cs" />
-     <Compile Include="Assets\GameSceneManager.cs" />
-     <Compile Include="Assets\GameState.cs" />
      <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalGeneralUtils.cs" />
      <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalMemberUtils.cs" />
      <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalStringUtils.cs" />
@@ -81,9 +77,13 @@
      <Compile Include="Assets\MathUtils\GeometryUtils\Vector2Int.cs" />
      <Compile Include="Assets\MathUtils\LocalMathUtils.cs" />
      <Compile Include="Assets\MathUtils\NumberRandomizer.cs" />
-     <Compile Include="Assets\MenuButton.cs" />
-     <Compile Include="Assets\TurnButton.cs" />
-     <Compile Include="Assets\TurnDisplay.cs" />
+     <Compile Include="Assets\TSC\GameMenuHamburgerButton.cs" />
+     <Compile Include="Assets\TSC\GameMenuManager.cs" />
+     <Compile Include="Assets\TSC\GameSceneManager.cs" />
+     <Compile Include="Assets\TSC\GameState.cs" />
+     <Compile Include="Assets\TSC\MenuButton.cs" />
+     <Compile Include="Assets\TSC\TurnButton.cs" />
+     <Compile Include="Assets\TSC\TurnDisplay.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IDragHandlerThorough.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IHoverHandler.cs" />
      <Compile Include="Assets\UnityUtils\MonoBehaviour\CustomCursorHoverHandler.cs" />

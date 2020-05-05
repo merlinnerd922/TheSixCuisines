@@ -22,7 +22,7 @@ namespace TSC.Game.Menu
         public GameSceneManager gameSceneManager;
 
         /// <summary>
-        /// TODO
+        /// The manager for the game menus.
         /// </summary>
         private GameMenuManager _gameMenuManager => gameSceneManager.menuManager;
 
@@ -38,17 +38,16 @@ namespace TSC.Game.Menu
 
         
         /// <summary>
-        /// TODO
+        /// Hide this menu, and activate the options summary menu again.
         /// </summary>
         public void HideMenu()
         {
-            
             this._gameMenuManager.ActivateMenu(this._gameMenuManager.optionsSummaryMenu);
             this.Deactivate();
         }
 
         /// <summary>
-        /// TODO
+        /// Show this menu and hide the active menu.
         /// </summary>
         public void ShowMenu()
         {

@@ -44,7 +44,7 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        // TODO
+        // Make sure to hide the game menu at the very start.
         if (this.menuManager.isActiveAndEnabled)
         {
             this.HideGameMenu();
@@ -72,9 +72,10 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void ShowGameMenu()
     {
+        // Show the menu manager.
         this.menuManager.Activate();
         
-        // TODO
+        // Hide all sub-menus except for the options summary view.
         this.menuManager.saveGameMenu.Deactivate();
         this.menuManager.ActivateMenu(this.menuManager.optionsSummaryMenu);
     }

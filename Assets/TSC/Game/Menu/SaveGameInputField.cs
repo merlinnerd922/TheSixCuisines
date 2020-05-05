@@ -17,7 +17,7 @@ namespace TSC.Game.Menu
         public SaveGameMenu saveGameMenu;
 
         /// <summary>
-        /// TODO
+        /// Initialize this script.
         /// </summary>
         protected override void Start()
         {
@@ -28,20 +28,26 @@ namespace TSC.Game.Menu
 
         
         /// <summary>
-        /// TODO
+        /// A flag indicating if this input field was active in the previous frame. By default, this is equal
+        /// to false.
         /// </summary>
-        bool allowEnter = false;
+        private bool wasPreviouslyInFocus = false;
         
         /// <summary>
-        /// TODO
+        /// Update this MonoBehaviour.
         /// </summary>
-        void Update () {
-             
-            if (allowEnter && (text.Length > 0) && (Input.GetKey (KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))) {
+        private void Update () {
+
+            // If there is text being submitted, then save the current game.
+            if (this.wasPreviouslyInFocus && (text.Length > 0) && (Input.GetKey (KeyCode.Return) 
+                                                                   || Input.GetKey(KeyCode.KeypadEnter))) {
                 saveGameMenu.SaveGame();
-                allowEnter = false;
-            } else
-                allowEnter = isFocused;
+                this.wasPreviouslyInFocus = false;
+            } 
+            
+            // Otherwise, keep track of whether this element is in focus.
+            else
+                this.wasPreviouslyInFocus = isFocused;
         }
 
     }

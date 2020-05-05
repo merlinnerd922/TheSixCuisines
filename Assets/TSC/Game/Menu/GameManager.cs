@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 namespace TSC.Game.Menu
 {
 /// <summary>
-/// TODO
+/// The manager for the entire game, and contains methods pertinent to all scenes.
 /// </summary>
     public class GameManager : MonoBehaviour
     {

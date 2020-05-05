@@ -11,32 +11,23 @@ public class GameMenuManager : MonoBehaviour
     /// <summary>
     /// The currently active in-game menu.
     /// </summary>
-    [FormerlySerializedAs("inGameMenu")] 
+    [FormerlySerializedAs("inGameMenu")]
     public InGameMenu activeMenu;
 
     /// <summary>
-    /// TODO
+    /// The game saving menu.
     /// </summary>
     public SaveGameMenu saveGameMenu;
 
     /// <summary>
-    /// TODO
+    /// The menu displaying all of the main options on the page.
     /// </summary>
     public OptionsSummaryMenu optionsSummaryMenu;
 
     /// <summary>
-    /// TODO
+    /// Activate the specified menu.
     /// </summary>
-    public void SaveGameOption()
-    {
-        this.activeMenu.Deactivate();
-        ActivateMenu(this.saveGameMenu);
-    }
-
-    /// <summary>
-    /// TODO
-    /// </summary>
-    /// <param name="menuToActivate"></param>
+    /// <param name="menuToActivate">The menu to activate.</param>
     public void ActivateMenu(InGameMenu menuToActivate)
     {
         menuToActivate.Activate();

@@ -87,8 +87,6 @@
      <Compile Include="Assets\UnityUtils\Handlers\IDragHandlerThorough.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IHoverHandler.cs" />
      <Compile Include="Assets\UnityUtils\MonoBehaviour\CustomCursorHoverHandler.cs" />
-     <Compile Include="Assets\UnityUtils\MonoBehaviour\DraggableImageMonoBehaviour.cs" />
-     <Compile Include="Assets\UnityUtils\MonoBehaviour\DragHandler.cs" />
      <Compile Include="Assets\UnityUtils\MonoBehaviour\MonoItemIncrementer.cs" />
      <Compile Include="Assets\UnityUtils\MonoBehaviour\TextFlasherMonoBehaviour.cs" />
      <Compile Include="Assets\UnityUtils\Sandbox\ImageLabelObject.cs" />

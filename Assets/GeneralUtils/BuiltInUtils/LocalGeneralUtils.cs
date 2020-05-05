@@ -88,7 +88,7 @@ public static class LocalGeneralUtils
 	/// <returns>The Enum representation of the provided String.</returns>
 	public static T ParseEnum<T>(string enumAsString)
 	{
-		return (T) Enum.Parse(typeof(FoodItem), enumAsString);
+		return (T) Enum.Parse(typeof(T), enumAsString);
 	}
 
 	/// <summary>

@@ -1,6 +1,7 @@
 ﻿﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -38,6 +39,15 @@ namespace BDT
         public static PathInst InitializeSaveFilePathFromFileName(string saveFileName)
         {
             return new PathInst(Application.persistentDataPath, saveFileName);
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetSaveFileNames()
+        {
+            return new List<string>(Directory.GetFiles(Application.persistentDataPath));
         }
 
     }

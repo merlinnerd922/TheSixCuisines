@@ -31,12 +31,11 @@ namespace TSC.Game.Menu
         /// </summary>
         public void SaveGame()
         {
-            PathInst targetPath = SaveGameManager.InitializeSaveFilePathFromFileName(this.inputField.text);
+            PathInst targetPath = SaveGameManager.InitializeSaveFilePathFromFileName($"{this.inputField.text}.tscgame");
             SaveGameManager.SaveGame(SaveFile.CreateSaveFile(this.gameSceneManager.gameState),
                 targetPath);
         }
 
-        
         /// <summary>
         /// Hide this menu, and activate the options summary menu again.
         /// </summary>

@@ -78,6 +78,8 @@ public class GameSceneManager : MonoBehaviour
         // Hide all sub-menus except for the options summary view.
         this.menuManager.saveGameMenu.Deactivate();
         this.menuManager.ActivateMenu(this.menuManager.optionsSummaryMenu);
+        
+        
     }
 
     /// <summary>

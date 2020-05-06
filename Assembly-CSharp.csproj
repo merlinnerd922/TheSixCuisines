@@ -66,6 +66,8 @@
      <Compile Include="Assets\GeneralUtils\Color\HSBColor.cs" />
      <Compile Include="Assets\GeneralUtils\Color\LocalColorUtils.cs" />
      <Compile Include="Assets\GeneralUtils\EqualityComparer.cs" />
+     <Compile Include="Assets\GeneralUtils\LocalDirectoryUtils.cs" />
+     <Compile Include="Assets\GeneralUtils\LocalFileUtils.cs" />
      <Compile Include="Assets\GeneralUtils\PathInst.cs" />
      <Compile Include="Assets\GeneralUtils\RuntimeException.cs" />
      <Compile Include="Assets\MathUtils\GeometryUtils\Axis3D.cs" />

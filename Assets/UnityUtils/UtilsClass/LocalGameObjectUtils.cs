@@ -1,6 +1,7 @@
 ﻿﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Extend;
@@ -780,6 +781,25 @@ namespace Helper
             public static void  InvokeButton(this GameObject go)
             {
                 go.GetComponent<Button>().onClick.Invoke();
+            }
+
+            /// <summary>
+            /// Destroy all children attached to the GameObject <paramref name="gameObject"/>.
+            /// </summary>
+            /// <param name="gameObject">The GameObject whose children should be destroyed.</param>
+            public static void DestroyAllChildren(this GameObject gameObject)
+            {
+                gameObject.ForEachChild(child => UnityObject.DestroyImmediate(child));
+            }
+
+            /// <summary>
+            /// Perform the action <paramref name="action"/> on each of <paramref name="gameObject"/>'s children.
+            /// </summary>
+            /// <param name="gameObject">The GameObject whose children should have an operation performed on.</param>
+            /// <param name="action">The operation to perform.</param>
+            private static void ForEachChild(this GameObject gameObject, Action<GameObject> action)
+            {
+                gameObject.GetChildren().ForEach(action);
             }
 
         }

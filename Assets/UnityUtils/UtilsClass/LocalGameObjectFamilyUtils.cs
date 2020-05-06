@@ -5,8 +5,9 @@ using System.Linq;
 using Extend;
 using Helper.ExtendSpace;
 using UnityEngine;
+ using Object = System.Object;
 
-namespace UnityUtils
+ namespace UnityUtils
 {
 
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -363,6 +364,7 @@ namespace UnityUtils
         {
             return gameObject.GetDescendant(descendantPath).GetComponent<T>();
         }
+
 
     }
 

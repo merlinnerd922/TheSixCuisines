@@ -3,7 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Extend;
 using UnityEngine;
 
 #endregion
@@ -42,12 +44,12 @@ namespace BDT
         }
 
         /// <summary>
-        /// TODO
+        /// Return the names of all save files stored in the game save directory location.
         /// </summary>
-        /// <returns></returns>
-        public static List<string> GetSaveFileNames()
+        /// <returns> the names of all save files stored in the game save directory location.</returns>
+        public static IEnumerable<string> GetSaveFileNames()
         {
-            return new List<string>(Directory.GetFiles(Application.persistentDataPath));
+            return LocalDirectoryUtils.GetFileNames(Application.persistentDataPath);
         }
 
     }

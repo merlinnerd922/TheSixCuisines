@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using BDT;
 using Extend;
+using GeneralUtils;
+using Helper.ExtendSpace;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityUtils;
@@ -32,17 +35,17 @@ namespace TSC.Game.Menu
         private bool _savedGamesLoaded = false;
 
         /// <summary>
-        /// TODO
+        /// The content holder for displaying all saved games.
         /// </summary>
         public GameObject saveGameViewContent;
 
         /// <summary>
-        /// TODO
+        /// The prefab used to initialize a text entry in the saved games window.
         /// </summary>
         public GameObject GAME_SAVE_TEXT_ITEM_PREFAB;
 
         /// <summary>
-        /// TODO
+        /// The scroll bar for scrolling through the different save files.
         /// </summary>
         public Scrollbar scrollBar;
 
@@ -56,8 +59,28 @@ namespace TSC.Game.Menu
         /// </summary>
         public void SaveGame()
         {
+            // Do nothing if the input field is empty.
+            if (this.inputField.text.IsEmpty())
+            {
+                return;
+            }
+
+            // Otherwise, create a Path object from the provided text content and check it for validity. If the file
+            // path provided is illegal, then simply return.
+            // TODO_LATER Add a message about illegal file name.
             PathInst targetPath = SaveGameManager.InitializeSaveFilePathFromFileName($"{this.inputField.text}.tscgame");
+            string path = targetPath.ToString();
+            if (!LocalFileUtils.ValidateDllPath(ref path))
+            {
+                return;
+            }
+
+            // Save the game at the desired path.
             SaveGameManager.SaveGame(SaveFile.CreateSaveFile(this.gameSceneManager.gameState), targetPath);
+
+            // Clear out the text input, and reload the saved games.
+            this.inputField.text = "";
+            this.LoadSavedGames();
         }
 
         /// <summary>
@@ -89,24 +112,28 @@ namespace TSC.Game.Menu
         /// </summary>
         private void LoadSavedGames()
         {
+            // Destroy all of this GameObject's children (representing the different save files) to start fresh.
+            this.saveGameViewContent.DestroyAllChildren();
+
+            // For each save file, add a node to the content viewer for that save file.
             foreach (string saveFileName in SaveGameManager.GetSaveFileNames())
             {
-                saveGameViewContent.AddChild(GetSavedGameTextItem(saveFileName), false);
+                saveGameViewContent.AddChild(this.CreateSavedGameTextItem(saveFileName), false);
             }
-            
-            // TODO
+
+            // Scroll the list back all the way to the top.
             scrollBar.value = 1;
         }
 
         /// <summary>
-        /// TODO
+        /// Create a saved game text item to be displayed in the list of saved games. Then, return that GameObject.
         /// </summary>
-        /// <param name="saveFileName"></param>
-        /// <returns></returns>
-        private GameObject GetSavedGameTextItem(string saveFileName)
+        /// <param name="saveFileName">The name of the file to save.</param>
+        /// <returns>a saved game text item to be displayed in the list of saved games.</returns>
+        private GameObject CreateSavedGameTextItem(string saveFileName)
         {
-            GameObject saveTextNode = Instantiate(GAME_SAVE_TEXT_ITEM_PREFAB) as GameObject;
-            saveTextNode.GetComponent<Text>().text = Path.GetFileName(saveFileName);
+            GameObject saveTextNode = Instantiate(this.GAME_SAVE_TEXT_ITEM_PREFAB);
+            saveTextNode.GetComponent<Text>().text = saveFileName;
             return saveTextNode;
         }
 

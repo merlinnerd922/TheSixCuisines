@@ -17,7 +17,7 @@ public class GameMenuManager : MonoBehaviour
     /// <summary>
     /// The game saving menu.
     /// </summary>
-    public SaveGameMenu saveGameMenu;
+    [FormerlySerializedAs("gameFileMenu")] public SaveGameMenu saveGameMenu;
 
     /// <summary>
     /// The menu displaying all of the main options on the page.

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TSC.Game.Menu
@@ -14,7 +15,7 @@ namespace TSC.Game.Menu
         /// <summary>
         /// The save game menu managing this input field.
         /// </summary>
-        public SaveGameMenu saveGameMenu;
+        [FormerlySerializedAs("gameFileMenu")] public SaveGameMenu saveGameMenu;
 
         /// <summary>
         /// Initialize this script.
@@ -41,7 +42,7 @@ namespace TSC.Game.Menu
             // If there is text being submitted, then save the current game.
             if (this.wasPreviouslyInFocus && (text.Length > 0) && (Input.GetKey (KeyCode.Return) 
                                                                    || Input.GetKey(KeyCode.KeypadEnter))) {
-                saveGameMenu.SaveGame();
+                this.saveGameMenu.SaveGame();
                 this.wasPreviouslyInFocus = false;
             } 
             

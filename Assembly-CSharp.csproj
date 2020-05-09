@@ -97,8 +97,9 @@
      <Compile Include="Assets\TSC\Game\Menu\GameMenuManager.cs" />
      <Compile Include="Assets\TSC\Game\Menu\InGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\Menu\OptionsSummaryMenu.cs" />
-     <Compile Include="Assets\TSC\Game\Menu\SaveGameInputField.cs" />
-     <Compile Include="Assets\TSC\Game\Menu\SaveGameMenu.cs" />
+     <Compile Include="Assets\TSC\Game\Menu\SaveGame\GameFileMenu.cs" />
+     <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameInputField.cs" />
+     <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\SaveFile.cs" />
      <Compile Include="Assets\TSC\MenuButton.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IDragHandlerThorough.cs" />

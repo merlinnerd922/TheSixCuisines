@@ -1375,8 +1375,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1050571581}
+  m_Children: []
   m_Father: {fileID: 1917010819}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1955,7 +1954,7 @@ GameObject:
   - component: {fileID: 742428583}
   - component: {fileID: 742428582}
   m_Layer: 5
-  m_Name: AmountToBuy (2)
+  m_Name: IngredientCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2224,9 +2223,19 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 566779113572738397, guid: be4976e4f38faac46a1f3950e5c10465,
+    - target: {fileID: 566779113273079917, guid: be4976e4f38faac46a1f3950e5c10465,
         type: 3}
-      propertyPath: m_ChildScaleWidth
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566779113273079917, guid: be4976e4f38faac46a1f3950e5c10465,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566779113273079917, guid: be4976e4f38faac46a1f3950e5c10465,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 566779112814290522, guid: be4976e4f38faac46a1f3950e5c10465,
@@ -2249,19 +2258,9 @@ PrefabInstance:
       propertyPath: m_NumberOfSteps
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 566779113273079917, guid: be4976e4f38faac46a1f3950e5c10465,
+    - target: {fileID: 566779113572738397, guid: be4976e4f38faac46a1f3950e5c10465,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 566779113273079917, guid: be4976e4f38faac46a1f3950e5c10465,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 566779113273079917, guid: be4976e4f38faac46a1f3950e5c10465,
-        type: 3}
-      propertyPath: m_AnchorMin.y
+      propertyPath: m_ChildScaleWidth
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2576,6 +2575,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901762387}
   m_CullTransparentMesh: 0
+--- !u!1 &953465165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 953465166}
+  m_Layer: 5
+  m_Name: MenuHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &953465166
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953465165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1050571581}
+  m_Father: {fileID: 1917010819}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1019106434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2714,6 +2749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1050571581}
+  - component: {fileID: 1050571582}
   m_Layer: 5
   m_Name: FrenchFries
   m_TagString: Untagged
@@ -2728,7 +2764,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050571580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2740,14 +2776,30 @@ RectTransform:
   - {fileID: 1592224499}
   - {fileID: 1905498604}
   - {fileID: 742428581}
-  m_Father: {fileID: 552021197}
+  m_Father: {fileID: 953465166}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.99, y: -35.5}
+  m_AnchoredPosition: {x: -15.99, y: -43.299908}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1050571582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050571580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e22ff45b2701c44a807136eba7b700e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodItemManaged: 0
+  amountToBuy: 0
+  gameSceneManager: {fileID: 1429842749}
+  foodAmountText: {fileID: 350083798}
 --- !u!1 &1099670774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3292,8 +3344,10 @@ MonoBehaviour:
   menuManager: {fileID: 241238132}
   gameState:
     turnNumber: 0
-    startingCash: 5000
+    cashOnHand: 5000
   turnDisplay: {fileID: 2017922357}
+  cashOnHandDisplay: {fileID: 2094609964}
+  hudMenuManager: {fileID: 1823758454}
 --- !u!114 &1429842750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3642,7 +3696,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1592224500}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1050571582}
+        m_MethodName: Increment
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1595078082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,7 +4175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodMenu: {fileID: 1917010820}
   trendsDisplay: {fileID: 1777895082}
-  activeMenu: {fileID: 0}
+  activeDisplay: {fileID: 0}
   newDishesDisplay: {fileID: 190396463}
 --- !u!1 &1831464506
 GameObject:
@@ -4632,7 +4697,7 @@ GameObject:
   - component: {fileID: 1905498606}
   - component: {fileID: 1905498605}
   m_Layer: 5
-  m_Name: AmountToBuy (1)
+  m_Name: DishPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4895,6 +4960,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 552021197}
+  - {fileID: 953465166}
   m_Father: {fileID: 1823758453}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4915,6 +4981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a566c8cf2dab03e41804ae2eb69e30cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuHolder: {fileID: 953465165}
 --- !u!1 &1936949446
 GameObject:
   m_ObjectHideFlags: 0
@@ -5169,6 +5236,7 @@ GameObject:
   - component: {fileID: 2094609961}
   - component: {fileID: 2094609963}
   - component: {fileID: 2094609962}
+  - component: {fileID: 2094609964}
   m_Layer: 5
   m_Name: CashOnHand
   m_TagString: Untagged
@@ -5232,3 +5300,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094609960}
   m_CullTransparentMesh: 0
+--- !u!114 &2094609964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094609960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0d6edce254024888e5093efb230f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashOnHand: 0
+  cashOnHandText: {fileID: 886662716}

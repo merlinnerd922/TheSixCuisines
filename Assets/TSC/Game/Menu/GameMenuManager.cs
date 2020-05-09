@@ -24,6 +24,7 @@ public class GameMenuManager : MonoBehaviour
     /// </summary>
     public OptionsSummaryMenu optionsSummaryMenu;
 
+
     /// <summary>
     /// Activate the specified menu.
     /// </summary>

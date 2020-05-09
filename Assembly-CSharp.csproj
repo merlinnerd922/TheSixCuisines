@@ -79,12 +79,15 @@
      <Compile Include="Assets\MathUtils\GeometryUtils\Vector2Int.cs" />
      <Compile Include="Assets\MathUtils\LocalMathUtils.cs" />
      <Compile Include="Assets\MathUtils\NumberRandomizer.cs" />
-     <Compile Include="Assets\TSC\Game\FoodItem.cs" />
+     <Compile Include="Assets\TSC\Game\FoodItem\Dish.cs" />
+     <Compile Include="Assets\TSC\Game\FoodItem\DishUtils.cs" />
      <Compile Include="Assets\TSC\Game\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\GameState.cs" />
+     <Compile Include="Assets\TSC\Game\HUDDisplay\CashOnHand.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\TurnButton.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\TurnDisplay.cs" />
-     <Compile Include="Assets\TSC\Game\HUDOptions\FoodDisplay.cs" />
+     <Compile Include="Assets\TSC\Game\HUDOptions\DishMenu.cs" />
+     <Compile Include="Assets\TSC\Game\HUDOptions\FoodItemController.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\HUDDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\HUDMenuManager.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\NewDishesDisplay.cs" />

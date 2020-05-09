@@ -13,7 +13,7 @@ public class GameSceneManager : MonoBehaviour
     /// The manager for the in-game menu.
     /// </summary>
     public GameMenuManager menuManager;
-    
+
     /// <summary>
     /// The current state of the game.
     /// </summary>
@@ -23,6 +23,16 @@ public class GameSceneManager : MonoBehaviour
     /// The display for the current turn.
     /// </summary>
     public TurnDisplay turnDisplay;
+
+    /// <summary>
+    /// The display for the player's current cash on hand.
+    /// </summary>
+    public CashOnHand cashOnHandDisplay;
+
+    /// <summary>
+    /// The manager for all the HUD displays in the scene.
+    /// </summary>
+    public HUDMenuManager hudMenuManager;
 
     /// <summary>
     /// The current turn number.
@@ -39,6 +49,7 @@ public class GameSceneManager : MonoBehaviour
     {
         this.SetCurrentTurn(this.turnNumber + 1);
     }
+
     /// <summary>
     /// Start this script.
     /// </summary>
@@ -50,11 +61,23 @@ public class GameSceneManager : MonoBehaviour
             this.HideGameMenu();
         }
 
-        // Create a new game state, and set the current turn to 1.
-        gameState = GameState.CreateNew();
+        // For now, only new games are supported, so load a new game from a newly generated state.
+        this.LoadNewGameFromNewGameState();
+    }
 
-        // Initialize the current turn to 1.
-        SetCurrentTurn(1);
+    /// <summary>
+    /// Create and load a brand new game state into the current scene.
+    /// </summary>
+    private void LoadNewGameFromNewGameState()
+    {
+        // Create a new game state.
+        this.gameState = GameState.CreateNew();
+
+        // Initialize info on the current turn, the amount of cash the player has on hand, as well as the amount of 
+        // food the player has in their inventory.
+        this.SetCurrentTurn(this.gameState.turnNumber);
+        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
+        this.hudMenuManager.dishMenu.foodMenuMapping = this.gameState.menuInventory;
     }
 
     /// <summary>
@@ -74,12 +97,10 @@ public class GameSceneManager : MonoBehaviour
     {
         // Show the menu manager.
         this.menuManager.Activate();
-        
+
         // Hide all sub-menus except for the options summary view.
         this.menuManager.saveGameMenu.Deactivate();
         this.menuManager.ActivateMenu(this.menuManager.optionsSummaryMenu);
-        
-        
     }
 
     /// <summary>

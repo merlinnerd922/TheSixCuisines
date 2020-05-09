@@ -14,7 +14,7 @@ public class HUDMenuManager : MonoBehaviour
     /// <summary>
     /// The food menu (as opposed to the gameplay menu) for displaying dishes served by the restaurant.
     /// </summary>
-    [FormerlySerializedAs("foodDisplay")] public FoodDisplay foodMenu;
+    [FormerlySerializedAs("foodMenu")] [FormerlySerializedAs("foodDisplay")] public DishMenu dishMenu;
 
     /// <summary>
     /// A display for current trends in cuisine.
@@ -36,7 +36,7 @@ public class HUDMenuManager : MonoBehaviour
     /// </summary>
     public void ToggleFoodMenu()
     {
-        this.ToggleMenu(this.foodMenu);
+        this.ToggleMenu(this.dishMenu);
     }
 
     /// <summary>

@@ -2,7 +2,7 @@
 /// A food item on the menu.
 /// </summary>
 public 
-    enum FoodItem
+    enum Dish
 {
     /// <summary>
     /// A dish on the menu.

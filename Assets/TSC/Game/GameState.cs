@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// The state of a game.
@@ -16,12 +17,13 @@ public class GameState
     /// <summary>
     /// The amount of cash that this player currently has on hand.
     /// </summary>
-    public float startingCash = 5000f;
+    [FormerlySerializedAs("startingCash")] 
+    public float cashOnHand = 5000f;
     
     /// <summary>
     /// The inventory of dishes the player has.
     /// </summary>
-    public SerializableDictionary<FoodItem, int> menuInventory = new SerializableDictionary<FoodItem, int>();
+    public SerializableDictionary<Dish, int> menuInventory = new SerializableDictionary<Dish, int>();
 
     /// <summary>
     /// Initialize and return a brand new GameState.
@@ -31,7 +33,14 @@ public class GameState
     {
         GameState gameState = new GameState();
         gameState.turnNumber = 1;
-        gameState.startingCash = 5000f;
+        gameState.cashOnHand = 5000f;
+        
+        // For each existing dish, set that player's inventory of that dish to 0.
+        foreach (Dish dish in LocalGeneralUtils.GetEnumList<Dish>())
+        {
+            gameState.menuInventory[dish] = 0;
+        }
+
         return gameState;
     }
 

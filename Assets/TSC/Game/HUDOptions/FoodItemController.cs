@@ -10,15 +10,23 @@ using UnityEngine.UI;
 /// </summary>
 public class FoodItemController : MonoBehaviour
 {
+
     /// <summary>
     /// The food item managed by this controller.
     /// </summary>
-    [FormerlySerializedAs("foodItemManaged")] public Dish dishManaged;
+    [FormerlySerializedAs("foodItemManaged")]
+    public Dish dishManaged;
 
     /// <summary>
     /// The amount of the FoodItem to buy.
     /// </summary>
     public int amountToBuy = 0;
+
+
+    /// <summary>
+    /// The text displaying the amount of a dish the user has in stock.
+    /// </summary>
+    public Text inStockText;
 
     /// <summary>
     /// The game scene manager managing this scene.
@@ -28,7 +36,8 @@ public class FoodItemController : MonoBehaviour
     /// <summary>
     /// The text displaying the amount of food of this type to buy.
     /// </summary>
-    [FormerlySerializedAs("foodAmountText")] public Text foodAmountToBuyText;
+    [FormerlySerializedAs("foodAmountText")]
+    public Text foodAmountToBuyText;
 
     /// <summary>
     /// Increment the count for this food item.
@@ -44,9 +53,8 @@ public class FoodItemController : MonoBehaviour
 
         // Otherwise, increment the amount to buy by the provided amount.
         this.gameSceneManager.cashOnHandDisplay.DecrementCashOnHand(price);
-        this.gameSceneManager.hudMenuManager.dishMenu.SetFoodAmount(this.dishManaged, 
-            this.gameSceneManager.hudMenuManager.dishMenu.GetFoodAmount(this
-        .dishManaged) + 1);
+        this.gameSceneManager.hudMenuManager.dishMenu.SetFoodAmount(this.dishManaged,
+            this.gameSceneManager.hudMenuManager.dishMenu.GetFoodAmount(this.dishManaged) + 1);
     }
 
     /// <summary>
@@ -59,15 +67,35 @@ public class FoodItemController : MonoBehaviour
     /// </summary>
     public void Confirm()
     {
-        
     }
-/// <summary>
-/// Set the amount of food of this type to buy to <paramref name="getFoodAmount"/>.
-/// </summary>
-/// <param name="getFoodAmount">The amount to set the dish buying amount to.</param>
+
+    /// <summary>
+    /// Set the amount of food of this type to buy to <paramref name="getFoodAmount"/>.
+    /// </summary>
+    /// <param name="getFoodAmount">The amount to set the dish buying amount to.</param>
     public void SetAmountOfFoodToBuy(int getFoodAmount)
     {
         this.foodAmountToBuyText.text = getFoodAmount.ToString();
+    }
+
+    /// <summary>
+    /// Return the currently displayed number of dishes to buy for the dish this controller is managing. <remarks>(By "buying a 
+    /// dish"
+    /// we mean buying all the ingredients required to make one instance of that dish. We make all of our stuff fresh!)</remarks>
+    /// </summary>
+    /// <returns>Return the currently displayed number of dishes to buy for the dish this controller is managing.</returns>
+    public int GetAmountOfFood()
+    {
+        return this.amountToBuy;
+    }
+
+    /// <summary>
+    /// Set the amount of dishes that the user has in stock of the stored dish to <paramref name="amountOfDishToSet"/>. 
+    /// </summary>
+    /// <param name="amountOfDishToSet">The value to set the amount of dishes the user has of this particular dish to.</param>
+    public void SetAmountOfDishesInStockInUI(int amountOfDishToSet)
+    {
+        inStockText.text = amountOfDishToSet.ToString();
     }
 
 }

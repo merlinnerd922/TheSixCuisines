@@ -57,4 +57,27 @@ public class DishMenu : HUDDisplay
         return this.foodMenuMapping[dish];
     }
 
+    /// <summary>
+    /// Purchase all the dish ingredient sets currently being listed as to be purchased by the current UI. (I.e.
+    /// if the UI currently says "Buy: X" where X is the number of ingredients sets to buy for dish Y, then increment
+    /// the dish stock of that dish by X).
+    /// </summary>
+    public void BuyIngredients()
+    {
+        // For each dish being controlled:
+        foreach (FoodItemController controller in this.menuHolder.GetComponentsInChildren<FoodItemController>())
+        {
+            // Calculate the new value of the provided ingredient in stock by adding the amount that is currently
+            // set as the amount to buy to the amount the user currently has in stock.
+            int amountOfFoodToSet = this.foodMenuMapping[controller.dishManaged] + controller.GetAmountOfFood();
+            
+            // Set this new value in both the internal food menu mapping as well as on the UI side. 
+            this.foodMenuMapping[controller.dishManaged] = amountOfFoodToSet;
+            controller.SetAmountOfDishesInStockInUI(amountOfFoodToSet);
+            
+            // Set the amount of food being bought back to 0.
+            controller.SetAmountOfFoodToBuy(0);
+        }
+    }
+
 }

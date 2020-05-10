@@ -8,7 +8,7 @@ using UnityUtils;
 namespace TSC.Game.Menu
 {
 /// <summary>
-/// TODO
+/// A script using for saving game files.
 /// </summary>
     public class GameFileMenu : InGameMenu
     {
@@ -96,6 +96,7 @@ namespace TSC.Game.Menu
             // Scroll the list back all the way to the top.
             this.scrollBar.value = 1;
         }
+
     }
 
 }

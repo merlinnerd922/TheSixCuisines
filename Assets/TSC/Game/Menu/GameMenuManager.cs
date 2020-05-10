@@ -1,4 +1,7 @@
-﻿using Extend;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using CollectionUtils;
+using Extend;
 using TSC.Game.Menu;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,15 +27,32 @@ public class GameMenuManager : MonoBehaviour
     /// </summary>
     public OptionsSummaryMenu optionsSummaryMenu;
 
+    /// <summary>
+    /// The game loading menu.
+    /// </summary>
+    public LoadGameMenu loadGameMenu;
+
 
     /// <summary>
     /// Activate the specified menu.
     /// </summary>
     /// <param name="menuToActivate">The menu to activate.</param>
+    [SuppressMessage("ReSharper", "LoopCanBePartlyConvertedToQuery")]
     public void ActivateMenu(InGameMenu menuToActivate)
     {
+        // (Deactivate all other menus first in the event they are activated). 
+        foreach (InGameMenu inGameMenu in LocalListUtils.of<InGameMenu>(this.saveGameMenu, this.loadGameMenu, this
+        .optionsSummaryMenu)) {
+            if (!menuToActivate.Equals(inGameMenu))
+            {
+                inGameMenu.Deactivate();
+            }
+        }
+
+        // Then, activate the menu we're targeting.
         menuToActivate.Activate();
         this.activeMenu = menuToActivate;
+        
     }
 
 }

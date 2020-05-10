@@ -845,6 +845,21 @@ namespace Extend
             monoBehaviour.gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Return this provided MonoBehaviour's <paramref name="nthAncestor"/>th ancestor.
+        /// </summary>
+        /// <param name="monoBehaviour">The MonoBehaviour whose ancestor should be returned,</param>
+        /// <param name="nthAncestor">The nth ancestor of this MonoBehavior to retrieve.</param>
+        public static GameObject GetNthAncestorGameObject(this MonoBehaviour monoBehaviour, int nthAncestor)
+        {
+            GameObject returnObject = monoBehaviour.gameObject;
+            for (int i = 0; i < 4; i++)
+            {
+                returnObject = returnObject.GetParent();
+            }
+            return returnObject;
+        }
+
     }
 
 }

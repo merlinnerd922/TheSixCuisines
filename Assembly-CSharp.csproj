@@ -59,6 +59,7 @@
      <Compile Include="Assets\CollectionUtils\DualKeyDictionary.cs" />
      <Compile Include="Assets\CollectionUtils\LocalCollectionUtils.cs" />
      <Compile Include="Assets\CollectionUtils\LocalDictionaryUtils.cs" />
+     <Compile Include="Assets\CollectionUtils\LocalListUtils.cs" />
      <Compile Include="Assets\CollectionUtils\SerializableDictionary.cs" />
      <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalGeneralUtils.cs" />
      <Compile Include="Assets\GeneralUtils\BuiltInUtils\LocalMemberUtils.cs" />
@@ -98,6 +99,8 @@
      <Compile Include="Assets\TSC\Game\Menu\InGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\Menu\OptionsSummaryMenu.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\GameFileMenu.cs" />
+     <Compile Include="Assets\TSC\Game\Menu\SaveGame\LoadGameMenu.cs" />
+     <Compile Include="Assets\TSC\Game\Menu\SaveGame\LoadGameTextEntry.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameInputField.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\SaveFile.cs" />

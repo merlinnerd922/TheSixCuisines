@@ -20,7 +20,7 @@ public class FoodItemController : MonoBehaviour
     /// <summary>
     /// The amount of the FoodItem to buy.
     /// </summary>
-    public int amountToBuy = 0;
+    public int amountToBuy;
 
 
     /// <summary>
@@ -39,6 +39,10 @@ public class FoodItemController : MonoBehaviour
     [FormerlySerializedAs("foodAmountText")]
     public Text foodAmountToBuyText;
 
+
+    private DishMenu _dishMenu=> this.gameSceneManager.hudMenuManager.dishMenu;
+
+
     /// <summary>
     /// Increment the count for this food item.
     /// </summary>
@@ -53,8 +57,8 @@ public class FoodItemController : MonoBehaviour
 
         // Otherwise, increment the amount to buy by the provided amount.
         this.gameSceneManager.cashOnHandDisplay.DecrementCashOnHand(price);
-        this.gameSceneManager.hudMenuManager.dishMenu.SetFoodAmount(this.dishManaged,
-            this.gameSceneManager.hudMenuManager.dishMenu.GetFoodAmount(this.dishManaged) + 1);
+        this._dishMenu.SetFoodAmountToPurchase(this.dishManaged,
+            this._dishMenu.GetFoodAmountToPurchase(this.dishManaged) + 1);
     }
 
     /// <summary>
@@ -76,6 +80,7 @@ public class FoodItemController : MonoBehaviour
     public void SetAmountOfFoodToBuy(int getFoodAmount)
     {
         this.foodAmountToBuyText.text = getFoodAmount.ToString();
+        this.amountToBuy = getFoodAmount;
     }
 
     /// <summary>

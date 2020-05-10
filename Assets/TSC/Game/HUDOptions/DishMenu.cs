@@ -12,23 +12,17 @@ public class DishMenu : HUDDisplay
 {
 
     /// <summary>
-    /// A mapping between dishes and the amount of them the player has in inventory.
-    /// </summary>
-    public Dictionary<Dish, int> foodMenuMapping = new Dictionary<Dish, int>();
-
-
-    /// <summary>
     /// The GameObject child of this dish menu holding all of the dishes represented as menu items.
     /// </summary>
     public GameObject menuHolder;
 
     /// <summary>
-    /// TODO
+    /// The scene manager for the current game being played.
     /// </summary>
     public GameSceneManager gameSceneManager;
-    
+
     /// <summary>
-    /// TODO
+    /// The display for the player's cash on hand.
     /// </summary>
     public CashOnHand cashDisplay;
 
@@ -37,10 +31,8 @@ public class DishMenu : HUDDisplay
     /// </summary>
     /// <param name="dishManaged">The dish the player has.</param>
     /// <param name="getFoodAmount">The amount of that dish that the player has.</param>
-    public void SetFoodAmount(Dish dishManaged, int getFoodAmount)
+    public void SetFoodAmountToPurchase(Dish dishManaged, int getFoodAmount)
     {
-        this.foodMenuMapping[dishManaged] = getFoodAmount;
-
         // Set the new dish amount in the UI.
         FoodItemController foodItemController = GetFoodItemController(dishManaged);
         foodItemController.SetAmountOfFoodToBuy(getFoodAmount);
@@ -58,14 +50,6 @@ public class DishMenu : HUDDisplay
         return child.GetComponent<FoodItemController>();
     }
 
-    /// <summary>
-    /// Return the amount of the provided dish <paramref name="dish"/> that the player has.
-    /// </summary>
-    /// <returns>The amount of the provided dish <paramref name="dish"/> that the player has.</returns>
-    public int GetFoodAmount(Dish dish)
-    {
-        return this.foodMenuMapping[dish];
-    }
 
     /// <summary>
     /// Purchase all the dish ingredient sets currently being listed as to be purchased by the current UI. (I.e.
@@ -79,42 +63,49 @@ public class DishMenu : HUDDisplay
         {
             // Calculate the new value of the provided ingredient in stock by adding the amount that is currently
             // set as the amount to buy to the amount the user currently has in stock.
-            int amountOfFoodToSet = this.foodMenuMapping[controller.dishManaged] + controller.GetAmountOfFood();
-            
+            int amountOfFoodToSet = this.gameSceneManager.gameState.menuInventory[controller.dishManaged] +
+                                    controller.GetAmountOfFood();
+
             // Set this new value in both the internal food menu mapping as well as on the UI side. 
-            this.foodMenuMapping[controller.dishManaged] = amountOfFoodToSet;
+            this.gameSceneManager.gameState.menuInventory[controller.dishManaged] = amountOfFoodToSet;
             controller.SetAmountOfDishesInStockInUI(amountOfFoodToSet);
-            
+
             // Set the amount of food being bought back to 0.
-            controller.SetAmountOfFoodToBuy(0);
-            
-            // Increment the user's inventory by the new amounts.
-            // TODO
-            gameSceneManager.gameState.menuInventory[controller.dishManaged] = amountOfFoodToSet;
+            SetFoodAmountToPurchase(controller.dishManaged, 0);
         }
 
+        // Set the player's cash on hand accordingly.
         this.gameSceneManager.gameState.cashOnHand = cashDisplay.cashOnHand;
     }
-/// <summary>
-/// TODO
-/// </summary>
-/// <returns></returns>
-    private IEnumerable<FoodItemController> GetFoodItemControllers()
+
+    /// <summary>
+    /// Return an enumeration of all of this menu's controllers for its FoodItem amounts.
+    /// </summary>
+    /// <returns>an enumeration of all of this menu's controllers for its FoodItem amounts.</returns>
+    public IEnumerable<FoodItemController> GetFoodItemControllers()
     {
         return this.menuHolder.GetComponentsInChildren<FoodItemController>();
     }
 
     /// <summary>
-    /// TODO
+    /// Return the amount of the dish <paramref name="dishManaged"/> that is being marked as being bought as currently displayed in the UI.
     /// </summary>
-    /// <param name="_gameState"></param>
-    public void SetDishMapping(GameState _gameState)
+    /// <param name="dishManaged">Ths dish being purchased.</param>
+    /// <returns>The amount of the dish <paramref name="dishManaged"/> that is being marked as being bought as currently displayed in the UI.</returns>
+    public int GetFoodAmountToPurchase(Dish dishManaged)
     {
-        this.foodMenuMapping = _gameState.menuInventory;
+        return GetFoodItemController(dishManaged).amountToBuy;
+    }
 
+    /// <summary>
+    /// Set the inventory dish counts for all dishes in inventory to the values set in the mapping <paramref name="dishMapping"/>.
+    /// </summary>
+    /// <param name="dishMapping">The mapping to set the dishes' count as displayed in the UI to.</param>
+    public void SetDishMapping(SerializableDictionary<Dish, int> dishMapping)
+    {
         foreach (FoodItemController controller in this.GetFoodItemControllers())
         {
-            controller.SetAmountOfDishesInStockInUI(this.foodMenuMapping[controller.dishManaged]);
+            controller.SetAmountOfDishesInStockInUI(dishMapping[controller.dishManaged]);
         }
     }
 

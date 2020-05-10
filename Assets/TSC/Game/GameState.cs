@@ -30,9 +30,9 @@ public class GameState
     public SerializableDictionary<Dish, int> menuInventory = InitializeDishMenu();
 
     /// <summary>
-    /// TODO
+    /// Initialize a brand new blank dish inventory, with the inventory of each existing dish set to 0. Then, return it.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>a brand new blank dish inventory, with the inventory of each existing dish set to 0.</returns>
     public static SerializableDictionary<Dish, int> InitializeDishMenu()
     {
         return LocalGeneralUtils.GetEnumList<Dish>().ToDictionary(x => x, x => 0).ToSerializableDictionary();
@@ -57,7 +57,7 @@ public class GameState
     public const int STARTING_TURN_NUMBER = 1;
 
     /// <summary>
-    /// TODO
+    /// The amount of cash that a player always starts with.
     /// </summary>
     public const int STARTING_CASH = 5000;
 

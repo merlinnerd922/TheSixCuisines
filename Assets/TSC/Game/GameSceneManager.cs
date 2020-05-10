@@ -84,18 +84,31 @@ public class GameSceneManager : MonoBehaviour
     /// <param name="_gameState">The state of the game to load.</param>
     public void LoadGameFromGameState(GameState _gameState)
     {
-        // TODO
-        this.SetCurrentTurn(_gameState.turnNumber == null ? GameState.STARTING_TURN_NUMBER : _gameState.turnNumber);
-        this.cashOnHandDisplay.SetCashOnHand(_gameState.cashOnHand == null ? GameState.STARTING_CASH : _gameState.cashOnHand);
-        
-        // TODO
-        if (_gameState.menuInventory == null)
+        // Set the game state to match the given game state.
+        this.gameState = _gameState;
+
+        // Initialize the starting turn number, iff it isn't set.
+        if (this.gameState.turnNumber == null)
         {
-            _gameState.menuInventory = GameState.InitializeDishMenu();
+            this.gameState.turnNumber = 1;
         }
-        
-        // TODO
-        this.hudMenuManager.dishMenu.SetDishMapping(_gameState);
+
+        // Initialize the player's menu inventory, iff it isn't set.
+        if (this.gameState.menuInventory == null)
+        {
+            this.gameState.menuInventory = GameState.InitializeDishMenu();
+        }
+
+        // Initialize the player's cash on hand, iff it isn't set.
+        if (this.gameState.cashOnHand == null)
+        {
+            this.gameState.cashOnHand = GameState.STARTING_CASH;
+        }
+
+// Set all the UI displays for all the elements in the save file.
+        this.SetCurrentTurn(this.gameState.turnNumber);
+        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
+        this.hudMenuManager.dishMenu.SetDishMapping(this.gameState.menuInventory);
     }
 
     /// <summary>

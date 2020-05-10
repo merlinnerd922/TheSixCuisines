@@ -15,8 +15,7 @@ namespace TSC.Game.Menu
         /// <summary>
         /// The text displaying the game to be loaded.
         /// </summary>
-        [FormerlySerializedAs("fileNameTextInput")] 
-        [FormerlySerializedAs("loadedGameTextInput")] 
+        [FormerlySerializedAs("fileNameTextInput")] [FormerlySerializedAs("loadedGameTextInput")]
         public Text fileNameText;
 
         /// <summary>
@@ -33,18 +32,17 @@ namespace TSC.Game.Menu
             this.fileNameText.text = textField.text;
         }
 
-/// <summary>
-/// TODO
-/// </summary>
+        /// <summary>
+        /// Load the game file from the provided text name in the text input.
+        /// </summary>
         public void LoadGame()
         {
-            // Load the game file from the provided text name 
+            // Extract the save file from the provided text file and load it.
             SaveFile saveFile = SaveGameManager.LoadGame(this.fileNameText.text) as SaveFile;
             this.gameSceneManager.LoadGameFromGameState(saveFile.gameState);
-            
+
             // Deactivate the game menu manager and show the game window itself.
             gameMenuManager.Deactivate();
-
         }
 
     }

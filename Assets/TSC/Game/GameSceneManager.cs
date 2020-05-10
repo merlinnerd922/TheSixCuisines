@@ -75,9 +75,27 @@ public class GameSceneManager : MonoBehaviour
 
         // Initialize info on the current turn, the amount of cash the player has on hand, as well as the amount of 
         // food the player has in their inventory.
-        this.SetCurrentTurn(this.gameState.turnNumber);
-        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
-        this.hudMenuManager.dishMenu.foodMenuMapping = this.gameState.menuInventory;
+        this.LoadGameFromGameState(this.gameState);
+    }
+
+    /// <summary>
+    /// Load the provided game state into the current scene.
+    /// </summary>
+    /// <param name="_gameState">The state of the game to load.</param>
+    public void LoadGameFromGameState(GameState _gameState)
+    {
+        // TODO
+        this.SetCurrentTurn(_gameState.turnNumber == null ? GameState.STARTING_TURN_NUMBER : _gameState.turnNumber);
+        this.cashOnHandDisplay.SetCashOnHand(_gameState.cashOnHand == null ? GameState.STARTING_CASH : _gameState.cashOnHand);
+        
+        // TODO
+        if (_gameState.menuInventory == null)
+        {
+            _gameState.menuInventory = GameState.InitializeDishMenu();
+        }
+        
+        // TODO
+        this.hudMenuManager.dishMenu.SetDishMapping(_gameState);
     }
 
     /// <summary>

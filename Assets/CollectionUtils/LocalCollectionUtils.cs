@@ -875,6 +875,21 @@ namespace Extend
             return collection.Where(predicate).GetRandomItem();
         }
 
+        /// <summary>
+        /// Convert the provided Dictionary into a SerializableDictionary, and return that SerializableDictionary.
+        /// </summary>
+        /// <param name="dict">The dictionary to convert into a SerializableDictionary.</param>
+        /// <returns>The SerializableDictionary representation of the provided dictionary.</returns>
+        public static SerializableDictionary<S, T> ToSerializableDictionary<S, T>(this Dictionary<S, T> dict)
+        {
+            SerializableDictionary<S, T> serializableDictionary = new SerializableDictionary<S, T>();
+            foreach (KeyValuePair<S, T> x in dict)
+            {
+                serializableDictionary.Add(x.Key, x.Value);
+            }
+            return serializableDictionary;
+        }
+
     }
 
 }

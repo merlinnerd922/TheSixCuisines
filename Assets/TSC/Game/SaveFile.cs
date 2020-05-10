@@ -11,7 +11,7 @@ namespace TSC.Game
 /// <summary>
 /// The state of the game stored in this save file.
 /// </summary>
-        private GameState gameState;
+internal GameState gameState;
 
         /// <summary>
         /// Create and return a brand new save file from the provided GameState.

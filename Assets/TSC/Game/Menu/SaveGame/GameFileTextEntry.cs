@@ -9,7 +9,7 @@ using UnityUtils;
 /// <summary>
 /// An entry within the load game menu. 
 /// </summary>
-public class LoadGameTextEntry : MonoBehaviour
+public class GameFileTextEntry : MonoBehaviour
 {
 
     /// <summary>
@@ -23,7 +23,7 @@ public class LoadGameTextEntry : MonoBehaviour
     public void SetLoadGameFileInputField()
     {
         LoadGameMenu loadGameMenu = this.GetNthAncestorGameObject(4).GetComponent<LoadGameMenu>();
-        loadGameMenu.loadedGameTextInput.text = thisText.text;
+        loadGameMenu.fileNameText.text = thisText.text;
     }
 
 }

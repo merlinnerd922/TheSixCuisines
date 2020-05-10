@@ -52,6 +52,17 @@ namespace BDT
             return LocalDirectoryUtils.GetFileNames(Application.persistentDataPath);
         }
 
+        /// <summary>
+        /// Load the game whose file name is provided below.
+        /// </summary>
+        /// <param name="filename">The name of the file to load.</param>
+        /// <returns>The save file object corresponding to the provided file name.</returns>
+        public static object LoadGame(string filename)
+        {
+            PathInst gamePath = InitializeSaveFilePathFromFileName(filename);
+            return _bf.Deserialize(gamePath.OpenExistingFileStream());
+        }
+
     }
 
 }

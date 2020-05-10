@@ -23,6 +23,16 @@ public class DishMenu : HUDDisplay
     public GameObject menuHolder;
 
     /// <summary>
+    /// TODO
+    /// </summary>
+    public GameSceneManager gameSceneManager;
+    
+    /// <summary>
+    /// TODO
+    /// </summary>
+    public CashOnHand cashDisplay;
+
+    /// <summary>
     /// Set the amount of the dish <paramref name="dishManaged"/> that this player has to <paramref name="getFoodAmount"/>. 
     /// </summary>
     /// <param name="dishManaged">The dish the player has.</param>
@@ -65,7 +75,7 @@ public class DishMenu : HUDDisplay
     public void BuyIngredients()
     {
         // For each dish being controlled:
-        foreach (FoodItemController controller in this.menuHolder.GetComponentsInChildren<FoodItemController>())
+        foreach (FoodItemController controller in this.GetFoodItemControllers())
         {
             // Calculate the new value of the provided ingredient in stock by adding the amount that is currently
             // set as the amount to buy to the amount the user currently has in stock.
@@ -77,6 +87,34 @@ public class DishMenu : HUDDisplay
             
             // Set the amount of food being bought back to 0.
             controller.SetAmountOfFoodToBuy(0);
+            
+            // Increment the user's inventory by the new amounts.
+            // TODO
+            gameSceneManager.gameState.menuInventory[controller.dishManaged] = amountOfFoodToSet;
+        }
+
+        this.gameSceneManager.gameState.cashOnHand = cashDisplay.cashOnHand;
+    }
+/// <summary>
+/// TODO
+/// </summary>
+/// <returns></returns>
+    private IEnumerable<FoodItemController> GetFoodItemControllers()
+    {
+        return this.menuHolder.GetComponentsInChildren<FoodItemController>();
+    }
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="_gameState"></param>
+    public void SetDishMapping(GameState _gameState)
+    {
+        this.foodMenuMapping = _gameState.menuInventory;
+
+        foreach (FoodItemController controller in this.GetFoodItemControllers())
+        {
+            controller.SetAmountOfDishesInStockInUI(this.foodMenuMapping[controller.dishManaged]);
         }
     }
 

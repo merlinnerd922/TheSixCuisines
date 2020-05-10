@@ -1051,7 +1051,8 @@ MonoBehaviour:
   GAME_SAVE_TEXT_ITEM_PREFAB: {fileID: 8787151833049161240, guid: 2b27ce3b3f5ce024c8b58a6d1c575ae8,
     type: 3}
   scrollBar: {fileID: 259797619}
-  loadedGameTextInput: {fileID: 555620290}
+  fileNameText: {fileID: 555620290}
+  gameMenuManager: {fileID: 241238132}
 --- !u!1 &280423831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,8 +2283,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SaveGame
+      - m_Target: {fileID: 260360313}
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5016,8 +5017,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -198, y: 123}
-  m_SizeDelta: {x: 160, y: 63.61}
+  m_AnchoredPosition: {x: -203, y: 123}
+  m_SizeDelta: {x: 54, y: 63.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1751385602
 MonoBehaviour:
@@ -5050,7 +5051,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: N/A
 --- !u!222 &1751385603
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6097,6 +6098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuHolder: {fileID: 953465165}
+  gameSceneManager: {fileID: 1429842749}
+  cashDisplay: {fileID: 2094609964}
 --- !u!1 &1936949446
 GameObject:
   m_ObjectHideFlags: 0

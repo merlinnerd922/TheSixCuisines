@@ -68,4 +68,13 @@ public class PathInst
         return this.AsString();
     }
 
+    /// <summary>
+    /// Open the file at this path as a FileStream, and return it.
+    /// </summary>
+    /// <returns>The file at this path as a FileStream.</returns>
+    public Stream OpenExistingFileStream()
+    {
+        return File.OpenRead(this.AsString());
+    }
+
 }

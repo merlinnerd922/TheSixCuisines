@@ -123,7 +123,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 755042047970222275}
-        m_MethodName: SetLoadGameFileInputField
+        m_MethodName: SetGameFileMenuInputField
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -2,6 +2,7 @@
 using Extend;
 using Helper.ExtendSpace;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityUtils;
 
@@ -12,7 +13,12 @@ namespace TSC.Game.Menu
 /// </summary>
     public class GameFileMenu : InGameMenu
     {
-
+        /// <summary>
+        /// The text displaying the game to be loaded.
+        /// </summary>
+        [FormerlySerializedAs("fileNameTextInput")] [FormerlySerializedAs("loadedGameTextInput")]
+        public Text fileNameText;
+        
         /// <summary>
         /// The manager for the current game scene.
         /// </summary>

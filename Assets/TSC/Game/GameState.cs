@@ -27,17 +27,21 @@ public class GameState
     /// <summary>
     /// The inventory of dishes the player has.
     /// </summary>
-    public SerializableDictionary<Dish, int> menuInventory = InitializeDishMenu();
+    public SerializableDictionary<Dish, int> menuInventory = InitializeZeroMapping();
 
     /// <summary>
-    /// Initialize a brand new blank dish inventory, with the inventory of each existing dish set to 0. Then, return it.
+    /// The mapping for the amount of each dish sold the previous day.
     /// </summary>
-    /// <returns>a brand new blank dish inventory, with the inventory of each existing dish set to 0.</returns>
-    public static SerializableDictionary<Dish, int> InitializeDishMenu()
+    internal SerializableDictionary<Dish, int> soldYesterdayMapping = InitializeZeroMapping();
+
+    /// <summary>
+    /// Initialize and return a brand new Dictionary mapping between each Dish type and the number 0.
+    /// </summary>
+    /// <returns>A brand new Dictionary mapping between each Dish type and the number 0.</returns>
+    public static SerializableDictionary<Dish, int> InitializeZeroMapping()
     {
         return LocalGeneralUtils.GetEnumList<Dish>().ToDictionary(x => x, x => 0).ToSerializableDictionary();
     }
-
 
     /// <summary>
     /// Initialize and return a brand new GameState.
@@ -48,7 +52,8 @@ public class GameState
         GameState gameState = new GameState();
         gameState.turnNumber = STARTING_TURN_NUMBER;
         gameState.cashOnHand = STARTING_CASH;
-        gameState.menuInventory = InitializeDishMenu();
+        gameState.menuInventory = InitializeZeroMapping();
+        gameState.soldYesterdayMapping = InitializeZeroMapping();
         return gameState;
     }
 /// <summary>
@@ -60,5 +65,35 @@ public class GameState
     /// The amount of cash that a player always starts with.
     /// </summary>
     public const int STARTING_CASH = 5000;
+
+    /// <summary>
+    /// Initialize each of this game state's fields, if they have null values.
+    /// </summary>
+    public void InitializeFieldsIfNull()
+    {
+        // Initialize the turn number to 1, if it's not set.
+        if (this.turnNumber == null)
+        {
+            this.turnNumber = STARTING_TURN_NUMBER;
+        }
+
+        // Initialize the player's menu inventory, iff it isn't set.
+        if (this.menuInventory == null)
+        {
+            this.menuInventory = InitializeZeroMapping();
+        }
+
+        // Initialize the player's cash on hand, iff it isn't set.
+        if (this.cashOnHand == null)
+        {
+            this.cashOnHand = STARTING_CASH;
+        }
+        
+        // Initialize the mapping of the amount of ingredients that were sold yesterday, if it isn't set.
+        if (this.soldYesterdayMapping == null)
+        {
+            this.soldYesterdayMapping = InitializeZeroMapping();
+        }
+    }
 
 }

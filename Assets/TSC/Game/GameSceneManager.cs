@@ -58,10 +58,11 @@ public class GameSceneManager : MonoBehaviour
         // Make sure that the number of customers that bought the dish does not exceed the amount the user has in stock.
         int numberOfCustomersToBuyDish = Math.Min(numberOfCustomers, this.gameState.menuInventory[Dish.FRENCH_FRIES]);
         
-        // As a result of that, decrement the user's currently money in inventory by the amount of the dish bought times 
-        // the dish price.
+        // As a result of that, update the user's information on both the amount of dishes sold yesterday as well
+        // as the amount of that dish sold in inventory, and have the UI update to that information accordingly.
         this.gameState.menuInventory[Dish.FRENCH_FRIES] -= numberOfCustomersToBuyDish;
-        this.hudMenuManager.dishMenu.SetDishInInventory(Dish.FRENCH_FRIES, this.gameState.menuInventory[Dish.FRENCH_FRIES]);
+        this.gameState.soldYesterdayMapping[Dish.FRENCH_FRIES] = numberOfCustomersToBuyDish;
+        this.hudMenuManager.dishMenu.SetDishDetails(this.gameState);
         
         // Then, decrement the dish's amount by the amount that customers bought.
         this.gameState.cashOnHand += numberOfCustomersToBuyDish * Dish.FRENCH_FRIES.GetRetailPrice();
@@ -109,27 +110,12 @@ public class GameSceneManager : MonoBehaviour
         this.gameState = _gameState;
 
         // Initialize the starting turn number, iff it isn't set.
-        if (this.gameState.turnNumber == null)
-        {
-            this.gameState.turnNumber = 1;
-        }
-
-        // Initialize the player's menu inventory, iff it isn't set.
-        if (this.gameState.menuInventory == null)
-        {
-            this.gameState.menuInventory = GameState.InitializeDishMenu();
-        }
-
-        // Initialize the player's cash on hand, iff it isn't set.
-        if (this.gameState.cashOnHand == null)
-        {
-            this.gameState.cashOnHand = GameState.STARTING_CASH;
-        }
+        this.gameState.InitializeFieldsIfNull();
 
         // Set all the UI displays for all the elements in the save file.
         this.SetCurrentTurn(this.gameState.turnNumber);
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
-        this.hudMenuManager.dishMenu.SetDishMapping(this.gameState.menuInventory);
+        this.hudMenuManager.dishMenu.SetDishDetails(this.gameState);
     }
 
     /// <summary>

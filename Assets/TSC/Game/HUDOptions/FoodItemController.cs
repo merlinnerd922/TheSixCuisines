@@ -24,6 +24,16 @@ public class FoodItemController : MonoBehaviour
 
 
     /// <summary>
+    /// The text displaying the retail price of a dish.
+    /// </summary>
+    public Text retailPriceText;
+    
+    /// <summary>
+    /// The text displaying the ingredient costs for a dish.
+    /// </summary>
+    public Text ingredientCostText;
+    
+    /// <summary>
     /// The text displaying the amount of a dish the user has in stock.
     /// </summary>
     public Text inStockText;
@@ -39,7 +49,12 @@ public class FoodItemController : MonoBehaviour
     [FormerlySerializedAs("foodAmountText")]
     public Text foodAmountToBuyText;
 
-/// <summary>
+    /// <summary>
+    /// The text displaying the amount of this ingredient the player bought yesterday.
+    /// </summary>
+    public Text boughtYesterdayText;
+
+    /// <summary>
 /// The menu of dishes this controller is being managed by.
 /// </summary>
     private DishMenu _dishMenu=> this.gameSceneManager.hudMenuManager.dishMenu;
@@ -67,13 +82,6 @@ public class FoodItemController : MonoBehaviour
     /// The amount of cash the player has on hand.
     /// </summary>
     public float playerCashOnHand => gameSceneManager.gameState.cashOnHand;
-
-    /// <summary>
-    /// Confirm the purchase of the ingredients for this dish.
-    /// </summary>
-    public void Confirm()
-    {
-    }
 
     /// <summary>
     /// Set the amount of food of this type to buy to <paramref name="getFoodAmount"/>.

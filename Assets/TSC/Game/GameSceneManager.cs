@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Extend;
+using Helper;
+using TSC.Game;
 using UnityEngine;
 
 /// <summary>
@@ -43,10 +46,28 @@ public class GameSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Increment the current turn.
+    /// Increment the current turn, and carry out all actions associated with the turn being incremented.
     /// </summary>
     public void IncrementTurn()
     {
+        // Have a random number of customers buy food, between 40 and 60 (50 +- 10 customers).
+        int numberOfCustomers = NumberRandomizer.GetIntBetweenExclusive(40, 60);
+        
+        // Have the customers buy a dish. (Right now, the only dish that is available is French Fries).
+        //
+        // Make sure that the number of customers that bought the dish does not exceed the amount the user has in stock.
+        int numberOfCustomersToBuyDish = Math.Min(numberOfCustomers, this.gameState.menuInventory[Dish.FRENCH_FRIES]);
+        
+        // As a result of that, decrement the user's currently money in inventory by the amount of the dish bought times 
+        // the dish price.
+        this.gameState.menuInventory[Dish.FRENCH_FRIES] -= numberOfCustomersToBuyDish;
+        this.hudMenuManager.dishMenu.SetDishInInventory(Dish.FRENCH_FRIES, this.gameState.menuInventory[Dish.FRENCH_FRIES]);
+        
+        // Then, decrement the dish's amount by the amount that customers bought.
+        this.gameState.cashOnHand += numberOfCustomersToBuyDish * Dish.FRENCH_FRIES.GetRetailPrice();
+        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
+        
+        // Finally, increment the current turn.
         this.SetCurrentTurn(this.turnNumber + 1);
     }
 
@@ -105,7 +126,7 @@ public class GameSceneManager : MonoBehaviour
             this.gameState.cashOnHand = GameState.STARTING_CASH;
         }
 
-// Set all the UI displays for all the elements in the save file.
+        // Set all the UI displays for all the elements in the save file.
         this.SetCurrentTurn(this.gameState.turnNumber);
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
         this.hudMenuManager.dishMenu.SetDishMapping(this.gameState.menuInventory);

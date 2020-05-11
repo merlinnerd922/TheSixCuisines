@@ -13,9 +13,17 @@ namespace TSC.Game
         /// <summary>
         /// A mapping between dishes and their ingredient costs.
         /// </summary>
-        private static Dictionary<Dish, float> DISH_COST_MAPPING = new Dictionary<Dish, float>()
+        private static Dictionary<Dish, float> INGREDIENTS_COST_MAPPING = new Dictionary<Dish, float>()
         {
             {Dish.FRENCH_FRIES, 25}
+        };
+
+        /// <summary>
+        /// A mapping between dishes and their retail prices.
+        /// </summary>
+        private static Dictionary<Dish, float> DISH_COST_MAPPING= new Dictionary<Dish, float>()
+        {
+            {Dish.FRENCH_FRIES, 50}
         };
 
         /// <summary>
@@ -23,6 +31,16 @@ namespace TSC.Game
         /// </summary>
         /// <returns>The ingredient cost of the provided dish.</returns>
         public static float GetIngredientCost(this Dish dish)
+        {
+            return INGREDIENTS_COST_MAPPING[dish];
+        }
+        
+        /// <summary>
+        /// Return the retail price of the provided dish.
+        /// </summary>
+        /// <param name="dish">The dish whose retail price should be returned.</param>
+        /// <returns>the retail price of the provided dish.</returns>
+        public static float GetRetailPrice(this Dish dish)
         {
             return DISH_COST_MAPPING[dish];
         }

@@ -93,6 +93,17 @@ namespace Helper
             return floatList;
         }
 
+/// <summary>
+/// Return a random integer between the lower and upper bounds provided.
+/// </summary>
+/// <param name="lowerBound">The lower bound of the integer to return.</param>
+/// <param name="upperBound">The upper bound of the integer to return.</param>
+/// <returns>a random integer between the lower and upper bounds provided.</returns>
+        public static int GetIntBetweenExclusive(int lowerBound, int upperBound)
+        {
+            return LocalGeneralUtils.SYS_RANDOM.Next(lowerBound, upperBound + 1);
+        }
+
     }
 
 }

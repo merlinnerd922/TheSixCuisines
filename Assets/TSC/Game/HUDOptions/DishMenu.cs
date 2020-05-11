@@ -109,4 +109,15 @@ public class DishMenu : HUDDisplay
         }
     }
 
+    /// <summary>
+    /// Set the count of the dish <paramref name="dish"/> that the player has in inventory to <paramref name="dishCount"/>.
+    /// </summary>
+    /// <param name="dish">The dish whose count should be set.</param>
+    /// <param name="dishCount">The count to set the dish to.</param>
+    public void SetDishInInventory(Dish dish, int dishCount)
+    {
+        FoodItemController foodItemController = GetFoodItemController(dish);
+        foodItemController.SetAmountOfDishesInStockInUI(dishCount);
+    }
+
 }

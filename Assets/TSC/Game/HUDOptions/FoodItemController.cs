@@ -39,7 +39,9 @@ public class FoodItemController : MonoBehaviour
     [FormerlySerializedAs("foodAmountText")]
     public Text foodAmountToBuyText;
 
-
+/// <summary>
+/// The menu of dishes this controller is being managed by.
+/// </summary>
     private DishMenu _dishMenu=> this.gameSceneManager.hudMenuManager.dishMenu;
 
 

@@ -77,6 +77,83 @@ public class FoodItemController : MonoBehaviour
         this._dishMenu.SetFoodAmountToPurchase(this.dishManaged,
             this._dishMenu.GetFoodAmountToPurchase(this.dishManaged) + 1);
     }
+    
+    
+    /// <summary>
+    /// Start the coroutine to hold down the increment button to quickly increment the amount of the recipe stored
+    /// in this incrementer.
+    /// </summary>
+    public void HoldDownIncrement()
+    {
+        IEnumerator holdDownCoroutine = this.GetHoldMouseDownIncrementCoroutine(true);
+        StartCoroutine(holdDownCoroutine);
+    }
+
+    
+    /// <summary>
+    /// The amount of time to wait when holding down a button before allowing rapid incrementation/decrementation.
+    /// </summary>
+    private const float HOLD_DELAY = 0.5f;
+    
+    /// <summary>
+    /// TODO Modify docs
+    /// Return a coroutine that does the following: after a small delay, begin rapidly incrementing/decrementing the
+    /// recipe stored in this controller.
+    /// </summary>
+    /// <param name="shouldIncrement">A flag that denotes whether the recipe amount should be incremented or
+    /// decremented.</param>
+    /// <returns>A coroutine that does the following: after a small delay, begin rapidly incrementing/decrementing
+    /// the recipe stored in this controller.</returns>
+    private IEnumerator GetHoldMouseDownIncrementCoroutine(bool shouldIncrement)
+    {
+        // Initialize a timer to keep track of how long we've held down the button.
+        //
+        // After a small delay, start incrementing or decrementing the recipe specified by this incrementer/decrementer.
+        float elapsedHoldDelay = 0;
+        bool holdDelayMet = false;
+
+        // Run this coroutine as long as the left mouse button's being held down.
+        while (Input.GetMouseButton(0))
+        {
+            // If the hold delay duration hasn't been met, then kept incrementing the hold delay timer.
+            if (!holdDelayMet)
+            {
+                elapsedHoldDelay += Time.deltaTime;
+
+                // After the button is held down for enough time, mark that this incrementer can begin rapidly incrementing
+                // or decrementing.
+                if (elapsedHoldDelay >= HOLD_DELAY)
+                {
+                    holdDelayMet = true;
+                }
+            }
+
+            // Increment the amount of this ingredient.
+            else if (shouldIncrement)
+            {
+                this.Increment();
+            }
+
+            // Decrement the amount of this ingredient. (TODO_LATER)
+            else
+            {
+            }
+
+            // Break from the current frame and come back in next frame to continue the incrementation.
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// Start the coroutine to hold down the decrement button to quickly decrement the amount of the recipe stored
+    /// in this incrementer.
+    /// </summary>
+    public void StartHoldDecrement()
+    {
+        IEnumerator holdDownCoroutine = this.GetHoldMouseDownIncrementCoroutine(false);
+        StartCoroutine(holdDownCoroutine);
+    }
+
 
     /// <summary>
     /// The amount of cash the player has on hand.

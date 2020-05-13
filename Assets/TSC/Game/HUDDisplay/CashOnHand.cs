@@ -7,6 +7,10 @@ using UnityEngine.UI;
 /// </summary>
 public class CashOnHand : MonoBehaviour
 {
+/// <summary>
+/// The progress bar for keeping track of how close the user is to their target cash goal.
+/// </summary>
+    public ProgressBar progressBar;
 
     /// <summary>
     /// The amount of cash the player has on hand, as displayed in the UI.
@@ -26,6 +30,9 @@ public class CashOnHand : MonoBehaviour
     {
         this.cashOnHand = cashOnHandToSet;
         this.cashOnHandText.text = $"${cashOnHandToSet}";
+        
+        // Set the progress of the user in reaching their target cash goal.
+        this.progressBar.SetCashOnHandProgress(cashOnHandToSet);
     }
 
     /// <summary>

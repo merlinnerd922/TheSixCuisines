@@ -85,6 +85,7 @@
      <Compile Include="Assets\TSC\Game\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\GameState.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\CashOnHand.cs" />
+     <Compile Include="Assets\TSC\Game\HUDDisplay\ProgressBar.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\TurnButton.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\TurnDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\DishMenu.cs" />

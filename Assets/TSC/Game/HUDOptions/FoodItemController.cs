@@ -96,7 +96,6 @@ public class FoodItemController : MonoBehaviour
     private const float HOLD_DELAY = 0.5f;
     
     /// <summary>
-    /// TODO Modify docs
     /// Return a coroutine that does the following: after a small delay, begin rapidly incrementing/decrementing the
     /// recipe stored in this controller.
     /// </summary>

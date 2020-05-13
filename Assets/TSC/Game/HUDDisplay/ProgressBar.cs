@@ -31,6 +31,11 @@ public class ProgressBar : MonoBehaviour
     private float TARGET_CASH_ON_HAND= 10000;
 
     /// <summary>
+    /// The victory screen on this
+    /// </summary>
+    public VictoryScreen victoryScreen;
+
+    /// <summary>
     /// Set the cash on hand that the player has to <paramref name="cashOnHandToSet"/>, and update the player's progress accordingly.
     /// </summary>
     /// <param name="cashOnHandToSet">The value to set the amount of cash the player has on hand.</param>
@@ -44,6 +49,12 @@ public class ProgressBar : MonoBehaviour
         
         // Finally, set the width of the RectTransform of the progress bar foreground accordingly.
         this.foregroundRectTransform.SetAnchorMaxX(progressPercentage);
+        
+        // Trigger the victory screen if the maximum target has been reached.
+        if (progressPercentage >= 1)
+        {
+            victoryScreen.Activate();
+        }
     }
 
 }

@@ -90,7 +90,7 @@ public class GameSceneManager : MonoBehaviour
     /// <summary>
     /// Create and load a brand new game state into the current scene.
     /// </summary>
-    private void LoadNewGameFromNewGameState()
+    internal void LoadNewGameFromNewGameState()
     {
         // Create a new game state.
         this.gameState = GameState.CreateNew();

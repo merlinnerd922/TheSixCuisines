@@ -15,7 +15,7 @@ namespace TSC.Game
         /// </summary>
         private static Dictionary<Dish, float> INGREDIENTS_COST_MAPPING = new Dictionary<Dish, float>()
         {
-            {Dish.FRENCH_FRIES, 25}
+            {Dish.FRENCH_FRIES, 25}, {Dish.BURGER, 1}
         };
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace TSC.Game
         /// </summary>
         private static Dictionary<Dish, float> DISH_COST_MAPPING= new Dictionary<Dish, float>()
         {
-            {Dish.FRENCH_FRIES, 50}
+            {Dish.FRENCH_FRIES, 50}, {Dish.BURGER, 2}
         };
 
         /// <summary>

@@ -5,7 +5,15 @@ public
     enum Dish
 {
     /// <summary>
-    /// A dish on the menu.
+    /// A hot plate of french fries.
     /// </summary>
 FRENCH_FRIES
+    
+    
+    ,
+    
+    /// <summary>
+    /// A very sexy beef burger.
+    /// </summary>
+    BURGER
 }

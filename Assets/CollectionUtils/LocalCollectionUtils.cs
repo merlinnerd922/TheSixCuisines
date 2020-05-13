@@ -890,6 +890,17 @@ namespace Extend
             return serializableDictionary;
         }
 
+        /// <summary>
+        /// Return a String representation of the provided enumerable.
+        /// </summary>
+        /// <param name="enumerable">The enumerable to generate a String representation of.</param>
+        /// <typeparam name="T">The type of object in the provided enumerable.</typeparam>
+        /// <returns>a String representation of the provided enumerable.</returns>
+        public static string AsString<T>(this IEnumerable<T> enumerable)
+        {
+            return "[" + string.Join(", ", enumerable) + "]";
+        }
+
     }
 
 }

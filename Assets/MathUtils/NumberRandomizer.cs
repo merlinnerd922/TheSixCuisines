@@ -1,11 +1,13 @@
 ﻿﻿#region
 
-using System;
-using System.Collections.Generic;
+ using System;
+ using System.Collections.Generic;
 using System.Linq;
 using Extend;
+using UnityEngine;
+using Random = System.Random;
 
-#endregion
+ #endregion
 
 namespace Helper
 {
@@ -70,6 +72,37 @@ namespace Helper
         {
             double result = LocalGeneralUtils.SYS_RANDOM.NextDouble() * (max - (double) min) + min;
             return (float) result;
+        }
+
+
+        /// <summary>
+        /// Generate and return a list of <paramref name="numberOfIntsToGenerate"/> of floats that add up to <paramref name="total"/>.
+        /// </summary>
+        /// <param name="numberOfIntsToGenerate">The number of integers to generate.</param>
+        /// <param name="total">The total that the generated floats should add up to.</param>
+        /// <returns>a list of <paramref name="numberOfIntsToGenerate"/> of floats that add up to <paramref name="total"/>.</returns>
+        public static IEnumerable<float> GenerateNFloatsWhoSumToM(int numberOfIntsToGenerate, float total)
+        {
+        // Generate a list of random floats between 1 and 100.
+            List<float> generateNFloatsWhoSumToM = new List<float>();
+            for (int i = 0; i < numberOfIntsToGenerate; i++)
+            {
+                generateNFloatsWhoSumToM.Add(LocalGeneralUtils.SYS_RANDOM.NextFloat(1, 100));
+            }
+
+            // Then, take the sum of all of those floats, so we can divide each of those floats by the sum and then
+            // multiply by the target total to reach our goal.
+            float totalSum = generateNFloatsWhoSumToM.Sum();
+            
+            // Divide each float by the total sum of numbers, and then multiply by the target total; this will result
+            // in all of the numbers equalling the total.
+            for (int i = 0; i < numberOfIntsToGenerate; i++)
+            {
+                generateNFloatsWhoSumToM[i] /= totalSum;
+                generateNFloatsWhoSumToM[i] *= total;
+            }
+
+            return generateNFloatsWhoSumToM;
         }
 
         /// <summary>

@@ -80,6 +80,7 @@
      <Compile Include="Assets\MathUtils\GeometryUtils\Vector2Int.cs" />
      <Compile Include="Assets\MathUtils\LocalMathUtils.cs" />
      <Compile Include="Assets\MathUtils\NumberRandomizer.cs" />
+     <Compile Include="Assets\TestScript\TestScript.cs" />
      <Compile Include="Assets\TSC\Game\FoodItem\Dish.cs" />
      <Compile Include="Assets\TSC\Game\FoodItem\DishUtils.cs" />
      <Compile Include="Assets\TSC\Game\GameSceneManager.cs" />

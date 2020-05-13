@@ -1,4 +1,6 @@
-﻿using BDT;
+﻿using System;
+using System.Linq;
+using BDT;
 using Extend;
 using Helper.ExtendSpace;
 using UnityEngine;
@@ -96,6 +98,19 @@ namespace TSC.Game.Menu
             // For each save file, add a node to the content viewer for that save file.
             foreach (string saveFileName in SaveGameManager.GetSaveFileNames())
             {
+                // Ignore files that don't end in TSCGAME.
+                if (!saveFileName.EndsWith(".tscgame", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+                
+                // Ignore save files with more than one period.
+                if (saveFileName.Count(x => x == '.') > 1)
+                {
+                    continue;
+                }
+
+                // Otherwise, add a brand new save file node.
                 this.saveGameViewContent.AddChild(this.CreateSavedGameTextItem(saveFileName), false);
             }
 

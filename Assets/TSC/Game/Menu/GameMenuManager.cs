@@ -41,8 +41,9 @@ public class GameMenuManager : MonoBehaviour
     public void ActivateMenu(InGameMenu menuToActivate)
     {
         // (Deactivate all other menus first in the event they are activated). 
-        foreach (InGameMenu inGameMenu in LocalListUtils.of<InGameMenu>(this.saveGameMenu, this.loadGameMenu, this
-        .optionsSummaryMenu)) {
+        IEnumerable<InGameMenu> inGameMenus = LocalListUtils.of<InGameMenu>(this.saveGameMenu, this.loadGameMenu, this
+            .optionsSummaryMenu);
+        foreach (InGameMenu inGameMenu in inGameMenus) {
             if (!menuToActivate.Equals(inGameMenu))
             {
                 inGameMenu.Deactivate();

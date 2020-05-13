@@ -202,7 +202,7 @@ namespace Helper
         /// <param name="stringToTrim">The string to trim the end off of.</param>
         /// <param name="subStr">The substring to trim off the end of <paramref name="stringToTrim" />.</param>
         /// <returns>The trimmed <see cref="string" /> version of <paramref name="stringToTrim" />.</returns>
-        public static string TrimEnd(this string stringToTrim, string subStr)
+        public static string RemoveEnd(this string stringToTrim, string subStr)
         {
             // Remove the suffix off the end of the string if necessary, before returning it.
             if (stringToTrim.EndsWith(subStr)) stringToTrim = stringToTrim.Remove(stringToTrim.Length - subStr.Length);
@@ -221,7 +221,7 @@ namespace Helper
         /// <param name="stringToTrim">The s.</param>
         /// <param name="substring">The substring to trim off the start.</param>
         /// <returns>The <see cref="string" /> from which we should trim off.</returns>
-        public static string TrimStart(this string stringToTrim, string substring)
+        public static string RemoveStart(this string stringToTrim, string substring)
         {
             if (!stringToTrim.StartsWith(substring)) return stringToTrim;
 

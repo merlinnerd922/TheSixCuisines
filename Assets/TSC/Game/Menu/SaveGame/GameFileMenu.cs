@@ -98,14 +98,8 @@ namespace TSC.Game.Menu
             // For each save file, add a node to the content viewer for that save file.
             foreach (string saveFileName in SaveGameManager.GetSaveFileNames())
             {
-                // Ignore files that don't end in TSCGAME.
-                if (!saveFileName.EndsWith(".tscgame", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-                
-                // Ignore save files with more than one period.
-                if (saveFileName.Count(x => x == '.') > 1)
+                // Ignore files that don't end in TSCGAME or have more than one period.
+                if (IsInvalidFileName(saveFileName))
                 {
                     continue;
                 }
@@ -116,6 +110,28 @@ namespace TSC.Game.Menu
 
             // Scroll the list back all the way to the top.
             this.scrollBar.value = 1;
+        }
+
+        /// <summary>
+        /// Return true iff the provided save game file name is invalid.
+        /// </summary>
+        /// <param name="saveFileName">The name of the file to save.</param>
+        /// <returns>true iff the provided save game file name is invalid.</returns>
+        private static bool IsInvalidFileName(string saveFileName)
+        {
+            return !IsValidFileName(saveFileName);
+        }
+
+        /// <summary>
+        /// Return true iff the provided save game file name is valid.
+        /// </summary>
+        /// <param name="saveFileName">The name of the file to save.</param>
+        /// <returns>true iff the provided save game file name is valid.</returns>
+        protected static bool IsValidFileName(string saveFileName)
+        {
+            return !saveFileName.IsNullOrEmpty() && saveFileName.EndsWith(".tscgame", StringComparison.OrdinalIgnoreCase) && 
+            saveFileName.Count(x =>
+             x == '.') <= 1;
         }
 
     }

@@ -389,7 +389,7 @@ namespace Helper
             public static GameObject RemoveCloneSubstrRecursive(this GameObject go)
             {
                 // Trim off the "clone" part of the name.
-                go.name = go.name.TrimEnd("(Clone)");
+                go.name = go.name.RemoveEnd("(Clone)");
 
                 // Then, do the same for all children:
                 foreach (GameObject child in go.GetChildren()) child.RemoveCloneSubstrRecursive();

@@ -77,7 +77,7 @@ public static class LocalGeneralUtils
 	/// <returns>The <see cref="bool" />.</returns>
 	public static bool IsNullOrEmpty(this string s)
     {
-        return s.IsAny(null, String.Empty);
+        return s.IsAny(null, string.Empty);
     }
 
 	/// <summary>

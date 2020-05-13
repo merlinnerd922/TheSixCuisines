@@ -4688,8 +4688,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -190, y: 46}
-  m_SizeDelta: {x: 329.9, y: 67.3}
+  m_AnchoredPosition: {x: 13, y: -37}
+  m_SizeDelta: {x: 607.5, y: 199.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1099670776
 MonoBehaviour:
@@ -6394,7 +6394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1777895081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6427,6 +6427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4c67fe5cee4259ab70fa5e87da1b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trendingFoodText: {fileID: 1099670776}
 --- !u!1 &1788935630
 GameObject:
   m_ObjectHideFlags: 0

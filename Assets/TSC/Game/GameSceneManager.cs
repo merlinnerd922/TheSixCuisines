@@ -68,6 +68,9 @@ public class GameSceneManager : MonoBehaviour
         this.gameState.cashOnHand += numberOfCustomersToBuyDish * Dish.FRENCH_FRIES.GetRetailPrice();
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
         
+        // Initialize new values for the daily trends.
+        this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
+        
         // Finally, increment the current turn.
         this.SetCurrentTurn(this.turnNumber + 1);
     }
@@ -85,6 +88,10 @@ public class GameSceneManager : MonoBehaviour
 
         // For now, only new games are supported, so load a new game from a newly generated state.
         this.LoadNewGameFromNewGameState();
+        
+        // Generate information on which foods are trending.
+        this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
+
     }
 
     /// <summary>

@@ -1,4 +1,9 @@
-﻿namespace TSC.Game.HUDOptions
+﻿using System.Collections.Generic;
+using System.Linq;
+using Helper;
+using UnityEngine.UI;
+
+namespace TSC.Game.HUDOptions
 {
 
     /// <summary>
@@ -6,6 +11,37 @@
     /// </summary>
     public class TrendsDisplay : HUDDisplay
     {
+
+        /// <summary>
+        /// The text displaying the currently trending cuisine.
+        /// </summary>
+        public Text trendingFoodText;
+
+        /// <summary>
+        /// Initialize information on the daily trends for food.
+        /// </summary>
+        public void InitializeDailyTrends()
+        {
+            // Initialize the string that the trend string will be set to.
+            string trendString = "";
+
+            // Get a list of all different types of dishes.
+            List<Dish> dishList = LocalGeneralUtils .GetEnumList<Dish>();
+            
+            // Initialize likelihoods adding up to 1 indicating how popular the dish will be.
+            List<float> foodPopularities = NumberRandomizer.GenerateNFloatsWhoSumToM(dishList.Count, 1f).ToList();
+
+            // Append each dish and its popularity onto the trend string.
+            for (int index = 0; index < dishList.Count; index++)
+            {
+                Dish d = dishList[index];
+                float dishPopularity = foodPopularities[index];
+                trendString += $"{d.ToTitleCaseSpacedString()}: {dishPopularity * 100:F2}%\n";
+            }
+
+            // Finally, set the trend string.
+            this.trendingFoodText.text = trendString;
+        }
 
     }
 

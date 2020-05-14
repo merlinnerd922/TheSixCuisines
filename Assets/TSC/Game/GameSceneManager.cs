@@ -217,9 +217,9 @@ public class GameSceneManager : MonoBehaviour
     /// Return a list of all recipes that this user has acquired.
     /// </summary>
     /// <returns>a list of all recipes that this user has acquired.</returns>
-    internal static List<Dish> GetAcquiredRecipes()
+    internal  List<Dish> GetAcquiredRecipes()
     {
-        return LocalGeneralUtils.GetEnumList<Dish>();
+        return this.gameState.acquiredDishes;
     }
 
     /// <summary>

@@ -6,7 +6,13 @@
     /// </summary>
     public class NewDishesDisplay : HUDDisplay
     {
-
+        
+        /// <summary>
+        /// The scene manager for the game scene.
+        /// </summary>
+        public GameSceneManager gameSceneManager;
+        
+        
     }
 
 }

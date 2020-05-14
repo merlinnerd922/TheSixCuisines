@@ -137,6 +137,42 @@ namespace Helper
             return LocalGeneralUtils.SYS_RANDOM.Next(lowerBound, upperBound + 1);
         }
 
+
+/// <summary>
+/// Return a random key from the provided Dictionary, where the values corresponding to the keys are the weights corresponding
+/// to how likely that item is to be chosen.
+/// </summary>
+/// <param name="mapping">The mapping containing a set of items and their weights.</param>
+/// <typeparam name="T">The type of the key in the Dictionary.</typeparam>
+/// <returns>A random key from the provided Dictionary, where the values corresponding to the keys are the weights corresponding
+/// to how likely that item is to be chosen.</returns>
+        public static T GetRandomItemWeighted<T>(Dictionary<T, float> mapping)
+        {
+            // Return the default value of T iff the provided mapping is empty.
+            if (mapping.Count == 0)
+            {
+                return default(T);
+            }
+
+            float totalWeight = mapping.Sum(c => c.Value);
+            float choice = LocalGeneralUtils.SYS_RANDOM.NextFloat(0, totalWeight);
+            float sum = 0;
+
+            foreach (KeyValuePair<T, float> obj in mapping)
+            {
+                for (float i = sum; i < obj.Value + sum; i++)
+                {
+                    if (i >= choice)
+                    {
+                        return obj.Key;
+                    }
+                }
+                sum += obj.Value;
+            }
+
+            return mapping.First().Key;
+        }
+
     }
 
 }

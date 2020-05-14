@@ -53,26 +53,61 @@ public class GameSceneManager : MonoBehaviour
         // Have a random number of customers buy food, between 40 and 60 (50 +- 10 customers).
         int numberOfCustomers = NumberRandomizer.GetIntBetweenExclusive(40, 60);
         
-        // Have the customers buy a dish. (Right now, the only dish that is available is French Fries).
-        //
-        // Make sure that the number of customers that bought the dish does not exceed the amount the user has in stock.
-        int numberOfCustomersToBuyDish = Math.Min(numberOfCustomers, this.gameState.menuInventory[Dish.FRENCH_FRIES]);
-        
-        // As a result of that, update the user's information on both the amount of dishes sold yesterday as well
-        // as the amount of that dish sold in inventory, and have the UI update to that information accordingly.
-        this.gameState.menuInventory[Dish.FRENCH_FRIES] -= numberOfCustomersToBuyDish;
-        this.gameState.soldYesterdayMapping[Dish.FRENCH_FRIES] = numberOfCustomersToBuyDish;
-        this.hudMenuManager.dishMenu.SetDishDetails(this.gameState);
-        
-        // Then, decrement the dish's amount by the amount that customers bought.
-        this.gameState.cashOnHand += numberOfCustomersToBuyDish * Dish.FRENCH_FRIES.GetRetailPrice();
-        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
-        
+        // Have the generated customers buy a dish.
+        this.DoBuyDishes(numberOfCustomers);
+
         // Initialize new values for the daily trends.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
         
         // Finally, increment the current turn.
         this.SetCurrentTurn(this.turnNumber + 1);
+    }
+
+    /// <summary>
+    /// Carry out the purchase of dishes for the current day.
+    /// </summary>
+    /// <param name="numberOfCustomers">The number of customers buying dishes.</param>
+    private void DoBuyDishes(int numberOfCustomers)
+    {
+        // Initialize a mapping between all the dishes and how many were bought.
+        Dictionary<Dish, int> dishPurchaseCounts = GameState.InitializeZeroMapping();
+        
+        // Get the mapping between the dishes and the weights at which they are chosen.
+        //
+        // Select a random dish for each customer.
+        for (int i = 0; i < numberOfCustomers; i++)
+        {
+            Dish randomDish = NumberRandomizer.GetRandomItemWeighted(this.hudMenuManager.trendsDisplay.
+                dishPopularityMapping);
+            dishPurchaseCounts[randomDish]++;
+        }
+        
+        // Have the customers buy a dish. (Right now, the only dish that is available is French Fries).
+        //
+        // Make sure that the number of customers that bought the dish does not exceed the amount the user has in stock.
+        foreach (Dish d in dishPurchaseCounts.Keys) {
+            this.BuyDishNTimesByCustomers(dishPurchaseCounts[d], d);
+        }
+    }
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="numberOfCustomers"></param>
+    /// <param name="dish"></param>
+    private void BuyDishNTimesByCustomers(int numberOfCustomers, Dish dish)
+    {
+        int numberOfCustomersToBuyDish = Math.Min(numberOfCustomers, this.gameState.menuInventory[dish]);
+
+        // As a result of that, update the user's information on both the amount of dishes sold yesterday as well
+        // as the amount of that dish sold in inventory, and have the UI update to that information accordingly.
+        this.gameState.menuInventory[dish] -= numberOfCustomersToBuyDish;
+        this.gameState.soldYesterdayMapping[dish] = numberOfCustomersToBuyDish;
+        this.hudMenuManager.dishMenu.SetDishDetails(this.gameState);
+
+        // Then, decrement the dish's amount by the amount that customers bought.
+        this.gameState.cashOnHand += numberOfCustomersToBuyDish * dish.GetRetailPrice();
+        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
     }
 
     /// <summary>

@@ -71,6 +71,14 @@
      <Compile Include="Assets\GeneralUtils\LocalFileUtils.cs" />
      <Compile Include="Assets\GeneralUtils\PathInst.cs" />
      <Compile Include="Assets\GeneralUtils\RuntimeException.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\DynamicRandomSelector.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\Interfaces\IRandomSelector.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\Interfaces\IRandomSelectorBuilder.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\RandomMath.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\RandomSelectorTests.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\StaticRandomSelectorBinary.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\StaticRandomSelectorBuilder.cs" />
+     <Compile Include="Assets\MathUtils\DynamicRandomSelector\StaticRandomSelectorLinear.cs" />
      <Compile Include="Assets\MathUtils\GeometryUtils\Axis3D.cs" />
      <Compile Include="Assets\MathUtils\GeometryUtils\Direction.cs" />
      <Compile Include="Assets\MathUtils\GeometryUtils\LocalVector2Utils.cs" />

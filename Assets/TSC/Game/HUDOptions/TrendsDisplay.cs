@@ -18,6 +18,11 @@ namespace TSC.Game.HUDOptions
         public Text trendingFoodText;
 
         /// <summary>
+        /// A mapping tracking the popularity of each dish.
+        /// </summary>
+        internal Dictionary<Dish, float> dishPopularityMapping;
+
+        /// <summary>
         /// Initialize information on the daily trends for food.
         /// </summary>
         public void InitializeDailyTrends()
@@ -26,17 +31,21 @@ namespace TSC.Game.HUDOptions
             string trendString = "";
 
             // Get a list of all different types of dishes.
-            List<Dish> dishList = LocalGeneralUtils .GetEnumList<Dish>();
+            List<Dish> dishList = LocalGeneralUtils.GetEnumList<Dish>();
             
             // Initialize likelihoods adding up to 1 indicating how popular the dish will be.
             List<float> foodPopularities = NumberRandomizer.GenerateNFloatsWhoSumToM(dishList.Count, 1f).ToList();
 
             // Append each dish and its popularity onto the trend string.
+            dishPopularityMapping = new Dictionary<Dish, float>();
             for (int index = 0; index < dishList.Count; index++)
             {
                 Dish d = dishList[index];
                 float dishPopularity = foodPopularities[index];
                 trendString += $"{d.ToTitleCaseSpacedString()}: {dishPopularity * 100:F2}%\n";
+
+                // Be sure to keep track of how popular each dish is in a Dictionary.
+                dishPopularityMapping[d] = dishPopularity;
             }
 
             // Finally, set the trend string.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DataStructures.RandomSelector;
 using Extend;
 using Helper;
 using TSC.Game;
@@ -52,13 +53,13 @@ public class GameSceneManager : MonoBehaviour
     {
         // Have a random number of customers buy food, between 40 and 60 (50 +- 10 customers).
         int numberOfCustomers = NumberRandomizer.GetIntBetweenExclusive(40, 60);
-        
+
         // Have the generated customers buy a dish.
         this.DoBuyDishes(numberOfCustomers);
 
         // Initialize new values for the daily trends.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
-        
+
         // Finally, increment the current turn.
         this.SetCurrentTurn(this.turnNumber + 1);
     }
@@ -71,32 +72,54 @@ public class GameSceneManager : MonoBehaviour
     {
         // Initialize a mapping between all the dishes and how many were bought.
         Dictionary<Dish, int> dishPurchaseCounts = GameState.InitializeZeroMapping();
-        
-        // Get the mapping between the dishes and the weights at which they are chosen.
-        //
-        // Select a random dish for each customer.
+
+        // Generate a randomized selector attuned to current trends in food.
+        DynamicRandomSelector<Dish> dishSelector = this.GetRandomDishSelector();
+
+        // For each customer, select a randomized dish for that customer to purchase and increment the amount of that
+        // dish incremented by 1.
         for (int i = 0; i < numberOfCustomers; i++)
         {
-            Dish randomDish = NumberRandomizer.GetRandomItemWeighted(this.hudMenuManager.trendsDisplay.
-                dishPopularityMapping);
+            Dish randomDish = dishSelector.SelectRandomItem();
             dishPurchaseCounts[randomDish]++;
         }
-        
-        // Have the customers buy a dish. (Right now, the only dish that is available is French Fries).
-        //
-        // Make sure that the number of customers that bought the dish does not exceed the amount the user has in stock.
-        foreach (Dish d in dishPurchaseCounts.Keys) {
+
+        // After the purchase counts have been calculated, decrement the user's recipe inventory and increment the user's
+        // cash on hand accordingly.
+        foreach (Dish d in dishPurchaseCounts.Keys)
+        {
             this.BuyDishNTimesByCustomers(dishPurchaseCounts[d], d);
         }
     }
 
     /// <summary>
-    /// TODO
+    /// Return a random dish selector that selects a random dish based on the popularity of each dish.
     /// </summary>
-    /// <param name="numberOfCustomers"></param>
-    /// <param name="dish"></param>
+    /// <returns> a random dish selector that selects a random dish based on the popularity of each dish.</returns>
+    private DynamicRandomSelector<Dish> GetRandomDishSelector()
+    {
+        // Add each dish and its popularity to the randomized selector.
+        DynamicRandomSelector<Dish> dishSelector = new DynamicRandomSelector<Dish>();
+        foreach (Dish d in LocalGeneralUtils.GetEnumList<Dish>())
+        {
+            dishSelector.Add(d, this.hudMenuManager.trendsDisplay.dishPopularityMapping[d]);
+        }
+
+        // Build and return the selector.
+        dishSelector.Build();
+        return dishSelector;
+    }
+
+    /// <summary>
+    /// Buy the provided dish <paramref name="dish"/> <paramref name="numberOfCustomers"/> times.
+    /// </summary>
+    /// <param name="numberOfCustomers">The number of customers buying the dish.</param>
+    /// <param name="dish">The dish being bought.</param>
     private void BuyDishNTimesByCustomers(int numberOfCustomers, Dish dish)
     {
+        // Have the customers buy the given dish.
+        //
+        // Make sure that the number of customers that bought the dish does not exceed the amount the user has in stock.
         int numberOfCustomersToBuyDish = Math.Min(numberOfCustomers, this.gameState.menuInventory[dish]);
 
         // As a result of that, update the user's information on both the amount of dishes sold yesterday as well
@@ -123,10 +146,9 @@ public class GameSceneManager : MonoBehaviour
 
         // For now, only new games are supported, so load a new game from a newly generated state.
         this.LoadNewGameFromNewGameState();
-        
+
         // Generate information on which foods are trending.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
-
     }
 
     /// <summary>

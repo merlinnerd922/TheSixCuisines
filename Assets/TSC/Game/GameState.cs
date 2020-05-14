@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,16 +12,21 @@ using UnityEngine.Serialization;
 [Serializable]
 public class GameState
 {
+
     /// <summary>
     /// The current turn number of the game state.
     /// </summary>
     public int turnNumber = 1;
-    
+
     /// <summary>
     /// The amount of cash that this player currently has on hand.
     /// </summary>
-    [FormerlySerializedAs("startingCash")] 
-    public float cashOnHand = 5000f;
+    [FormerlySerializedAs("startingCash")] public float cashOnHand = 5000f;
+
+    /// <summary>
+    /// The list of dishes that the user has purchased.
+    /// </summary>
+    public List<Dish> acquiredDishes = new List<Dish>() {Dish.FRENCH_FRIES};
 
     /// <summary>
     /// The inventory of dishes the player has.
@@ -56,9 +60,10 @@ public class GameState
         gameState.soldYesterdayMapping = InitializeZeroMapping();
         return gameState;
     }
-/// <summary>
-/// The starting turn number, which is always set to 1 (as opposed to 0).
-/// </summary>
+
+    /// <summary>
+    /// The starting turn number, which is always set to 1 (as opposed to 0).
+    /// </summary>
     public const int STARTING_TURN_NUMBER = 1;
 
     /// <summary>
@@ -88,12 +93,29 @@ public class GameState
         {
             this.cashOnHand = STARTING_CASH;
         }
-        
+
         // Initialize the mapping of the amount of ingredients that were sold yesterday, if it isn't set.
         if (this.soldYesterdayMapping == null)
         {
             this.soldYesterdayMapping = InitializeZeroMapping();
         }
+    }
+
+    /// <summary>
+    /// Return the amount of the dish <paramref name="dishManaged"/> sold yesterday.
+    /// </summary>
+    /// <param name="dishManaged">The dish whose sales from yesterday we're trying to retrieve.</param>
+    /// <returns>the amount of the dish <paramref name="dishManaged"/> sold yesterday.</returns>
+    public int getSoldYesterday(Dish dishManaged)
+    {
+        // If there is no information on this dish being sold yesterday, then obviously the number that was sold is 0.
+        if (!this.soldYesterdayMapping.ContainsKey(dishManaged))
+        {
+            return 0;
+        }
+
+        // Otherwise, return the corresponding entry.
+        return soldYesterdayMapping[dishManaged];
     }
 
 }

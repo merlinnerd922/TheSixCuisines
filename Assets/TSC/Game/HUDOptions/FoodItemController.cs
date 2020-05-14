@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Helper;
 using TSC.Game;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -53,6 +54,11 @@ public class FoodItemController : MonoBehaviour
     /// The text displaying the amount of this ingredient the player bought yesterday.
     /// </summary>
     public Text boughtYesterdayText;
+
+    /// <summary>
+    /// An image of this food item.
+    /// </summary>
+    public Image image;
 
     /// <summary>
 /// The menu of dishes this controller is being managed by.
@@ -187,6 +193,24 @@ public class FoodItemController : MonoBehaviour
     public void SetAmountOfDishesInStockInUI(int amountOfDishToSet)
     {
         inStockText.text = amountOfDishToSet.ToString();
+    }
+
+    /// <summary>
+    /// Initialize this FoodItemController by populating it with information from the provided parameters.
+    /// </summary>
+    /// <param name="dish">The dish that this controller is managing.</param>
+    /// <param name="_gameSceneManager">The GameSceneManager that made a call to this controller.</param>
+    public void Initialize(Dish dish, GameSceneManager _gameSceneManager)
+    {
+        // Store references to the GameSceneManager that initialized this FoodItemController, as well as the dish 
+        // being managed by this controller.
+        this.gameSceneManager = _gameSceneManager;
+        this.name = dish.ToCamelCaseString();
+        this.dishManaged = dish;
+        
+        // Set this controller's dish's image.
+        Sprite imageSprite = Resources.Load<Sprite>($"Sprites/FoodSprites/{dish.ToCamelCaseString()}");
+        this.image.sprite = imageSprite;
     }
 
 }

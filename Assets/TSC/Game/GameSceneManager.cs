@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using DataStructures.RandomSelector;
 using Extend;
 using Helper;
+using Helper.ExtendSpace;
 using TSC.Game;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityUtils;
+using Object = UnityEngine.Object;
 
 /// <summary>
 /// A manager for the game scene.
@@ -37,6 +42,12 @@ public class GameSceneManager : MonoBehaviour
     /// The manager for all the HUD displays in the scene.
     /// </summary>
     public HUDMenuManager hudMenuManager;
+
+    /// <summary>
+    /// The prefab containing the food controller, for modifying and viewing information on a dish in the user's
+    /// inventory.
+    /// </summary>
+    public GameObject FOOD_CONTROLLER_PREFAB;
 
     /// <summary>
     /// The current turn number.
@@ -100,7 +111,7 @@ public class GameSceneManager : MonoBehaviour
     {
         // Add each dish and its popularity to the randomized selector.
         DynamicRandomSelector<Dish> dishSelector = new DynamicRandomSelector<Dish>();
-        foreach (Dish d in LocalGeneralUtils.GetEnumList<Dish>())
+        foreach (Dish d in GetAcquiredRecipes())
         {
             dishSelector.Add(d, this.hudMenuManager.trendsDisplay.dishPopularityMapping[d]);
         }
@@ -168,10 +179,47 @@ public class GameSceneManager : MonoBehaviour
     /// Load the game from the provided game state, and initialize any other variables required.
     /// </summary>
     /// <param name="_gameState">The GameState to load from.</param>
+    [SuppressMessage("ReSharper", "LoopCanBePartlyConvertedToQuery")]
     internal void LoadAndInitializeScene(GameState _gameState)
     {
+        // Load the UI for the menu display.
+        this.LoadDishInfoUI();
+
+        // Load all information from the provided game state.
         this.LoadGameFromGameState(_gameState);
+
+        // Initialize some random daily trends for determining the popularity of foods.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
+    }
+
+    /// <summary>
+    /// Load all UI related to the dish menu display.
+    /// </summary>
+    private void LoadDishInfoUI()
+    {
+        // Clear out the menu because we're currently loading the dish menu anew.
+        GameObject dishMenuMenuHolder = this.hudMenuManager.dishMenu.menuHolder;
+        dishMenuMenuHolder.DestroyAllChildren();
+
+        // For each dish, instantiate a prefab to represent the dish.
+        foreach (Dish dish in GetAcquiredRecipes())
+        {
+            GameObject instantiatedMenuItem = Instantiate(this.FOOD_CONTROLLER_PREFAB);
+            dishMenuMenuHolder.AddChild(instantiatedMenuItem, false);
+
+            // Then, initialize the script attached to the prefab with information on this GameSceneManager.
+            FoodItemController foodItemController = instantiatedMenuItem.GetComponent<FoodItemController>();
+            foodItemController.Initialize(dish, this);
+        }
+    }
+
+    /// <summary>
+    /// Return a list of all recipes that this user has acquired.
+    /// </summary>
+    /// <returns>a list of all recipes that this user has acquired.</returns>
+    internal static List<Dish> GetAcquiredRecipes()
+    {
+        return LocalGeneralUtils.GetEnumList<Dish>();
     }
 
     /// <summary>
@@ -222,6 +270,5 @@ public class GameSceneManager : MonoBehaviour
     {
         this.menuManager.Deactivate();
     }
-
 
 }

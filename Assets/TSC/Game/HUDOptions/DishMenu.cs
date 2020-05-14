@@ -154,7 +154,7 @@ public class DishMenu : HUDDisplay
             foodItemController.ingredientCostText.text =
                 $"Ingredient Cost: ${dishManaged.GetIngredientCost()}";
             foodItemController.boughtYesterdayText.text =
-                $"Sold yesterday: {gameState.soldYesterdayMapping[dishManaged]}";
+                $"Sold yesterday: {gameState.getSoldYesterday(dishManaged)}";
         }
         
     }

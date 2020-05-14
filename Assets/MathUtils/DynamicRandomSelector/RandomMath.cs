@@ -209,7 +209,7 @@ namespace DataStructures.RandomSelector.Math {
         }
 
         /// <summary>
-        /// Gemerates uniform random values for all indexes in array.
+        /// Generates uniform random values for all indexes in array.
         /// </summary>
         /// <param name="array">The array where all values will be randomized.</param>
         /// <param name="r">Random generator</param>

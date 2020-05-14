@@ -23,6 +23,11 @@ namespace TSC.Game.HUDOptions
         internal Dictionary<Dish, float> dishPopularityMapping;
 
         /// <summary>
+        /// The scene manager for the game scene.
+        /// </summary>
+        public GameSceneManager gameSceneManager;
+
+        /// <summary>
         /// Initialize information on the daily trends for food.
         /// </summary>
         public void InitializeDailyTrends()
@@ -31,7 +36,7 @@ namespace TSC.Game.HUDOptions
             string trendString = "";
 
             // Get a list of all different types of dishes.
-            List<Dish> dishList = LocalGeneralUtils.GetEnumList<Dish>();
+            List<Dish> dishList = GameSceneManager.GetAcquiredRecipes();
             
             // Initialize likelihoods adding up to 1 indicating how popular the dish will be.
             List<float> foodPopularities = NumberRandomizer.GenerateNFloatsWhoSumToM(dishList.Count, 1f).ToList();

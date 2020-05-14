@@ -161,7 +161,17 @@ public class GameSceneManager : MonoBehaviour
 
         // Initialize info on the current turn, the amount of cash the player has on hand, as well as the amount of 
         // food the player has in their inventory.
-        this.LoadGameFromGameState(this.gameState);
+        this.LoadAndInitializeScene(this.gameState);
+    }
+
+    /// <summary>
+    /// Load the game from the provided game state, and initialize any other variables required.
+    /// </summary>
+    /// <param name="_gameState">The GameState to load from.</param>
+    internal void LoadAndInitializeScene(GameState _gameState)
+    {
+        this.LoadGameFromGameState(_gameState);
+        this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
     }
 
     /// <summary>
@@ -212,5 +222,6 @@ public class GameSceneManager : MonoBehaviour
     {
         this.menuManager.Deactivate();
     }
+
 
 }

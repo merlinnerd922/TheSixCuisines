@@ -26,7 +26,7 @@ namespace TSC.Game.Menu
         {
             // Extract the save file from the provided text file and load it.
             SaveFile saveFile = SaveGameManager.LoadGame(this.fileNameText.text) as SaveFile;
-            this.gameSceneManager.LoadGameFromGameState(saveFile.gameState);
+            this.gameSceneManager.LoadAndInitializeScene(saveFile.gameState);
 
             // Deactivate the game menu manager and show the game window itself.
             gameMenuManager.Deactivate();

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Extend;
@@ -106,7 +107,20 @@ public class DishMenu : HUDDisplay
     {
         foreach (FoodItemController controller in this.GetFoodItemControllers())
         {
-            controller.SetAmountOfDishesInStockInUI(dishMapping[controller.dishManaged]);
+            // If the dish is in the inventory, populate the dish count from the inventory.
+            int amountOfDishToSet = int.MinValue;
+            if (dishMapping.ContainsKey(controller.dishManaged))
+            {
+                amountOfDishToSet = dishMapping[controller.dishManaged];
+            }
+            
+            // Otherwise, if it's not, set the count simply to 0.
+            else
+            {
+                amountOfDishToSet = 0;
+            }
+
+            controller.SetAmountOfDishesInStockInUI(amountOfDishToSet);
         }
     }
 

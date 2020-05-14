@@ -65,7 +65,7 @@ public class DishMenu : HUDDisplay
         {
             // Calculate the new value of the provided ingredient in stock by adding the amount that is currently
             // set as the amount to buy to the amount the user currently has in stock.
-            int amountOfFoodToSet = this.gameSceneManager.gameState.menuInventory[controller.dishManaged] +
+            int amountOfFoodToSet = this.gameSceneManager.gameState.GetAmountInInventory(controller.dishManaged) +
                                     controller.GetAmountOfFood();
 
             // Set this new value in both the internal food menu mapping as well as on the UI side. 
@@ -154,7 +154,7 @@ public class DishMenu : HUDDisplay
             foodItemController.ingredientCostText.text =
                 $"Ingredient Cost: ${dishManaged.GetIngredientCost()}";
             foodItemController.boughtYesterdayText.text =
-                $"Sold yesterday: {gameState.getSoldYesterday(dishManaged)}";
+                $"Sold yesterday: {gameState.GetSoldYesterday(dishManaged)}";
         }
         
     }

@@ -106,16 +106,33 @@ public class GameState
     /// </summary>
     /// <param name="dishManaged">The dish whose sales from yesterday we're trying to retrieve.</param>
     /// <returns>the amount of the dish <paramref name="dishManaged"/> sold yesterday.</returns>
-    public int getSoldYesterday(Dish dishManaged)
+    public int GetSoldYesterday(Dish dishManaged)
     {
         // If there is no information on this dish being sold yesterday, then obviously the number that was sold is 0.
         if (!this.soldYesterdayMapping.ContainsKey(dishManaged))
         {
-            return 0;
+            this.soldYesterdayMapping[dishManaged] = 0;
         }
 
-        // Otherwise, return the corresponding entry.
+        // Return the corresponding entry.
         return soldYesterdayMapping[dishManaged];
+    }
+
+    /// <summary>
+    /// Return the amount of the dish <paramref name="dish"/> that the user has in inventory.
+    /// </summary>
+    /// <param name="dish">The dish whose count in inventory should be returned.</param>
+    /// <returns>the amount of the dish <paramref name="dish"/> that the user has in inventory.</returns>
+    public int GetAmountInInventory(Dish dish)
+    {
+        // If there is no record of the dish being in the inventory, then obviously there is 0 of it.
+        if (!menuInventory.ContainsKey(dish))
+        {
+            this.menuInventory[dish] = 0;
+        }
+
+        // Return the corresponding entry.
+        return menuInventory[dish];
     }
 
 }

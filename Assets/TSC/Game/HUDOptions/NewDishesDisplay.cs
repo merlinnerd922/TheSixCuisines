@@ -43,10 +43,9 @@ namespace TSC.Game.HUDOptions
                 GameObject instantiate = Instantiate(this.unboughtDishPrefab);
                 this.dishHolder.AddChild(instantiate, false);
                 
-                // Initialize the dish's image and text display. 
+                // Initialize the dish's image and text display.
                 UnboughtDish unboughtDish =  instantiate.GetComponent<UnboughtDish>();
-                unboughtDish.dishImage.sprite = GameSceneManager.GetDishSprite(dish);
-                unboughtDish.dishText.text = dish.ToTitleCaseSpacedString();
+                unboughtDish.Initialize(dish);
             }
         }
 

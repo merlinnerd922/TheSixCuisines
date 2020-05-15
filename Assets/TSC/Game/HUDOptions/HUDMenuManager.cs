@@ -74,14 +74,14 @@ public class HUDMenuManager : MonoBehaviour
             this.DeactivateDisplay(this.activeDisplay);
         }
 
-        this.ActivateMenu(display);
+        this.ActivateDisplay(display);
     }
 
     /// <summary>
     /// Deactivate the provided display.
     /// </summary>
     /// <param name="hudDisplay">The display to deactivate.</param>
-    private void DeactivateDisplay(HUDDisplay hudDisplay)
+    internal void DeactivateDisplay(HUDDisplay hudDisplay)
     {
         hudDisplay.Deactivate();
         this.activeDisplay = null;
@@ -91,7 +91,7 @@ public class HUDMenuManager : MonoBehaviour
     /// Activate the provided display.
     /// </summary>
     /// <param name="hudDisplay">The display to activate.</param>
-    private void ActivateMenu(HUDDisplay hudDisplay)
+    public void ActivateDisplay(HUDDisplay hudDisplay)
     {
         hudDisplay.Activate();
         this.activeDisplay = hudDisplay;

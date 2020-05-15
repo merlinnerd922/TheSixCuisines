@@ -26,7 +26,7 @@ public class GameState
     /// <summary>
     /// The list of dishes that the user has purchased.
     /// </summary>
-    public List<Dish> acquiredDishes = new List<Dish>() {Dish.FRENCH_FRIES};
+    public HashSet<Dish> acquiredDishes = new HashSet<Dish>() {Dish.FRENCH_FRIES};
 
     /// <summary>
     /// The inventory of dishes the player has.
@@ -133,6 +133,15 @@ public class GameState
 
         // Return the corresponding entry.
         return menuInventory[dish];
+    }
+
+    /// <summary>
+    /// Return an enumeration of all the dishes that this player has NOT bought.
+    /// </summary>
+    /// <returns>an enumeration of all the dishes that this player has NOT bought.</returns>
+    public IEnumerable<Dish> GetUnboughtDishes()
+    {
+        return LocalGeneralUtils.GetEnumList<Dish>().Where(x => !this.acquiredDishes.Contains(x));
     }
 
 }

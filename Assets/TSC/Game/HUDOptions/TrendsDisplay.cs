@@ -36,7 +36,7 @@ namespace TSC.Game.HUDOptions
             string trendString = "";
 
             // Get a list of all different types of dishes.
-            List<Dish> dishList = this.gameSceneManager.GetAcquiredRecipes();
+            List<Dish> dishList = this.gameSceneManager.GetAcquiredRecipes().ToList();
             
             // Initialize likelihoods adding up to 1 indicating how popular the dish will be.
             List<float> foodPopularities = NumberRandomizer.GenerateNFloatsWhoSumToM(dishList.Count, 1f).ToList();

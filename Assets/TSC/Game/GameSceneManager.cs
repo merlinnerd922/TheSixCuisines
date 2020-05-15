@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using DataStructures.RandomSelector;
 using Extend;
 using Helper;
@@ -82,7 +83,7 @@ public class GameSceneManager : MonoBehaviour
     private void DoBuyDishes(int numberOfCustomers)
     {
         // Initialize a mapping between all the dishes and how many were bought.
-        Dictionary<Dish, int> dishPurchaseCounts = GameState.InitializeZeroMapping();
+        Dictionary<Dish, int> dishPurchaseCounts = this.GetAcquiredRecipes().ToDictionary(x => x, x => 0).ToSerializableDictionary();
 
         // Generate a randomized selector attuned to current trends in food.
         DynamicRandomSelector<Dish> dishSelector = this.GetRandomDishSelector();
@@ -111,7 +112,7 @@ public class GameSceneManager : MonoBehaviour
     {
         // Add each dish and its popularity to the randomized selector.
         DynamicRandomSelector<Dish> dishSelector = new DynamicRandomSelector<Dish>();
-        foreach (Dish d in GetAcquiredRecipes())
+        foreach (Dish d in this.GetAcquiredRecipes())
         {
             dishSelector.Add(d, this.hudMenuManager.trendsDisplay.dishPopularityMapping[d]);
         }
@@ -154,12 +155,15 @@ public class GameSceneManager : MonoBehaviour
         {
             this.HideGameMenu();
         }
+        
+        // Hide all menus except for the dish menu.
+        this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.newDishesDisplay);
+        this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.trendsDisplay);
+        this.hudMenuManager.ActivateDisplay(this.hudMenuManager.dishMenu);
 
         // For now, only new games are supported, so load a new game from a newly generated state.
         this.LoadNewGameFromNewGameState();
 
-        // Generate information on which foods are trending.
-        this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
     }
 
     /// <summary>
@@ -183,41 +187,23 @@ public class GameSceneManager : MonoBehaviour
     internal void LoadAndInitializeScene(GameState _gameState)
     {
         // Load the UI for the menu display.
-        this.LoadDishInfoUI();
+        this.hudMenuManager.dishMenu.LoadDishInfoUI(this);
 
         // Load all information from the provided game state.
         this.LoadGameFromGameState(_gameState);
 
         // Initialize some random daily trends for determining the popularity of foods.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
-    }
-
-    /// <summary>
-    /// Load all UI related to the dish menu display.
-    /// </summary>
-    private void LoadDishInfoUI()
-    {
-        // Clear out the menu because we're currently loading the dish menu anew.
-        GameObject dishMenuMenuHolder = this.hudMenuManager.dishMenu.menuHolder;
-        dishMenuMenuHolder.DestroyAllChildren();
-
-        // For each dish, instantiate a prefab to represent the dish.
-        foreach (Dish dish in GetAcquiredRecipes())
-        {
-            GameObject instantiatedMenuItem = Instantiate(this.FOOD_CONTROLLER_PREFAB);
-            dishMenuMenuHolder.AddChild(instantiatedMenuItem, false);
-
-            // Then, initialize the script attached to the prefab with information on this GameSceneManager.
-            FoodItemController foodItemController = instantiatedMenuItem.GetComponent<FoodItemController>();
-            foodItemController.Initialize(dish, this);
-        }
+        
+        // Initialize info on the recipes not purchased.
+        this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes();
     }
 
     /// <summary>
     /// Return a list of all recipes that this user has acquired.
     /// </summary>
     /// <returns>a list of all recipes that this user has acquired.</returns>
-    internal  List<Dish> GetAcquiredRecipes()
+    public HashSet<Dish> GetAcquiredRecipes()
     {
         return this.gameState.acquiredDishes;
     }
@@ -246,8 +232,8 @@ public class GameSceneManager : MonoBehaviour
     /// <param name="turnToSet">The value to set the current turn to.</param>
     private void SetCurrentTurn(int turnToSet)
     {
-        turnNumber = turnToSet;
-        turnDisplay.SetTurnNumber(turnToSet);
+        this.turnNumber = turnToSet;
+        this.turnDisplay.SetTurnNumber(turnToSet);
     }
 
     /// <summary>
@@ -269,6 +255,16 @@ public class GameSceneManager : MonoBehaviour
     public void HideGameMenu()
     {
         this.menuManager.Deactivate();
+    }
+
+    /// <summary>
+    /// Return the Sprite containing the image for the dish <paramref name="dish"/>.
+    /// </summary>
+    /// <param name="dish">The dish whose sprite should be returned.</param>
+    /// <returns> the Sprite containing the image for the dish <paramref name="dish"/>.</returns>
+    public static Sprite GetDishSprite(Dish dish)
+    {
+        return Resources.Load<Sprite>($"Sprites/FoodSprites/{dish.ToCamelCaseString()}");
     }
 
 }

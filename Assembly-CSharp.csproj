@@ -88,7 +88,8 @@
      <Compile Include="Assets\MathUtils\GeometryUtils\Vector2Int.cs" />
      <Compile Include="Assets\MathUtils\LocalMathUtils.cs" />
      <Compile Include="Assets\MathUtils\NumberRandomizer.cs" />
-     <Compile Include="Assets\TestScript\TestScript.cs" />
+     <Compile Include="Assets\Test\RoadTile.cs" />
+     <Compile Include="Assets\Test\TestScript.cs" />
      <Compile Include="Assets\TSC\Game\FoodItem\Dish.cs" />
      <Compile Include="Assets\TSC\Game\FoodItem\DishUtils.cs" />
      <Compile Include="Assets\TSC\Game\GameSceneManager.cs" />
@@ -104,7 +105,8 @@
      <Compile Include="Assets\TSC\Game\HUDOptions\NewDishesDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\TrendsDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\UnboughtDish.cs" />
-     <Compile Include="Assets\TSC\Game\Map.cs" />
+     <Compile Include="Assets\TSC\Game\Map\Map.cs" />
+     <Compile Include="Assets\TSC\Game\Map\RestaurantTile.cs" />
      <Compile Include="Assets\TSC\Game\Menu\GameManager.cs" />
      <Compile Include="Assets\TSC\Game\Menu\GameMenuHamburgerButton.cs" />
      <Compile Include="Assets\TSC\Game\Menu\GameMenuManager.cs" />

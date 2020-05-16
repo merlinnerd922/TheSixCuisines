@@ -1,11 +1,15 @@
-﻿﻿#region
+﻿#region
 
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Helper;
 using Helper.ExtendSpace;
+using Test;
+using TSC.Game;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityUtils;
 using Object = UnityEngine.Object;
@@ -19,6 +23,7 @@ namespace Extend
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class LocalUnityUtils
     {
+
         /// <summary>
         /// Return the global position of the provided MonoBehaviour <paramref name="mb"/>.
         /// </summary>
@@ -811,8 +816,8 @@ namespace Extend
         /// </summary>
         /// <param name="monoBehaviourToSet">The MonoBehaviour whose global position should be set.</param>
         /// <param name="monoBehaviourToFollow">The MonoBehaviour whose global position should be matched.</param>
-        public static void SetSameGlobalPositionAs(this MonoBehaviour monoBehaviourToSet, MonoBehaviour 
-        monoBehaviourToFollow)
+        public static void SetSameGlobalPositionAs(this MonoBehaviour monoBehaviourToSet,
+            MonoBehaviour monoBehaviourToFollow)
         {
             monoBehaviourToSet.gameObject.SetGlobalPosition(monoBehaviourToFollow.gameObject.GetGlobalPosition());
         }
@@ -853,13 +858,39 @@ namespace Extend
         public static GameObject GetNthAncestorGameObject(this MonoBehaviour monoBehaviour, int nthAncestor)
         {
             GameObject returnObject = monoBehaviour.gameObject;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < nthAncestor; i++)
             {
                 returnObject = returnObject.GetParent();
             }
+
             return returnObject;
         }
 
+#if UNITY_EDITOR
+
+        /// <summary>
+        /// Open the file saving window to save a brand new tile of the type <typeparamref name="T"/>, and savethat
+        /// tile.
+        /// </summary>
+        /// <param name="defaultNewTileName">The default name of the new tile.</param>
+        /// <param name="fileNameExtension">The file extension of the tile.</param>
+        /// <param name="directory">The directory to open the file dialog.</param>
+        /// <param name="windowName">The name of the file dialog to open.</param>
+        /// <typeparam name="T">The type of tile to generate.</typeparam>
+        internal static void CreateTileOfType<T>(string defaultNewTileName, string fileNameExtension, string directory,
+            string windowName) where T : Tile
+        {
+            // Pick the location for where to save the newly created tile.
+            string path = EditorUtility.SaveFilePanelInProject(windowName, defaultNewTileName, fileNameExtension,
+                windowName, directory);
+
+            // Return if no file name is provided; otherwise, generate the asset.
+            if (path == "")
+                return;
+            AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<T>(), path);
+        }
+
     }
+#endif
 
 }

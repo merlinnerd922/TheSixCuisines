@@ -187,10 +187,31 @@ public class GameSceneManager : MonoBehaviour
     internal void LoadAndInitializeScene(GameState _gameState)
     {
         // Load the UI for the menu display.
-        this.hudMenuManager.dishMenu.LoadDishInfoUI(this);
+        // Clear out the menu because we're currently loading the dish menu anew.
+        GameObject dishMenuMenuHolder = this.hudMenuManager.dishMenu.menuHolder;
+        dishMenuMenuHolder.DestroyAllChildren();
 
-        // Load all information from the provided game state.
-        this.LoadGameFromGameState(_gameState);
+        // Set the game state to match the given game state.
+        this.gameState = _gameState;
+
+        // Initialize the starting turn number, iff it isn't set.
+        this.gameState.InitializeFieldsIfNull();
+
+        // Set all the UI displays for all the elements in the save file.
+        this.SetCurrentTurn(this.gameState.turnNumber);
+        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
+
+        // For each dish, instantiate a prefab to represent the dish.
+        foreach (Dish dish in this.GetAcquiredRecipes())
+        {
+            GameObject instantiatedMenuItem = Instantiate(this.FOOD_CONTROLLER_PREFAB);
+            dishMenuMenuHolder.AddChild(instantiatedMenuItem, false);
+
+            // Then, initialize the script attached to the prefab with information on this GameSceneManager.
+            FoodItemController foodItemController = instantiatedMenuItem.GetComponent<FoodItemController>();
+            foodItemController.Initialize(dish, this);
+        }
+        this.hudMenuManager.dishMenu.SetDishDetails(this.gameState);
 
         // Initialize some random daily trends for determining the popularity of foods.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
@@ -206,24 +227,6 @@ public class GameSceneManager : MonoBehaviour
     public HashSet<Dish> GetAcquiredRecipes()
     {
         return this.gameState.acquiredDishes;
-    }
-
-    /// <summary>
-    /// Load the provided game state into the current scene.
-    /// </summary>
-    /// <param name="_gameState">The state of the game to load.</param>
-    public void LoadGameFromGameState(GameState _gameState)
-    {
-        // Set the game state to match the given game state.
-        this.gameState = _gameState;
-
-        // Initialize the starting turn number, iff it isn't set.
-        this.gameState.InitializeFieldsIfNull();
-
-        // Set all the UI displays for all the elements in the save file.
-        this.SetCurrentTurn(this.gameState.turnNumber);
-        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
-        this.hudMenuManager.dishMenu.SetDishDetails(this.gameState);
     }
 
     /// <summary>

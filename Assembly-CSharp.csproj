@@ -92,7 +92,6 @@
      <Compile Include="Assets\TSC\Game\FoodItem\Dish.cs" />
      <Compile Include="Assets\TSC\Game\FoodItem\DishUtils.cs" />
      <Compile Include="Assets\TSC\Game\GameSceneManager.cs" />
-     <Compile Include="Assets\TSC\Game\GameState.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\CashOnHand.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\ProgressBar.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\TurnButton.cs" />
@@ -105,6 +104,7 @@
      <Compile Include="Assets\TSC\Game\HUDOptions\NewDishesDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\TrendsDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\UnboughtDish.cs" />
+     <Compile Include="Assets\TSC\Game\Map.cs" />
      <Compile Include="Assets\TSC\Game\Menu\GameManager.cs" />
      <Compile Include="Assets\TSC\Game\Menu\GameMenuHamburgerButton.cs" />
      <Compile Include="Assets\TSC\Game\Menu\GameMenuManager.cs" />
@@ -115,7 +115,8 @@
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\LoadGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameInputField.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameMenu.cs" />
-     <Compile Include="Assets\TSC\Game\SaveFile.cs" />
+     <Compile Include="Assets\TSC\Game\SaveGame\GameState.cs" />
+     <Compile Include="Assets\TSC\Game\SaveGame\SaveFile.cs" />
      <Compile Include="Assets\TSC\MenuButton.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IDragHandlerThorough.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IHoverHandler.cs" />

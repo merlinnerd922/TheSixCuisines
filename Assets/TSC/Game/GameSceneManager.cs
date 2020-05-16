@@ -19,6 +19,7 @@ using Object = UnityEngine.Object;
 public class GameSceneManager : MonoBehaviour
 {
 
+    
     /// <summary>
     /// The manager for the in-game menu.
     /// </summary>

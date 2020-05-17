@@ -44,7 +44,10 @@ TagManager:
   - name: Backdrop
     uniqueID: 3221369555
     locked: 0
-  - name: Tilemap
+  - name: Backdrop Tilemap
+    uniqueID: 3540678465
+    locked: 0
+  - name: Buildings Tilemap
     uniqueID: 2313843709
     locked: 0
   - name: UI

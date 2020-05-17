@@ -44,4 +44,13 @@ public class CashOnHand : MonoBehaviour
         SetCashOnHand(cashOnHand - amountToDecrement);
     }
 
+    /// <summary>
+    /// Increment the amount of cash the player has on hand by <paramref name="amountToIncrement"/>.
+    /// </summary>
+    /// <param name="amountToIncrement">The amount to increment the player's cash by.</param>
+    public void IncrementCashOnHand(float amountToIncrement)
+    {
+        SetCashOnHand(this.cashOnHand + amountToIncrement);
+    }
+
 }

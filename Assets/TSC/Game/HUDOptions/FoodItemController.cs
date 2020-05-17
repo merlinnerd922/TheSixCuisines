@@ -84,7 +84,25 @@ public class FoodItemController : MonoBehaviour
             this._dishMenu.GetFoodAmountToPurchase(this.dishManaged) + 1);
     }
     
-    
+    /// <summary>
+    /// Decrement the count for this food item.
+    /// </summary>
+    public void Decrement()
+    {
+        // Do nothing if the player doesn't have anything to decrement.
+        if (this._dishMenu.GetFoodAmountToPurchase(this.dishManaged) == 0)
+        {
+            return;
+        }
+
+        // Otherwise, decrement the amount to buy by the provided amount, and refund the cost.
+        float ingredientCost = this.dishManaged.GetIngredientCost();
+        this.gameSceneManager.cashOnHandDisplay.IncrementCashOnHand(ingredientCost);
+        this._dishMenu.SetFoodAmountToPurchase(this.dishManaged,
+            this._dishMenu.GetFoodAmountToPurchase(this.dishManaged) - 1);
+    }
+
+
     /// <summary>
     /// Start the coroutine to hold down the increment button to quickly increment the amount of the recipe stored
     /// in this incrementer.
@@ -142,6 +160,7 @@ public class FoodItemController : MonoBehaviour
             // Decrement the amount of this ingredient. (TODO_LATER)
             else
             {
+                this.Decrement();
             }
 
             // Break from the current frame and come back in next frame to continue the incrementation.
@@ -153,7 +172,7 @@ public class FoodItemController : MonoBehaviour
     /// Start the coroutine to hold down the decrement button to quickly decrement the amount of the recipe stored
     /// in this incrementer.
     /// </summary>
-    public void StartHoldDecrement()
+    public void HoldDownDecrement()
     {
         IEnumerator holdDownCoroutine = this.GetHoldMouseDownIncrementCoroutine(false);
         StartCoroutine(holdDownCoroutine);

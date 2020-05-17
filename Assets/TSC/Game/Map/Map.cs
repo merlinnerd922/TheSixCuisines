@@ -13,6 +13,16 @@ public class Map : MonoBehaviour
 {
 
     /// <summary>
+    /// The image texture for a speech bubble.
+    /// </summary>
+    private Texture _speechBubbleTexture;
+
+    /// <summary>
+    /// The tilemap for storing all building tiles.
+    /// </summary>
+    public Tilemap buildingTilemap;
+
+    /// <summary>
     /// Process a mouse click downwards on this map.
     /// </summary>
     public void OnMouseDown()
@@ -27,8 +37,20 @@ public class Map : MonoBehaviour
 //        Debug.Log(tilemap.WorldToCell(screenToWorldPoint));
 //        TileBase tile = tilemap.GetTile(tilemap.WorldToCell(screenToWorldPoint));
 //        Debug.Log(tile);
-
     }
 
+    /// <summary>
+    /// Perform any GUI-related actions for the current frame.
+    /// </summary>
+    public void OnGUI()
+    {
+    }
+
+    /// <summary>
+    /// Start this map.
+    /// </summary>
+    public void Start()
+    {
+    }
 
 }

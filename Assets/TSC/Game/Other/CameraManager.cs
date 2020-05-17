@@ -17,7 +17,7 @@ namespace TSC.Game
         /// <summary>
         /// The target zoom.
         /// </summary>
-        private float targetZoom;
+        internal float targetZoom;
 
         /// <summary>
         /// The speed at which linear interpolation occurs when zooming the camera.

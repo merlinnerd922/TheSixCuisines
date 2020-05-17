@@ -170,6 +170,9 @@ public class GameSceneManager : MonoBehaviour
 
         // For now, only new games are supported, so load a new game from a newly generated state.
         this.LoadNewGameFromNewGameState();
+        
+        // Start the camera zoom position at a reasonable zoom.
+        this.cameraManager.targetZoom = this.cameraManager.managedCamera.orthographicSize;
 
     }
 

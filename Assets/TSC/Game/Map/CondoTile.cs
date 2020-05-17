@@ -19,8 +19,8 @@ namespace TSC.Game
         [MenuItem("Assets/Create/CondoTile")]
         public static void CreateCondoTile()
         {
-            LocalUnityUtils.CreateTileOfType<RestaurantTile>("New " + nameof(RestaurantTile), "Asset", 
-                "Assets", "Save " + nameof(RestaurantTile));
+            LocalUnityUtils.CreateTileOfType<CondoTile>("New " + nameof(CondoTile), "Asset", 
+                "Assets", "Save " + nameof(CondoTile));
         }
     }
 

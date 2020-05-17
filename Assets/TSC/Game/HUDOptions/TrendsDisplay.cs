@@ -28,6 +28,16 @@ namespace TSC.Game.HUDOptions
         public GameSceneManager gameSceneManager;
 
         /// <summary>
+        /// The text displaying the estimated number of customers that the player will receive at the restaurant today.
+        /// </summary>
+        public Text estimatedCustomersText;
+
+        /// <summary>
+        /// The estimated number of customers that the player will have this turn.
+        /// </summary>
+        internal int estimatedNumberOfCustomers;
+
+        /// <summary>
         /// Initialize information on the daily trends for food.
         /// </summary>
         public void InitializeDailyTrends()
@@ -47,7 +57,13 @@ namespace TSC.Game.HUDOptions
             {
                 Dish d = dishList[index];
                 float dishPopularity = foodPopularities[index];
-                trendString += $"{d.ToTitleCaseSpacedString()}: {dishPopularity * 100:F2}%\n";
+                trendString += $"{d.ToTitleCaseSpacedString()}: {dishPopularity * 100:F2}%";
+
+                // Append a newline to the end of the string if we still have more recipe popularities to render.
+                if (index < dishList.Count - 1)
+                {
+                    trendString += "\n";
+                }
 
                 // Be sure to keep track of how popular each dish is in a Dictionary.
                 dishPopularityMapping[d] = dishPopularity;
@@ -55,6 +71,16 @@ namespace TSC.Game.HUDOptions
 
             // Finally, set the trend string.
             this.trendingFoodText.text = trendString;
+        }
+
+        /// <summary>
+        /// Set the estimated number of customers the player will have to <paramref name="numCustomers"/>.
+        /// </summary>
+        /// <param name="numCustomers">The value to set the estimated number of customers the player will have.</param>
+        public void SetNumberOfEstimatedCustomers(int numCustomers)
+        {
+            estimatedNumberOfCustomers = numCustomers;
+            this.estimatedCustomersText.text = $"Projected customers: {numCustomers}";
         }
 
     }

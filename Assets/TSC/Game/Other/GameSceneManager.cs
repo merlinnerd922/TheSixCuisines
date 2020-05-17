@@ -19,7 +19,10 @@ using Object = UnityEngine.Object;
 /// </summary>
 public class GameSceneManager : MonoBehaviour
 {
-
+/// <summary>
+/// The tilemap representing the current world.
+/// </summary>
+    public Tilemap tilemap;
     
     /// <summary>
     /// The manager for the in-game menu.
@@ -70,8 +73,12 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void IncrementTurn()
     {
-        // Have a random number of customers buy food, between 40 and 60 (50 +- 10 customers).
-        int numberOfCustomers = NumberRandomizer.GetIntBetweenExclusive(40, 60);
+        // Have a random number of customers buy food, within +-10 customers of the estimated number of customers
+        // estimated to arrive.
+        int estimatedCustomers = this.hudMenuManager.trendsDisplay.estimatedNumberOfCustomers;
+        int numberOfCustomers = NumberRandomizer.GetIntBetweenExclusive(
+        estimatedCustomers - 10,
+        estimatedCustomers + 10);
 
         // Have the generated customers buy a dish.
         this.DoBuyDishes(numberOfCustomers);
@@ -228,6 +235,38 @@ public class GameSceneManager : MonoBehaviour
         
         // Initialize info on the recipes not purchased.
         this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes();
+        
+        // Initialize information on the projected number of customers.
+        this.CalculateCustomerAmount();
+    }
+    
+/// <summary>
+/// Calculate and set the number of customers that are projected to come to the restaurant.
+/// </summary>
+    private void CalculateCustomerAmount()
+    {
+        int numberOfCustomers = 0;
+        
+        // Retrieve all tiles within the tilemap.
+        BoundsInt bounds = tilemap.cellBounds;
+        TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
+
+        // For each tile in the tilemap, if the tile is a condo tile, then increment the number of customers by 3.
+        for (int x = 0; x < bounds.size.x; x++) {
+            for (int y = 0; y < bounds.size.y; y++) {
+                TileBase tile = allTiles[x + y * bounds.size.x];
+                if (tile != null)
+                {
+                    if (tile.GetType() == typeof(CondoTile))
+                    {
+                        numberOfCustomers += 3;
+                    }
+                }
+            }
+        }
+
+        // Finally, when we're done calculating the number of customers, set that number accordingly.
+        this.hudMenuManager.trendsDisplay.SetNumberOfEstimatedCustomers(numberOfCustomers);
     }
 
     /// <summary>

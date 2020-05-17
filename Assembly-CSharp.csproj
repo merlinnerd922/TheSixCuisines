@@ -105,6 +105,7 @@
      <Compile Include="Assets\TSC\Game\HUDOptions\NewDishesDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\TrendsDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDOptions\UnboughtDish.cs" />
+     <Compile Include="Assets\TSC\Game\Map\CondoTile.cs" />
      <Compile Include="Assets\TSC\Game\Map\Map.cs" />
      <Compile Include="Assets\TSC\Game\Map\RestaurantTile.cs" />
      <Compile Include="Assets\TSC\Game\Menu\GameManager.cs" />

@@ -18,8 +18,8 @@ namespace TSC.Game
         [MenuItem("Assets/Create/RestaurantTile")]
         public static void CreateRestaurantTile()
         {
-            LocalUnityUtils.CreateTileOfType<RestaurantTile>("New Road Tile", "Asset", 
-                "Assets", "Save Road Tile");
+            LocalUnityUtils.CreateTileOfType<RestaurantTile>("New " + nameof(RestaurantTile), "Asset", 
+                "Assets", "Save " + nameof(RestaurantTile));
         }
         
 

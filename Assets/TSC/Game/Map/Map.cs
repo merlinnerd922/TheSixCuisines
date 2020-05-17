@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 /// <summary>
 /// The in-game map.
 /// </summary>
+[SuppressMessage("ReSharper", "Unity.RedundantEventFunction")]
 public class Map : MonoBehaviour
 {
 
@@ -15,7 +17,6 @@ public class Map : MonoBehaviour
     public void OnMouseDown()
     {
         // Perform a series of commands to test out the functionality of the tilemap-based map.
-        
 //        Grid grid = this.GetComponentInParent<Grid>();
 //        Tilemap tilemap = this.GetComponent<Tilemap>();
 //        Vector3 mousePosition = Input.mousePosition;

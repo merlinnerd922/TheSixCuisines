@@ -19,10 +19,10 @@ using Object = UnityEngine.Object;
 /// </summary>
 public class GameSceneManager : MonoBehaviour
 {
-/// <summary>
-/// The tilemap representing the current world.
-/// </summary>
-    public Tilemap tilemap;
+    /// <summary>
+    /// The tilemap representing the current world.
+    /// </summary>
+        public Tilemap tilemap;
     
     /// <summary>
     /// The manager for the in-game menu.
@@ -173,7 +173,7 @@ public class GameSceneManager : MonoBehaviour
         // Hide all menus except for the dish menu.
         this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.newDishesDisplay);
         this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.trendsDisplay);
-        this.hudMenuManager.ActivateDisplay(this.hudMenuManager.dishMenu);
+        this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.dishMenu);
 
         // For now, only new games are supported, so load a new game from a newly generated state.
         this.LoadNewGameFromNewGameState();

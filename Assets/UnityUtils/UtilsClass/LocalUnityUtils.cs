@@ -889,7 +889,7 @@ namespace Extend
             AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<T>(), path);
         }
 
-    }
 #endif
 
+    }
 }

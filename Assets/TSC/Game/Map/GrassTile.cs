@@ -10,13 +10,16 @@ namespace TSC.Game
     /// </summary>
     public class GrassTile : Tile
     {
-
+#if UNITY_EDITOR
+        /// <summary>
+        /// Create a brand new grass tile by opening the file dialog and saving a brand new location for the tile.
+        /// </summary>
         [MenuItem("Assets/Create/GrassTile")]
         public static void CreateGrassTile()
         {
             LocalUnityUtils.CreateTileOfType<GrassTile>("New Tile", "Asset", "Assets", "Save Tile");
         }
-
+#endif
     }
 
 }

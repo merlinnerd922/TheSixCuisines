@@ -10,7 +10,7 @@ namespace TSC.Game
     public class CondoTile : Tile
     {
 
-        
+#if UNITY_EDITOR
         /// <summary>
         /// Create a brand new condo tile by opening the file dialog and saving a brand new location for the tile.
         ///
@@ -22,6 +22,6 @@ namespace TSC.Game
             LocalUnityUtils.CreateTileOfType<CondoTile>("New " + nameof(CondoTile), "Asset", 
                 "Assets", "Save " + nameof(CondoTile));
         }
+#endif
     }
-
 }

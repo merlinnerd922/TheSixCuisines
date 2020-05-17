@@ -17,6 +17,11 @@ public class HUDMenuManager : MonoBehaviour
     [FormerlySerializedAs("foodMenu")] [FormerlySerializedAs("foodDisplay")] public DishMenu dishMenu;
 
     /// <summary>
+    /// The display for purchasing upgrades and décor.
+    /// </summary>
+    public DecorDisplay decorDisplay;
+    
+    /// <summary>
     /// A display for current trends in cuisine.
     /// </summary>
     public TrendsDisplay trendsDisplay;
@@ -53,6 +58,14 @@ public class HUDMenuManager : MonoBehaviour
     public void ToggleNewDishesDisplay()
     {
         this.ToggleMenu(this.newDishesDisplay);
+    }
+    
+    /// <summary>
+    /// Toggle the display for new decor.
+    /// </summary>
+    public void ToggleDecorDisplay()
+    {
+        this.ToggleMenu(this.decorDisplay);
     }
 
     /// <summary>
@@ -96,5 +109,7 @@ public class HUDMenuManager : MonoBehaviour
         hudDisplay.Activate();
         this.activeDisplay = hudDisplay;
     }
+    
+    
 
 }

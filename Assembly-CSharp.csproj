@@ -92,7 +92,6 @@
      <Compile Include="Assets\Test\TestScript.cs" />
      <Compile Include="Assets\TSC\Game\FoodItem\Dish.cs" />
      <Compile Include="Assets\TSC\Game\FoodItem\DishUtils.cs" />
-     <Compile Include="Assets\TSC\Game\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\CashOnHand.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\ProgressBar.cs" />
      <Compile Include="Assets\TSC\Game\HUDDisplay\TurnButton.cs" />
@@ -118,6 +117,8 @@
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\LoadGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameInputField.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameMenu.cs" />
+     <Compile Include="Assets\TSC\Game\Other\CameraManager.cs" />
+     <Compile Include="Assets\TSC\Game\Other\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\GameState.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\SaveFile.cs" />
      <Compile Include="Assets\TSC\MenuButton.cs" />

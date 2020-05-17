@@ -53,6 +53,11 @@ public class GameSceneManager : MonoBehaviour
     public GameObject FOOD_CONTROLLER_PREFAB;
 
     /// <summary>
+    /// The manager for the camera.
+    /// </summary>
+    public CameraManager cameraManager;
+
+    /// <summary>
     /// The current turn number.
     /// </summary>
     public int turnNumber {
@@ -271,5 +276,15 @@ public class GameSceneManager : MonoBehaviour
     {
         return Resources.Load<Sprite>($"Sprites/FoodSprites/{dish.ToCamelCaseString()}");
     }
+
+    /// <summary>
+    /// Update the current frame.
+    /// </summary>
+    public void Update()
+    {
+        // Update the zoom in/out for the mouse.
+        cameraManager.UpdateCameraZoom();
+    }
+
 
 }

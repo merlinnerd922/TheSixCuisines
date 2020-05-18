@@ -183,11 +183,12 @@ public class DishMenu : HUDDisplay
     }
 
     /// <summary>
-    /// TODO
+    /// Initialize this menu of dishes.
     /// </summary>
-    /// <param name="_gameSceneManager"></param>
+    /// <param name="_gameSceneManager">The GameSceneManager to </param>
     public void InitializeDishMenu(GameSceneManager _gameSceneManager)
     {
+        // Start by clearing out all entries in the menu.
         GameObject dishMenuMenuHolder = this.menuHolder;
         dishMenuMenuHolder.DestroyAllChildren();
 

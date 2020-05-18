@@ -16828,7 +16828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1561435366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16862,6 +16862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d04cd038ce3cb4880a16aba188c614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unboughtDecorPrefab: {fileID: 4716950337556898661, guid: e5a2c50a9a4cf084496d568886c0060a,
+    type: 3}
+  decorHolder: {fileID: 1635279648}
 --- !u!1 &1595078082
 GameObject:
   m_ObjectHideFlags: 0

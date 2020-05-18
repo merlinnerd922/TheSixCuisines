@@ -101,6 +101,7 @@
      <Compile Include="Assets\TSC\Game\HUDMenus\Display\HUDDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDMenus\Display\NewDishesDisplay.cs" />
      <Compile Include="Assets\TSC\Game\HUDMenus\Display\TrendsDisplay.cs" />
+     <Compile Include="Assets\TSC\Game\HUDMenus\Display\UnboughtDecor.cs" />
      <Compile Include="Assets\TSC\Game\HUDMenus\FoodItemController.cs" />
      <Compile Include="Assets\TSC\Game\HUDMenus\HUDMenuManager.cs" />
      <Compile Include="Assets\TSC\Game\HUDMenus\UnboughtDish.cs" />
@@ -121,6 +122,7 @@
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\Other\CameraManager.cs" />
      <Compile Include="Assets\TSC\Game\Other\DecorAds.cs" />
+     <Compile Include="Assets\TSC\Game\Other\DecorAdsUtils.cs" />
      <Compile Include="Assets\TSC\Game\Other\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\GameState.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\SaveFile.cs" />

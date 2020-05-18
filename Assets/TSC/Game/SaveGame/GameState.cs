@@ -157,9 +157,9 @@ public class GameState
     public List<DecorAds> decorAds = new List<DecorAds>();
 
     /// <summary>
-    /// TODO
+    /// Return a list of the decorations and advertisements that this player has NOT bought.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>a list of the decorations and advertisements that this player has NOT bought.</returns>
     public List<DecorAds> GetUnboughtDecorations()
     {
         return LocalGeneralUtils.GetEnumList<DecorAds>().Where(decorAd => !decorAds.Contains(decorAd)).ToList();

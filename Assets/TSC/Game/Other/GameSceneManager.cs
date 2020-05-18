@@ -326,6 +326,9 @@ public class GameSceneManager : MonoBehaviour
     {
         // Update the zoom in/out for the mouse.
         cameraManager.UpdateCameraZoom();
+        
+        // Update the camera panning.
+        this.cameraManager.UpdateCameraPan();
     }
 
 

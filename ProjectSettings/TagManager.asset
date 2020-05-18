@@ -50,6 +50,9 @@ TagManager:
   - name: Buildings Tilemap
     uniqueID: 2313843709
     locked: 0
+  - name: Map UI
+    uniqueID: 1881052241
+    locked: 0
   - name: UI
     uniqueID: 17008569
     locked: 0

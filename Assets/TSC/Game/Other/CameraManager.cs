@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 
 namespace TSC.Game
 {
@@ -20,6 +21,16 @@ namespace TSC.Game
         internal float targetZoom;
 
         /// <summary>
+        /// The speed at which the camera pans.
+        /// </summary>
+        private float speed = 12f;
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        public CinemachineVirtualCamera cinemachineCamera;
+
+        /// <summary>
         /// The speed at which linear interpolation occurs when zooming the camera.
         /// </summary>
         private const float ZOOM_LERP_SPEED = 10;
@@ -35,17 +46,45 @@ namespace TSC.Game
         public void UpdateCameraZoom()
         {
             // Get the scroll input info from the mouse.
-            float scrollData = Input.GetAxis("Mouse ScrollWheel"); 
-            
+            float scrollData = Input.GetAxis("Mouse ScrollWheel");
+
             // Change the zoom by the amount scrolled.
             targetZoom -= scrollData * ZOOM_FACTOR;
-            
+
             // Prevent the zoom from zooming in too big or too small.
             this.targetZoom = Mathf.Clamp(this.targetZoom, 2f, 10f);
 
             // Slowly animate the zoom so that it is a smooth animation.
-            this.managedCamera.orthographicSize = Mathf.Lerp(this.managedCamera.orthographicSize, this.targetZoom,
+            this.cinemachineCamera.m_Lens.OrthographicSize = 
+                Mathf.Lerp(this.managedCamera.orthographicSize, this.targetZoom,
                 Time.deltaTime * ZOOM_LERP_SPEED);
+        }
+
+        /// <summary>
+        /// Update the panning of the camera.
+        /// </summary>
+        public void UpdateCameraPan()
+        {
+            // Update the camera being panned to the right, to the left, downwards and upwards, respectively.
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+            }
+
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
+            }
+
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+            }
         }
 
     }

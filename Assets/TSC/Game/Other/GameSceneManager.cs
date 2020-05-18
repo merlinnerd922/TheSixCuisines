@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -10,9 +9,7 @@ using Helper.ExtendSpace;
 using TSC.Game;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 using UnityUtils;
-using Object = UnityEngine.Object;
 
 /// <summary>
 /// A manager for the game scene.
@@ -203,10 +200,6 @@ public class GameSceneManager : MonoBehaviour
     [SuppressMessage("ReSharper", "LoopCanBePartlyConvertedToQuery")]
     internal void LoadAndInitializeScene(GameState _gameState)
     {
-        // Load the UI for the menu display.
-        // Clear out the menu because we're currently loading the dish menu anew.
-        GameObject dishMenuMenuHolder = this.hudMenuManager.dishMenu.menuHolder;
-        dishMenuMenuHolder.DestroyAllChildren();
 
         // Set the game state to match the given game state.
         this.gameState = _gameState;
@@ -218,29 +211,25 @@ public class GameSceneManager : MonoBehaviour
         this.SetCurrentTurn(this.gameState.turnNumber);
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
 
-        // For each dish, instantiate a prefab to represent the dish.
-        foreach (Dish dish in this.GetAcquiredRecipes())
-        {
-            GameObject instantiatedMenuItem = Instantiate(this.FOOD_CONTROLLER_PREFAB);
-            dishMenuMenuHolder.AddChild(instantiatedMenuItem, false);
-
-            // Then, initialize the script attached to the prefab with information on this GameSceneManager.
-            FoodItemController foodItemController = instantiatedMenuItem.GetComponent<FoodItemController>();
-            foodItemController.Initialize(dish, this);
-        }
-        this.hudMenuManager.dishMenu.SetDishDetails(this.gameState);
+        // Load the UI for the menu display.
+        // Clear out the menu because we're currently loading the dish menu anew.
+        this.hudMenuManager.dishMenu.InitializeDishMenu(this);
 
         // Initialize some random daily trends for determining the popularity of foods.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
         
+        // Initialize information on the projected number of customers.
+        this.CalculateCustomerAmount();
+        
         // Initialize info on the recipes not purchased.
         this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes();
         
-        // Initialize information on the projected number of customers.
-        this.CalculateCustomerAmount();
+        // Initialize information on the decor the user HASN'T bought.
+        this.hudMenuManager.decorDisplay.Initialize(this);
+
     }
-    
-/// <summary>
+
+    /// <summary>
 /// Calculate and set the number of customers that are projected to come to the restaurant.
 /// </summary>
     private void CalculateCustomerAmount()

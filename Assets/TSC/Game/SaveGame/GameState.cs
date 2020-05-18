@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Extend;
+using TSC.Game.SaveGame;
 using UnityEngine.Serialization;
 
 /// <summary>
@@ -58,6 +59,7 @@ public class GameState
         gameState.cashOnHand = STARTING_CASH;
         gameState.menuInventory = InitializeZeroMapping();
         gameState.soldYesterdayMapping = InitializeZeroMapping();
+        gameState.decorAds = new List<DecorAds>();
         return gameState;
     }
 
@@ -98,6 +100,11 @@ public class GameState
         if (this.soldYesterdayMapping == null)
         {
             this.soldYesterdayMapping = InitializeZeroMapping();
+        }
+        
+        // Initialize the set of decor and ads the user has purchased, if null.
+        if (this.decorAds == null)
+        {this.decorAds = new List<DecorAds>();
         }
     }
 
@@ -142,6 +149,20 @@ public class GameState
     public IEnumerable<Dish> GetUnboughtDishes()
     {
         return LocalGeneralUtils.GetEnumList<Dish>().Where(x => !this.acquiredDishes.Contains(x));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public List<DecorAds> decorAds = new List<DecorAds>();
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <returns></returns>
+    public List<DecorAds> GetUnboughtDecorations()
+    {
+        return LocalGeneralUtils.GetEnumList<DecorAds>().Where(decorAd => !decorAds.Contains(decorAd)).ToList();
     }
 
 }

@@ -182,4 +182,27 @@ public class DishMenu : HUDDisplay
         }
     }
 
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="_gameSceneManager"></param>
+    public void InitializeDishMenu(GameSceneManager _gameSceneManager)
+    {
+        GameObject dishMenuMenuHolder = this.menuHolder;
+        dishMenuMenuHolder.DestroyAllChildren();
+
+        // For each dish, instantiate a prefab to represent the dish.
+        foreach (Dish dish in _gameSceneManager.GetAcquiredRecipes())
+        {
+            GameObject instantiatedMenuItem = Instantiate(_gameSceneManager.FOOD_CONTROLLER_PREFAB);
+            dishMenuMenuHolder.AddChild(instantiatedMenuItem, false);
+
+            // Then, initialize the script attached to the prefab with information on this GameSceneManager.
+            FoodItemController foodItemController = instantiatedMenuItem.GetComponent<FoodItemController>();
+            foodItemController.Initialize(dish, _gameSceneManager);
+        }
+
+        this.SetDishDetails(this.gameSceneManager.gameState);
+    }
+
 }

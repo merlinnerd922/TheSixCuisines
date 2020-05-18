@@ -120,6 +120,7 @@
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameInputField.cs" />
      <Compile Include="Assets\TSC\Game\Menu\SaveGame\SaveGameMenu.cs" />
      <Compile Include="Assets\TSC\Game\Other\CameraManager.cs" />
+     <Compile Include="Assets\TSC\Game\Other\DecorAds.cs" />
      <Compile Include="Assets\TSC\Game\Other\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\GameState.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\SaveFile.cs" />

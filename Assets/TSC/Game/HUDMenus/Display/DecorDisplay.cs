@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TSC.Game.SaveGame;
 using UnityEngine;
 
 /// <summary>
@@ -7,4 +8,19 @@ using UnityEngine;
 /// </summary>
 public class DecorDisplay : HUDDisplay
 {
+    
+    
+/// <summary>
+/// TODO
+/// </summary>
+/// <param name="gameSceneManager"></param>
+    public void Initialize(GameSceneManager gameSceneManager)
+    {
+        foreach (DecorAds decorAd in gameSceneManager.gameState.GetUnboughtDecorations())
+        {
+            
+        }
+
+    }
+
 }

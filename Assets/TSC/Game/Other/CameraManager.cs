@@ -26,7 +26,7 @@ namespace TSC.Game
         private float speed = 12f;
 
         /// <summary>
-        /// TODO
+        /// The CinemachineVirtualCamera instance that is confining the position of the camera.
         /// </summary>
         public CinemachineVirtualCamera cinemachineCamera;
 

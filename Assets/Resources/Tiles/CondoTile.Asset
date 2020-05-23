@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d7196d17e34ed8a297c09a0f9ce204, type: 3}
   m_Name: CondoTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 0476adcd72af68f4b8b281c8e50f124c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b29cffdccc91101428eb475b8f163e4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

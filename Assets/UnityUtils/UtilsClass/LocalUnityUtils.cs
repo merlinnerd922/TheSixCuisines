@@ -566,7 +566,7 @@ namespace Extend
         /// <summary>Return the grandparent GameObject of the GameObject that <paramref name="monoBehaviour" /> is attached to.</summary>
         /// <param name="monoBehaviour">The MonoBehaviour script whose GameObject's grandparent we want to return.</param>
         /// <returns>the grandparent GameObject of the GameObject that <paramref name="monoBehaviour" /> is attached to.</returns>
-        public static GameObject GetGrandParentGameObject(this MonoBehaviour monoBehaviour)
+        public static GameObject GetGrandParent(this MonoBehaviour monoBehaviour)
         {
             return monoBehaviour.gameObject.GetGrandparent();
         }

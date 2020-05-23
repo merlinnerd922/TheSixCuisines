@@ -225,7 +225,7 @@ public class GameSceneManager : MonoBehaviour
         this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes();
         
         // Initialize information on the decor the user HASN'T bought.
-        this.hudMenuManager.decorDisplay.Initialize(this);
+        this.hudMenuManager.decorDisplay.Initialize(this.gameState);
 
     }
 
@@ -320,5 +320,15 @@ public class GameSceneManager : MonoBehaviour
         this.cameraManager.UpdateCameraPan();
     }
 
+
+    /// <summary>
+    /// Set the amount of cash the user has on hand as well as in the GameState to <paramref name="newValue"/>.
+    /// </summary>
+    /// <param name="newValue">The value to set the player's cash on hand to.</param>
+    public void SetCashOnHand(float newValue)
+    {
+        gameState.cashOnHand = newValue;
+        cashOnHandDisplay.SetCashOnHand(newValue);
+    }
 
 }

@@ -70,6 +70,7 @@ namespace TSC.Game.HUDMenus.Display
             // Delete this GameObject immediately now that its stored item has been bought.
             Destroy(this.gameObject);
         }
+        
 
         /// <summary>
         /// Initialize this unbought decor object.

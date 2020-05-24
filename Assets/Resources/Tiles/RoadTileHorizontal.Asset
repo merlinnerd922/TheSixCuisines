@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5d716e95c2e475eaa4d04d9921beba6, type: 3}
-  m_Name: Restaurant2
+  m_Script: {fileID: 11500000, guid: 8550dd241d8d4d359c36fa74acf4660f, type: 3}
+  m_Name: RoadTileHorizontal
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: fe1700e7d40fa9a4c8c5a6a1361f1996, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 769787fe18633114f97841a7335fb160, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

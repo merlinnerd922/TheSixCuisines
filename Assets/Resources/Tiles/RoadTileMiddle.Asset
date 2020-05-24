@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8550dd241d8d4d359c36fa74acf4660f, type: 3}
-  m_Name: RoadTile
+  m_Name: RoadTileMiddle
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 50746399a2818354b8c44909d322ced0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3e674f962844984d92455dd0520486e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

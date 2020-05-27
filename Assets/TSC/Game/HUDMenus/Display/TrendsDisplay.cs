@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Extend;
 using Helper;
+using Helper.ExtendSpace;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityUtils;
 
 namespace TSC.Game.HUDOptions
 {
@@ -11,6 +15,15 @@ namespace TSC.Game.HUDOptions
     /// </summary>
     public class TrendsDisplay : HUDDisplay
     {
+/// <summary>
+/// TODO`
+/// </summary>
+        public GameObject trendingDishesHolder;
+        
+/// <summary>
+/// TODO
+/// </summary>
+public GameObject trendingDishPrefab;
 
         /// <summary>
         /// The text displaying the currently trending cuisine.
@@ -51,26 +64,52 @@ namespace TSC.Game.HUDOptions
             // Initialize likelihoods adding up to 1 indicating how popular the dish will be.
             List<float> foodPopularities = NumberRandomizer.GenerateNFloatsWhoSumToM(dishList.Count, 1f).ToList();
 
+            // TODO
+            trendingDishesHolder.DestroyAllChildren();
+            
             // Append each dish and its popularity onto the trend string.
             dishPopularityMapping = new Dictionary<Dish, float>();
             for (int index = 0; index < dishList.Count; index++)
             {
-                Dish d = dishList[index];
+                Dish dish = dishList[index];
                 float dishPopularity = foodPopularities[index];
-                trendString += $"{d.ToTitleCaseSpacedString()}: {dishPopularity * 100:F2}%";
-
-                // Append a newline to the end of the string if we still have more recipe popularities to render.
-                if (index < dishList.Count - 1)
-                {
-                    trendString += "\n";
-                }
-
+                
                 // Be sure to keep track of how popular each dish is in a Dictionary.
-                dishPopularityMapping[d] = dishPopularity;
+                dishPopularityMapping[dish] = dishPopularity;
+
+                // TODO
+                GameObject trendingDish = Instantiate(this.trendingDishPrefab) as GameObject;
+                this.trendingDishesHolder.AddChild(trendingDish, false);
+                Image image = trendingDish.GetComponent<Image>();
+                image.sprite = DishUtils.GetDishSprite(dish);
+                int imageSize = (int) (225 * dishPopularity);
+                image.SetImageSize(imageSize, imageSize) ;
             }
 
             // Finally, set the trend string.
             this.trendingFoodText.text = trendString;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="trendString"></param>
+        /// <param name="d"></param>
+        /// <param name="dishPopularity"></param>
+        /// <param name="index"></param>
+        /// <param name="dishList"></param>
+        /// <returns></returns>
+        private static string AppendPopularityString(string trendString, Dish d, float dishPopularity, int index, List<Dish> dishList)
+        {
+            trendString += $"{d.ToTitleCaseSpacedString()}: {dishPopularity * 100:F2}%";
+
+            // Append a newline to the end of the string if we still have more recipe popularities to render.
+            if (index < dishList.Count - 1)
+            {
+                trendString += "\n";
+            }
+
+            return trendString;
         }
 
         /// <summary>

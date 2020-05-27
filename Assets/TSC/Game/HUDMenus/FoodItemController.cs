@@ -228,7 +228,7 @@ public class FoodItemController : MonoBehaviour
         this.dishManaged = dish;
         
         // Set this controller's dish's image.
-        this.image.sprite = GameSceneManager.GetDishSprite(dish);
+        this.image.sprite = DishUtils.GetDishSprite(dish);
     }
 
 }

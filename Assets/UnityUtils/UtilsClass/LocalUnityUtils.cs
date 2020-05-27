@@ -891,5 +891,16 @@ namespace Extend
 
 #endif
 
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public static void SetImageSize(this Image component, int width, int height)
+        {
+            component.rectTransform.sizeDelta = new Vector2(width, height);
+        }
+
     }
 }

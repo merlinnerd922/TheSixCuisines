@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Helper;
+using TSC.Game;
 using TSC.Game.HUDOptions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +34,7 @@ public class UnboughtDish : MonoBehaviour
     /// <param name="dish">The dish to set this object to.</param>
     public void Initialize(Dish dish)
     {
-        dishImage.sprite = GameSceneManager.GetDishSprite(dish);
+        dishImage.sprite = DishUtils.GetDishSprite(dish);
         dishText.text = dish.ToTitleCaseSpacedString();
         thisDish = dish;
     }

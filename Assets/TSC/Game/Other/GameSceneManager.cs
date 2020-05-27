@@ -299,16 +299,6 @@ public class GameSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Return the Sprite containing the image for the dish <paramref name="dish"/>.
-    /// </summary>
-    /// <param name="dish">The dish whose sprite should be returned.</param>
-    /// <returns> the Sprite containing the image for the dish <paramref name="dish"/>.</returns>
-    public static Sprite GetDishSprite(Dish dish)
-    {
-        return Resources.Load<Sprite>($"Sprites/FoodSprites/{dish.ToCamelCaseString()}");
-    }
-
-    /// <summary>
     /// Update the current frame.
     /// </summary>
     public void Update()

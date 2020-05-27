@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Helper;
+using UnityEngine;
 
 namespace TSC.Game
 {
@@ -56,6 +57,16 @@ namespace TSC.Game
         public static string GetCamelCaseString(this Dish dish)
         {
             return dish.ToString().ToCamelCase();
+        }
+
+        /// <summary>
+        /// Return the Sprite containing the image for the dish <paramref name="dish"/>.
+        /// </summary>
+        /// <param name="dish">The dish whose sprite should be returned.</param>
+        /// <returns> the Sprite containing the image for the dish <paramref name="dish"/>.</returns>
+        public static Sprite GetDishSprite(Dish dish)
+        {
+            return Resources.Load<Sprite>($"Sprites/FoodSprites/{dish.ToCamelCaseString()}");
         }
 
     }

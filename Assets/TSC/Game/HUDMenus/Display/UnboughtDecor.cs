@@ -85,7 +85,6 @@ namespace TSC.Game.HUDMenus.Display
             this.decorItem = decorAd;
         }
 
-        
     }
 
 }

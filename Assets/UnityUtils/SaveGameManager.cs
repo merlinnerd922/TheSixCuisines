@@ -19,7 +19,7 @@ namespace BDT
     {
 
         /// <summary>A formatter to convert data into a save file.</summary>
-        private protected static BinaryFormatter _bf = new BinaryFormatter();
+        protected internal static BinaryFormatter _bf = new BinaryFormatter();
 
         /// <summary>Save the provided game state <paramref name="savedGame" /> at the path specified by <paramref name="path" />.</summary>
         /// <param name="savedGame">The game state to save.</param>

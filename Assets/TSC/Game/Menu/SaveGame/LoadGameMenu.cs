@@ -20,16 +20,30 @@ namespace TSC.Game.Menu
         public GameMenuManager gameMenuManager;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public GenericNoticeDisplay genericNoticeDisplay;
+
+        /// <summary>
         /// Load the game file from the provided text name in the text input.
         /// </summary>
         public void LoadGame()
         {
             // Extract the save file from the provided text file and load it.
-            SaveFile saveFile = SaveGameManager.LoadGame(this.fileNameText.text) as SaveFile;
-            this.gameSceneManager.LoadAndInitializeScene(saveFile.gameState);
+            PathInst gamePath = SaveGameManager.InitializeSaveFilePathFromFileName(this.fileNameText.text);
 
-            // Deactivate the game menu manager and show the game window itself.
-            gameMenuManager.Deactivate();
+            if (gamePath.Exists())
+            {
+                SaveFile saveFile = SaveGameManager._bf.Deserialize(gamePath.OpenExistingFileStream()) as SaveFile;
+                this.gameSceneManager.LoadAndInitializeScene(saveFile.gameState);
+
+                // Deactivate the game menu manager and show the game window itself.
+                gameMenuManager.Deactivate();
+            }
+            else
+            {
+                genericNoticeDisplay.Activate();
+            }
         }
 
     }

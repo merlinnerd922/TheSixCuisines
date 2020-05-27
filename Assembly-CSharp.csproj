@@ -124,6 +124,7 @@
      <Compile Include="Assets\TSC\Game\Other\DecorAds.cs" />
      <Compile Include="Assets\TSC\Game\Other\DecorAdsUtils.cs" />
      <Compile Include="Assets\TSC\Game\Other\GameSceneManager.cs" />
+     <Compile Include="Assets\TSC\Game\Other\GenericNoticeDisplay.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\GameState.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\SaveFile.cs" />
      <Compile Include="Assets\TSC\MenuButton.cs" />
@@ -142,6 +143,9 @@
      <Compile Include="Assets\UnityUtils\UtilsClass\LocalUnityUtils.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Cinemachine">
+ <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Editor">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
@@ -179,6 +183,9 @@
  <Reference Include="UnityEditor.SpatialTracking">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="com.unity.cinemachine.editor">
+ <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
@@ -196,12 +203,6 @@
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Cinemachine">
- <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
- </Reference>
- <Reference Include="com.unity.cinemachine.editor">
- <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.12f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

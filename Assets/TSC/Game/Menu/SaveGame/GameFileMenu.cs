@@ -49,7 +49,7 @@ namespace TSC.Game.Menu
         /// <summary>
         /// The manager for the game menus.
         /// </summary>
-        private GameMenuManager _gameMenuManager => this.gameSceneManager.menuManager;
+        private GameMenuManager _gameMenuManager => this.gameSceneManager.gameMenuManager;
 
         /// <summary>
         /// Hide this menu, and activate the options summary menu again.

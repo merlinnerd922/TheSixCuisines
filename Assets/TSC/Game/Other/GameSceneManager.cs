@@ -8,6 +8,7 @@ using Helper;
 using Helper.ExtendSpace;
 using TSC.Game;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using UnityUtils;
 
@@ -24,7 +25,7 @@ public class GameSceneManager : MonoBehaviour
     /// <summary>
     /// The manager for the in-game menu.
     /// </summary>
-    public GameMenuManager menuManager;
+    [FormerlySerializedAs("menuManager")] public GameMenuManager gameMenuManager;
 
     /// <summary>
     /// The current state of the game.
@@ -162,7 +163,7 @@ public class GameSceneManager : MonoBehaviour
     public void Start()
     {
         // Make sure to hide the game menu at the very start.
-        if (this.menuManager.isActiveAndEnabled)
+        if (this.gameMenuManager.isActiveAndEnabled)
         {
             this.HideGameMenu();
         }
@@ -283,11 +284,11 @@ public class GameSceneManager : MonoBehaviour
     public void ShowGameMenu()
     {
         // Show the menu manager.
-        this.menuManager.Activate();
+        this.gameMenuManager.Activate();
 
         // Hide all sub-menus except for the options summary view.
-        this.menuManager.saveGameMenu.Deactivate();
-        this.menuManager.ActivateMenu(this.menuManager.optionsSummaryMenu);
+        this.gameMenuManager.saveGameMenu.Deactivate();
+        this.gameMenuManager.ActivateMenu(this.gameMenuManager.optionsSummaryMenu);
     }
 
     /// <summary>
@@ -295,7 +296,7 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void HideGameMenu()
     {
-        this.menuManager.Deactivate();
+        this.gameMenuManager.Deactivate();
     }
 
     /// <summary>
@@ -313,11 +314,15 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        // Update the zoom in/out for the mouse.
-        cameraManager.UpdateCameraZoom();
-        
-        // Update the camera panning.
-        this.cameraManager.UpdateCameraPan();
+        // If none of the overlay menus are active, do any needed updates on the camera.
+        if (!this.hudMenuManager.isActiveAndEnabled && !this.gameMenuManager.isActiveAndEnabled) {
+
+            // Update the zoom in/out for the mouse.
+            cameraManager.UpdateCameraZoom();
+
+            // Update the camera panning.
+            this.cameraManager.UpdateCameraPan();
+        }
     }
 
 

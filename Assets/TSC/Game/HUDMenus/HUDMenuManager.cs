@@ -98,6 +98,7 @@ public class HUDMenuManager : MonoBehaviour
     {
         hudDisplay.Deactivate();
         this.activeDisplay = null;
+        this.Deactivate();
     }
 
     /// <summary>
@@ -108,8 +109,13 @@ public class HUDMenuManager : MonoBehaviour
     {
         hudDisplay.Activate();
         this.activeDisplay = hudDisplay;
+        this.Activate();
     }
-    
-    
+
+
+    public bool IsActive()
+    {
+        return isActiveAndEnabled;
+    }
 
 }

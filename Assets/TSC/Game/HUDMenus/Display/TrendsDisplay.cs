@@ -83,8 +83,6 @@ public GameObject trendingDishPrefab;
                 // Set the size and sprite of the image, with the size of the image varying based on its popularity.
                 Image image = trendingDish.GetComponent<Image>();
                 image.sprite = DishUtils.GetDishSprite(dish);
-                int imageSize = (int) (225 * dishPopularity);
-                image.SetImageSize(imageSize, imageSize) ;
             }
 
             // Then, for each image, resize all the images so that they fit their container.

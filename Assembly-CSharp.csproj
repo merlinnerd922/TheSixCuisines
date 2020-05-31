@@ -144,6 +144,7 @@
      <Compile Include="Assets\UnityUtils\UtilsClass\LocalGameObjectFamilyUtils.cs" />
      <Compile Include="Assets\UnityUtils\UtilsClass\LocalGameObjectUtils.cs" />
      <Compile Include="Assets\UnityUtils\UtilsClass\LocalUnityUtils.cs" />
+     <None Include="Assets\packages\Newtonsoft.Json.xml" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
@@ -383,6 +384,9 @@
  </Reference>
  <Reference Include="UnityEngine.XRModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.12f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Assets/packages/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>C:/Users/SDA/Documents/GameProjects/TheSixCuisines/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>

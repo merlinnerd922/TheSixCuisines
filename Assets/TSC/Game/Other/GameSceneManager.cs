@@ -223,7 +223,7 @@ public class GameSceneManager : MonoBehaviour
     /// <summary>
     /// Create and load a brand new game state into the current scene.
     /// </summary>
-    /// <param name="level"></param>
+    /// <param name="level">TODO</param>
     internal void LoadNewGameFromNewGameState(Level level)
     {
         // Create a new game state.

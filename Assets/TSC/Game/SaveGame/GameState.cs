@@ -33,7 +33,7 @@ public class GameState
     /// <summary>
     /// The list of dishes that the user has purchased.
     /// </summary>
-    public HashSet<Dish> acquiredDishes = new HashSet<Dish>() {Dish.FRENCH_FRIES};
+    public HashSet<Dish> acquiredDishes;
 
     /// <summary>
     /// The inventory of dishes the player has.

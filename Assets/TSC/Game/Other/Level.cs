@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -41,6 +43,8 @@ namespace TSC.Game.Other
         /// </summary>
         public List<Dish> startingDishes;
 
+        public Dish startingDish;
+
         /// <summary>
         /// The amount of cash that the player starts with.
         /// </summary>
@@ -54,7 +58,7 @@ namespace TSC.Game.Other
         {
             TextAsset textAsset = Resources.Load<TextAsset>("Data/Levels/Level1");
             string textFile = textAsset.text;
-            return JsonUtility.FromJson<Level>(textFile);
+            return JsonConvert.DeserializeObject<Level>(textFile);
         }
 
     }

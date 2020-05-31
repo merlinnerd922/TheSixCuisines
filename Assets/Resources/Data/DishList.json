@@ -1,0 +1,18 @@
+﻿{
+  "FRENCH_FRIES": {
+    "ingredientCost" : 2.0,
+    "retailPrice" : 5.0
+  },
+  "ONION_RINGS": {
+    "ingredientCost" : 3.0,
+    "retailPrice" : 6.5
+  },
+  "POTATO_SOUP": {
+    "ingredientCost" : 5.0,
+    "retailPrice" : 10
+  },
+  "BURGER" :  {
+    "ingredientCost": 10,
+    "retailPrice" : 15
+  }
+}

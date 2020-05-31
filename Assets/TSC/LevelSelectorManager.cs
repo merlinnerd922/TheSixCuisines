@@ -26,7 +26,7 @@ public class LevelSelectorManager : MonoBehaviour
     public void LoadLevelGameScene()
     {
         // Store information on the level that's about to be played in a script within the level info GameObject.
-        this.levelInfoScript.level = ExtractLevel();
+        this.levelInfoScript.level = Level.CreateLevel1();
 
         // Convert the level info object to a root-level object so that it can be persisted across scenes.
         GameObject _levelInfoObject = this.levelInfoScript.gameObject;
@@ -35,17 +35,6 @@ public class LevelSelectorManager : MonoBehaviour
         
         // Finally, load the game scene, with info stored on this level info.
         SceneManager.LoadScene("Scenes/GameScene");
-    }
-
-    /// <summary>
-    /// Extract and return level information stored in a saved JSON file.
-    /// </summary>
-    /// <returns>An object containing level information, as stored in a saved JSON file.</returns>
-    private static Level ExtractLevel()
-    {
-        TextAsset textAsset = Resources.Load<TextAsset>("Levels/Level1");
-        string textFile = textAsset.text;
-        return JsonUtility.FromJson<Level>(textFile);
     }
 
 }

@@ -161,28 +161,6 @@ public class DishMenu : HUDDisplay
     }
 
     /// <summary>
-    /// Load all UI related to the dish menu display.
-    /// </summary>
-    /// <param name="_gameSceneManager"></param>
-    public void LoadDishInfoUI(GameSceneManager _gameSceneManager)
-    {
-        // Clear out the menu because we're currently loading the dish menu anew.
-        GameObject dishMenuMenuHolder = this.menuHolder;
-        dishMenuMenuHolder.DestroyAllChildren();
-
-        // For each dish, instantiate a prefab to represent the dish.
-        foreach (Dish dish in _gameSceneManager.GetAcquiredRecipes())
-        {
-            GameObject instantiatedMenuItem = Instantiate(_gameSceneManager.FOOD_CONTROLLER_PREFAB);
-            dishMenuMenuHolder.AddChild(instantiatedMenuItem, false);
-
-            // Then, initialize the script attached to the prefab with information on this GameSceneManager.
-            FoodItemController foodItemController = instantiatedMenuItem.GetComponent<FoodItemController>();
-            foodItemController.Initialize(dish, _gameSceneManager);
-        }
-    }
-
-    /// <summary>
     /// Initialize this menu of dishes.
     /// </summary>
     /// <param name="_gameSceneManager">The GameSceneManager to </param>

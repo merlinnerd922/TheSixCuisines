@@ -205,35 +205,10 @@ public class GameSceneManager : MonoBehaviour
         // If no level info is available, set all level variables to certain default values.
         else
         {
-            level = new Level();
-            level.moneyGoal = 10000;
+            level = Level.CreateLevel1();
         }
 
         return level;
-    }
-
-    /// <summary>
-    /// Load, extract and set all level info from the LevelInfo object.
-    /// </summary>
-    private void LoadLevelInfo()
-    {
-        // Extract information on this current level from the LevelInfo object.
-        GameObject levelInfo = GameObject.Find("LevelInfo");
-
-        // Set all relevant level information.
-        if (levelInfo != null)
-        {
-            Level level = levelInfo.GetComponent<LevelInfoObject>().level;
-            this.SetLevelInfo(level);
-        }
-
-        // If no level info is available, set all level variables to certain default values.
-        else
-        {
-            Level newLevel = new Level();
-            newLevel.moneyGoal = 10000;
-            this.SetLevelInfo(newLevel);
-        }
     }
 
     /// <summary>
@@ -254,6 +229,8 @@ public class GameSceneManager : MonoBehaviour
         // Create a new game state.
         this.gameState = GameState.CreateNew();
         this.gameState.levelBeingPlayed = level;
+        this.gameState.acquiredDishes = level.startingDishes.ToHashSet();
+        this.gameState.cashOnHand = level.startingCash;
 
         // Initialize info on the current turn, the amount of cash the player has on hand, as well as the amount of 
         // food the player has in their inventory.
@@ -269,14 +246,16 @@ public class GameSceneManager : MonoBehaviour
     {
         // Set the game state to match the given game state.
         this.gameState = _gameState;
-
+        
         // Initialize the starting turn number, iff it isn't set.
         this.gameState.InitializeFieldsIfNull();
 
         // Set all the UI displays for all the elements in the save file.
         this.SetCurrentTurn(this.gameState.turnNumber);
-        this.SetCashGoal(this.gameState.levelBeingPlayed.moneyGoal);
+        
+        // Set how much cash the player has on hand and their target cash goal.
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
+        this.SetCashGoal(this.gameState.levelBeingPlayed.moneyGoal);
 
         // Load the UI for the menu display.
         // Clear out the menu because we're currently loading the dish menu anew.
@@ -289,7 +268,7 @@ public class GameSceneManager : MonoBehaviour
         this.CalculateCustomerAmount();
 
         // Initialize info on the recipes not purchased.
-        this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes();
+        this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes(this.gameState.levelBeingPlayed.dishDomain);
 
         // Initialize information on the decor the user HASN'T bought.
         this.hudMenuManager.decorDisplay.Initialize(this.gameState);

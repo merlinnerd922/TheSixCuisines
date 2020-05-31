@@ -1,4 +1,5 @@
-﻿using Helper;
+﻿using System.Collections.Generic;
+using Helper;
 using Helper.ExtendSpace;
 using UnityEngine;
 using UnityUtils;
@@ -27,17 +28,18 @@ namespace TSC.Game.HUDOptions
         /// A prefab for a menu item on this new dishes display.
         /// </summary>
         public GameObject unboughtDishPrefab;
-        
+
         /// <summary>
         /// Load all dishes that the user has NOT bought on this page.
         /// </summary>
-        public void LoadUnboughtDishes()
+        /// <param name="dishDomain"></param>
+        public void LoadUnboughtDishes(IEnumerable<Dish> dishDomain)
         {
             // Clear out the existing menu.
             this.dishHolder.DestroyAllChildren();
             
             // For each unbought dish, load it.
-            foreach (Dish dish in this.gameSceneManager.gameState.GetUnboughtDishes())
+            foreach (Dish dish in this.gameSceneManager.gameState.GetUnboughtDishes(dishDomain))
             {
                 // Instantiate a GameObject representing the dish.
                 GameObject instantiate = Instantiate(this.unboughtDishPrefab);

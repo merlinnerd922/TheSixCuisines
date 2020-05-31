@@ -27,7 +27,7 @@ namespace TSC.Game.Menu
         /// <summary>
         /// Load the game file from the provided text name in the text input.
         /// </summary>
-        public void LoadGame()
+        public void LoadExistingGame()
         {
             // Extract the save file from the provided text file and load it.
             PathInst gamePath = SaveGameManager.InitializeSaveFilePathFromFileName(this.fileNameText.text);

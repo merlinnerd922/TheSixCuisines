@@ -152,10 +152,11 @@ public class GameState
     /// <summary>
     /// Return an enumeration of all the dishes that this player has NOT bought.
     /// </summary>
+    /// <param name="dishDomain"></param>
     /// <returns>an enumeration of all the dishes that this player has NOT bought.</returns>
-    public IEnumerable<Dish> GetUnboughtDishes()
+    public IEnumerable<Dish> GetUnboughtDishes(IEnumerable<Dish> dishDomain)
     {
-        return LocalGeneralUtils.GetEnumList<Dish>().Where(x => !this.acquiredDishes.Contains(x));
+        return dishDomain.Where(dish => !this.acquiredDishes.Contains(dish));
     }
 
     /// <summary>

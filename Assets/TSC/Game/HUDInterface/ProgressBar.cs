@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Extend;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 /// <summary>
@@ -14,7 +15,7 @@ public class ProgressBar : MonoBehaviour
     /// The foreground image of the progress bar.
     /// </summary>
     public Image foreground;
-    
+
     /// <summary>
     /// The text displaying the user's progress in reaching their goal.
     /// </summary>
@@ -24,36 +25,44 @@ public class ProgressBar : MonoBehaviour
     /// The RectTransform of the foreground of the progress bar.
     /// </summary>
     public RectTransform foregroundRectTransform;
-    
+
     /// <summary>
     /// The target amount of cash the player has to reach.
     /// </summary>
-    public float TARGET_CASH_ON_HAND= 10000;
+    [FormerlySerializedAs("TARGET_CASH_ON_HAND")]
+    public float targetCashOnHand = 10000;
 
     /// <summary>
     /// The victory screen on this
     /// </summary>
     public VictoryScreen victoryScreen;
 
+    public float cashOnHand;
+
     /// <summary>
     /// Set the cash on hand that the player has to <paramref name="cashOnHandToSet"/>, and update the player's progress accordingly.
     /// </summary>
     /// <param name="cashOnHandToSet">The value to set the amount of cash the player has on hand.</param>
-    public void SetCashOnHandProgress(float cashOnHandToSet)
+    /// <param name="_targetCashOnHand">
+    /// The target amount of cash that the player should get to win the level/</param>
+    public void SetCashOnHandProgress(float cashOnHandToSet, float _targetCashOnHand)
     {
+        this.cashOnHand = cashOnHandToSet;
+        this.targetCashOnHand = _targetCashOnHand;
+
         // Set the text display of the user's progress.
-        progressText.text = $"Progress : ${cashOnHandToSet}/${this.TARGET_CASH_ON_HAND}";
-        
+        this.progressText.text = $"Progress : ${cashOnHandToSet}/${_targetCashOnHand}";
+
         // Cap the maximum amount of the fill of the progress bar by 100% from above.
-        float progressPercentage = Mathf.Min(cashOnHandToSet / this.TARGET_CASH_ON_HAND, 1f);
-        
+        float progressPercentage = Mathf.Min(cashOnHandToSet / _targetCashOnHand, 1f);
+
         // Finally, set the width of the RectTransform of the progress bar foreground accordingly.
         this.foregroundRectTransform.SetAnchorMaxX(progressPercentage);
-        
+
         // Trigger the victory screen if the maximum target has been reached.
         if (progressPercentage >= 1)
         {
-            victoryScreen.Activate();
+            this.victoryScreen.Activate();
         }
     }
 

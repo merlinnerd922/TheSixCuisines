@@ -2,16 +2,18 @@
 
 namespace TSC.Game
 {
-/// <summary>
-/// A save file containing a saved game.
-/// </summary>
-[Serializable]
+
+    /// <summary>
+    /// A save file containing a saved game.
+    /// </summary>
+    [Serializable]
     public class SaveFile
     {
-/// <summary>
-/// The state of the game stored in this save file.
-/// </summary>
-internal GameState gameState;
+
+        /// <summary>
+        /// The state of the game stored in this save file.
+        /// </summary>
+        internal GameState gameState;
 
         /// <summary>
         /// Create and return a brand new save file from the provided GameState.

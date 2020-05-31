@@ -15,6 +15,11 @@ namespace TSC.Game.Other
         /// </summary>
         public float moneyGoal;
 
+        /// <summary>
+        /// The index of this level, indexed from 1.
+        /// </summary>
+        public int level;
+
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using Extend;
+using TSC.Game.Other;
 using UnityEngine;
 
 /// <summary>
@@ -21,7 +22,7 @@ public class VictoryScreen : MonoBehaviour
         this.Deactivate();
 
         // Initialize all the variables for a new game.
-        this.gameSceneManager.LoadNewGameFromNewGameState();
+        this.gameSceneManager.LoadNewGameFromNewGameState(new Level());
     }
 
 }

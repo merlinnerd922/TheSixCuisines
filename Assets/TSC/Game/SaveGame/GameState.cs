@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Extend;
+using TSC.Game.Other;
 using TSC.Game.SaveGame;
 using UnityEngine.Serialization;
 
@@ -13,6 +14,11 @@ using UnityEngine.Serialization;
 [Serializable]
 public class GameState
 {
+
+    /// <summary>
+    /// The current level being played.
+    /// </summary>
+    public Level levelBeingPlayed;
 
     /// <summary>
     /// The current turn number of the game state.
@@ -101,10 +107,11 @@ public class GameState
         {
             this.soldYesterdayMapping = InitializeZeroMapping();
         }
-        
+
         // Initialize the set of decor and ads the user has purchased, if null.
         if (this.decorAds == null)
-        {this.decorAds = new List<DecorAds>();
+        {
+            this.decorAds = new List<DecorAds>();
         }
     }
 
@@ -152,7 +159,7 @@ public class GameState
     }
 
     /// <summary>
-    /// 
+    /// A list of decor that the player has purchased.
     /// </summary>
     public List<DecorAds> decorAds = new List<DecorAds>();
 

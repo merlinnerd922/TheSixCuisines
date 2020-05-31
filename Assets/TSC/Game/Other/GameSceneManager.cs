@@ -170,9 +170,6 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        // Load all information on the current level being played.
-        this.LoadLevelInfo();
-
         // Make sure to hide the game menu at the very start.
         if (this.gameMenuManager.isActiveAndEnabled)
         {
@@ -185,10 +182,34 @@ public class GameSceneManager : MonoBehaviour
         this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.dishMenu);
 
         // For now, only new games are supported, so load a new game from a newly generated state.
-        this.LoadNewGameFromNewGameState();
+        Level level = GetLevelInfo();
+        this.LoadNewGameFromNewGameState(level);
 
         // Start the camera zoom position at a reasonable zoom.
         this.cameraManager.targetZoom = this.cameraManager.managedCamera.orthographicSize;
+    }
+
+    private static Level GetLevelInfo()
+    {
+// Load all information on the current level being played.
+        // Extract information on this current level from the LevelInfo object.
+        GameObject levelInfo = GameObject.Find("LevelInfo");
+
+        // Set all relevant level information.
+        Level level;
+        if (levelInfo != null)
+        {
+            level = levelInfo.GetComponent<LevelInfoObject>().level;
+        }
+
+        // If no level info is available, set all level variables to certain default values.
+        else
+        {
+            level = new Level();
+            level.moneyGoal = 10000;
+        }
+
+        return level;
     }
 
     /// <summary>
@@ -196,30 +217,43 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     private void LoadLevelInfo()
     {
-// Extract information on this current level from the LevelInfo object.
+        // Extract information on this current level from the LevelInfo object.
         GameObject levelInfo = GameObject.Find("LevelInfo");
-        Level level = levelInfo.GetComponent<LevelInfoObject>().level;
 
-        // Set all relevant level information. 
+        // Set all relevant level information.
         if (levelInfo != null)
         {
-            this.progressBar.TARGET_CASH_ON_HAND = level.moneyGoal;
+            Level level = levelInfo.GetComponent<LevelInfoObject>().level;
+            this.SetLevelInfo(level);
         }
 
         // If no level info is available, set all level variables to certain default values.
         else
         {
-            this.progressBar.TARGET_CASH_ON_HAND = 10000;
+            Level newLevel = new Level();
+            newLevel.moneyGoal = 10000;
+            this.SetLevelInfo(newLevel);
         }
+    }
+
+    /// <summary>
+    /// Set information on the level being played by the player to <paramref name="level"/>.
+    /// </summary>
+    /// <param name="level">The level being played by the player.</param>
+    private void SetLevelInfo(Level level)
+    {
+        this.gameState.levelBeingPlayed = level;
     }
 
     /// <summary>
     /// Create and load a brand new game state into the current scene.
     /// </summary>
-    internal void LoadNewGameFromNewGameState()
+    /// <param name="level"></param>
+    internal void LoadNewGameFromNewGameState(Level level)
     {
         // Create a new game state.
         this.gameState = GameState.CreateNew();
+        this.gameState.levelBeingPlayed = level;
 
         // Initialize info on the current turn, the amount of cash the player has on hand, as well as the amount of 
         // food the player has in their inventory.
@@ -241,6 +275,7 @@ public class GameSceneManager : MonoBehaviour
 
         // Set all the UI displays for all the elements in the save file.
         this.SetCurrentTurn(this.gameState.turnNumber);
+        this.SetCashGoal(this.gameState.levelBeingPlayed.moneyGoal);
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
 
         // Load the UI for the menu display.
@@ -258,6 +293,15 @@ public class GameSceneManager : MonoBehaviour
 
         // Initialize information on the decor the user HASN'T bought.
         this.hudMenuManager.decorDisplay.Initialize(this.gameState);
+    }
+
+    /// <summary>
+    /// Set the cash goal in the current scene to <paramref name="moneyGoal"/>.
+    /// </summary>
+    /// <param name="moneyGoal">The goal to set the cash goal in the current scene to.</param>
+    private void SetCashGoal(float moneyGoal)
+    {
+        this.progressBar.SetCashOnHandProgress(this.progressBar.cashOnHand, moneyGoal);
     }
 
     /// <summary>

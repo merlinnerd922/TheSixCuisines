@@ -32,7 +32,7 @@ public class CashOnHand : MonoBehaviour
         this.cashOnHandText.text = $"${cashOnHandToSet}";
         
         // Set the progress of the user in reaching their target cash goal.
-        this.progressBar.SetCashOnHandProgress(cashOnHandToSet);
+        this.progressBar.SetCashOnHandProgress(cashOnHandToSet, this.progressBar.targetCashOnHand);
     }
 
     /// <summary>

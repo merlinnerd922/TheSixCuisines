@@ -17,11 +17,11 @@ public class VictoryScreen : MonoBehaviour
     /// </summary>
     public void StartNewGame()
     {
-        // Initialize all the variables for a new game.
-        this.gameSceneManager.LoadNewGameFromNewGameState();
-
         // Hide this victory panel.
         this.Deactivate();
+
+        // Initialize all the variables for a new game.
+        this.gameSceneManager.LoadNewGameFromNewGameState();
     }
 
 }

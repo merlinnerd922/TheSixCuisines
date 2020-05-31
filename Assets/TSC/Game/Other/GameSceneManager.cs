@@ -6,7 +6,9 @@ using DataStructures.RandomSelector;
 using Extend;
 using Helper;
 using Helper.ExtendSpace;
+using TSC;
 using TSC.Game;
+using TSC.Game.Other;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
@@ -17,11 +19,17 @@ using UnityUtils;
 /// </summary>
 public class GameSceneManager : MonoBehaviour
 {
+
     /// <summary>
     /// The tilemap representing the current world.
     /// </summary>
-        public Tilemap tilemap;
-    
+    public Tilemap tilemap;
+
+    /// <summary>
+    /// The progress bar in the scene, indicating how much money the user has accumulated to get to their goal.
+    /// </summary>
+    public ProgressBar progressBar;
+
     /// <summary>
     /// The manager for the in-game menu.
     /// </summary>
@@ -74,9 +82,8 @@ public class GameSceneManager : MonoBehaviour
         // Have a random number of customers buy food, within +-10 customers of the estimated number of customers
         // estimated to arrive.
         int estimatedCustomers = this.hudMenuManager.trendsDisplay.estimatedNumberOfCustomers;
-        int numberOfCustomers = NumberRandomizer.GetIntBetweenExclusive(
-        estimatedCustomers - 10,
-        estimatedCustomers + 10);
+        int numberOfCustomers =
+            NumberRandomizer.GetIntBetweenExclusive(estimatedCustomers - 10, estimatedCustomers + 10);
 
         // Have the generated customers buy a dish.
         this.DoBuyDishes(numberOfCustomers);
@@ -95,7 +102,8 @@ public class GameSceneManager : MonoBehaviour
     private void DoBuyDishes(int numberOfCustomers)
     {
         // Initialize a mapping between all the dishes and how many were bought.
-        Dictionary<Dish, int> dishPurchaseCounts = this.GetAcquiredRecipes().ToDictionary(x => x, x => 0).ToSerializableDictionary();
+        Dictionary<Dish, int> dishPurchaseCounts =
+            this.GetAcquiredRecipes().ToDictionary(x => x, x => 0).ToSerializableDictionary();
 
         // Generate a randomized selector attuned to current trends in food.
         DynamicRandomSelector<Dish> dishSelector = this.GetRandomDishSelector();
@@ -162,12 +170,15 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void Start()
     {
+        // Load all information on the current level being played.
+        this.LoadLevelInfo();
+
         // Make sure to hide the game menu at the very start.
         if (this.gameMenuManager.isActiveAndEnabled)
         {
             this.HideGameMenu();
         }
-        
+
         // Hide all menus except for the dish menu.
         this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.newDishesDisplay);
         this.hudMenuManager.DeactivateDisplay(this.hudMenuManager.trendsDisplay);
@@ -175,10 +186,31 @@ public class GameSceneManager : MonoBehaviour
 
         // For now, only new games are supported, so load a new game from a newly generated state.
         this.LoadNewGameFromNewGameState();
-        
+
         // Start the camera zoom position at a reasonable zoom.
         this.cameraManager.targetZoom = this.cameraManager.managedCamera.orthographicSize;
+    }
 
+    /// <summary>
+    /// Load, extract and set all level info from the LevelInfo object.
+    /// </summary>
+    private void LoadLevelInfo()
+    {
+// Extract information on this current level from the LevelInfo object.
+        GameObject levelInfo = GameObject.Find("LevelInfo");
+        Level level = levelInfo.GetComponent<LevelInfoObject>().level;
+
+        // Set all relevant level information. 
+        if (levelInfo != null)
+        {
+            this.progressBar.TARGET_CASH_ON_HAND = level.moneyGoal;
+        }
+
+        // If no level info is available, set all level variables to certain default values.
+        else
+        {
+            this.progressBar.TARGET_CASH_ON_HAND = 10000;
+        }
     }
 
     /// <summary>
@@ -201,7 +233,6 @@ public class GameSceneManager : MonoBehaviour
     [SuppressMessage("ReSharper", "LoopCanBePartlyConvertedToQuery")]
     internal void LoadAndInitializeScene(GameState _gameState)
     {
-
         // Set the game state to match the given game state.
         this.gameState = _gameState;
 
@@ -218,32 +249,33 @@ public class GameSceneManager : MonoBehaviour
 
         // Initialize some random daily trends for determining the popularity of foods.
         this.hudMenuManager.trendsDisplay.InitializeDailyTrends();
-        
+
         // Initialize information on the projected number of customers.
         this.CalculateCustomerAmount();
-        
+
         // Initialize info on the recipes not purchased.
         this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes();
-        
+
         // Initialize information on the decor the user HASN'T bought.
         this.hudMenuManager.decorDisplay.Initialize(this.gameState);
-
     }
 
     /// <summary>
-/// Calculate and set the number of customers that are projected to come to the restaurant.
-/// </summary>
+    /// Calculate and set the number of customers that are projected to come to the restaurant.
+    /// </summary>
     private void CalculateCustomerAmount()
     {
         int numberOfCustomers = 0;
-        
+
         // Retrieve all tiles within the tilemap.
         BoundsInt bounds = tilemap.cellBounds;
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
 
         // For each tile in the tilemap, if the tile is a condo tile, then increment the number of customers by 3.
-        for (int x = 0; x < bounds.size.x; x++) {
-            for (int y = 0; y < bounds.size.y; y++) {
+        for (int x = 0; x < bounds.size.x; x++)
+        {
+            for (int y = 0; y < bounds.size.y; y++)
+            {
                 TileBase tile = allTiles[x + y * bounds.size.x];
                 if (tile != null)
                 {
@@ -315,8 +347,8 @@ public class GameSceneManager : MonoBehaviour
     public void Update()
     {
         // If none of the overlay menus are active, do any needed updates on the camera.
-        if (!this.hudMenuManager.isActiveAndEnabled && !this.gameMenuManager.isActiveAndEnabled) {
-
+        if (!this.hudMenuManager.isActiveAndEnabled && !this.gameMenuManager.isActiveAndEnabled)
+        {
             // Update the zoom in/out for the mouse.
             cameraManager.UpdateCameraZoom();
 

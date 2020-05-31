@@ -125,8 +125,11 @@
      <Compile Include="Assets\TSC\Game\Other\DecorAdsUtils.cs" />
      <Compile Include="Assets\TSC\Game\Other\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\Other\GenericNoticeDisplay.cs" />
+     <Compile Include="Assets\TSC\Game\Other\Level.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\GameState.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\SaveFile.cs" />
+     <Compile Include="Assets\TSC\LevelInfoObject.cs" />
+     <Compile Include="Assets\TSC\LevelSelectorManager.cs" />
      <Compile Include="Assets\TSC\MenuButton.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IDragHandlerThorough.cs" />
      <Compile Include="Assets\UnityUtils\Handlers\IHoverHandler.cs" />

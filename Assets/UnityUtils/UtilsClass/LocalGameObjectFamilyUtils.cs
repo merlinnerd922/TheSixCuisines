@@ -327,7 +327,15 @@ using UnityEngine;
         /// </param>
         public static void SetParent(this GameObject gameObject, GameObject parent, bool globalPositionStays = true)
         {
-            gameObject.transform.SetParent(parent.transform, globalPositionStays);
+            // For null objects, simply set the parent to null instead of retrieving its transform.
+            if (parent == null)
+            {
+                gameObject.transform.SetParent(null, globalPositionStays);
+            }
+            else
+            {
+                gameObject.transform.SetParent(parent.transform, globalPositionStays);
+            }
         }
 
         /// <summary>

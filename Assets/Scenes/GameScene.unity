@@ -2346,6 +2346,7 @@ MonoBehaviour:
   foreground: {fileID: 865985676}
   progressText: {fileID: 1696775503}
   foregroundRectTransform: {fileID: 865985675}
+  TARGET_CASH_ON_HAND: 10000
   victoryScreen: {fileID: 176939196}
 --- !u!222 &516935339
 CanvasRenderer:
@@ -5823,7 +5824,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 205463506}
-  menuManager: {fileID: 241238132}
+  progressBar: {fileID: 516935338}
+  gameMenuManager: {fileID: 241238132}
   gameState:
     turnNumber: 0
     cashOnHand: 5000

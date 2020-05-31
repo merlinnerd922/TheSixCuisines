@@ -28,7 +28,7 @@ public class ProgressBar : MonoBehaviour
     /// <summary>
     /// The target amount of cash the player has to reach.
     /// </summary>
-    private float TARGET_CASH_ON_HAND= 10000;
+    public float TARGET_CASH_ON_HAND= 10000;
 
     /// <summary>
     /// The victory screen on this

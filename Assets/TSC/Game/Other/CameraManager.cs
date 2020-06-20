@@ -55,7 +55,7 @@ namespace TSC.Game
             this.targetZoom = Mathf.Clamp(this.targetZoom, 2f, 10f);
 
             // Slowly animate the zoom so that it is a smooth animation.
-            this.cinemachineCamera.m_Lens.OrthographicSize = 
+            this.cinemachineCamera.m_Lens.OrthographicSize =
                 Mathf.Lerp(this.managedCamera.orthographicSize, this.targetZoom,
                 Time.deltaTime * ZOOM_LERP_SPEED);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Helper;
 using TSC.Game;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,7 +12,6 @@ using UnityEngine.Tilemaps;
 [SuppressMessage("ReSharper", "Unity.RedundantEventFunction")]
 public class Map : MonoBehaviour
 {
-
     /// <summary>
     /// The image texture for a speech bubble.
     /// </summary>
@@ -22,21 +22,13 @@ public class Map : MonoBehaviour
     /// </summary>
     public Tilemap buildingTilemap;
 
+    public Tilemap terrainTilemap;
+
     /// <summary>
     /// Process a mouse click downwards on this map.
     /// </summary>
     public void OnMouseDown()
     {
-        // Perform a series of commands to test out the functionality of the tilemap-based map.
-//        Grid grid = this.GetComponentInParent<Grid>();
-//        Tilemap tilemap = this.GetComponent<Tilemap>();
-//        Vector3 mousePosition = Input.mousePosition;
-//        Vector3 screenToWorldPoint = Camera.main.ScreenToWorldPoint(mousePosition);
-//        Debug.Log(mousePosition);
-//        Debug.Log(screenToWorldPoint);
-//        Debug.Log(tilemap.WorldToCell(screenToWorldPoint));
-//        TileBase tile = tilemap.GetTile(tilemap.WorldToCell(screenToWorldPoint));
-//        Debug.Log(tile);
     }
 
     /// <summary>
@@ -52,5 +44,37 @@ public class Map : MonoBehaviour
     public void Start()
     {
     }
+
+/// <summary>
+/// TODO
+/// </summary>
+    public void GenerateMap()
+    {
+        this.buildingTilemap.ClearAllTiles();
+        this.terrainTilemap.ClearAllTiles();
+
+        List<int> xCoordinates = NumberRandomizer.GetNRandomInts(10, -5, 11);
+        List<int> yCoordinates = NumberRandomizer.GetNRandomInts(10, -5, 11);
+        
+        GrassTile grassTile = Resources.Load<GrassTile>("Tiles/GrassTile");
+        CondoTile condoTile = Resources.Load<CondoTile>("Tiles/CondoTile");
+        
+        for (int i = -5; i <= 5; i++)
+        {
+            for (int j = -5; j <= 5; j++)
+            {
+                this.terrainTilemap.SetTile(new Vector3Int(i, j, 0), Instantiate(grassTile));
+            }
+        }
+
+ 
+
+        this.buildingTilemap.SetTile(new Vector3Int(0, 0, 0), Instantiate(condoTile) );
+        this.buildingTilemap.SetTile(new Vector3Int(0, 1, 0), Instantiate(condoTile) );
+        this.buildingTilemap.SetTile(new Vector3Int(1, 0, 0), Instantiate(condoTile) );
+        this.buildingTilemap.SetTile(new Vector3Int(1, 1, 0), Instantiate(condoTile) );
+
+    }
+
 
 }

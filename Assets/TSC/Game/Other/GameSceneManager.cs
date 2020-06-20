@@ -67,6 +67,11 @@ public class GameSceneManager : MonoBehaviour
     public CameraManager cameraManager;
 
     /// <summary>
+    /// TODO
+    /// </summary>
+    public Map map;
+
+    /// <summary>
     /// The current turn number.
     /// </summary>
     public int turnNumber {
@@ -247,8 +252,11 @@ public class GameSceneManager : MonoBehaviour
         // Set the game state to match the given game state.
         this.gameState = _gameState;
         
-        // Initialize the starting turn number, iff it isn't set.
+        // Initialize the starting turn number and other unset variables, iff they aren't set.
         this.gameState.InitializeFieldsIfNull();
+        
+        // Generate the map.
+        this.map.GenerateMap();
 
         // Set all the UI displays for all the elements in the save file.
         this.SetCurrentTurn(this.gameState.turnNumber);

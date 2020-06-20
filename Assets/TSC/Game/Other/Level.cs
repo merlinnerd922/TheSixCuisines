@@ -33,6 +33,11 @@ namespace TSC.Game.Other
         public int level;
 
         /// <summary>
+        /// The number of condo buildings on this level. 
+        /// </summary>
+        public int condos;
+
+        /// <summary>
         /// The list of dishes that the user can purchase for the current level.
         /// </summary>
         [FormerlySerializedAs("purchasableDishes")]
@@ -42,8 +47,6 @@ namespace TSC.Game.Other
         /// The set of dishes the user starts the level with.
         /// </summary>
         public List<Dish> startingDishes;
-
-        public Dish startingDish;
 
         /// <summary>
         /// The amount of cash that the player starts with.

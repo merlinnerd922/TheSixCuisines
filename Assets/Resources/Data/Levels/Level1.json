@@ -7,5 +7,6 @@
   ],
   "dishDomain": [
     "POTATO_SOUP", "FRENCH_FRIES", "BURGER"
-  ]
-}
+  ],
+  "condos" : 10
+}                        

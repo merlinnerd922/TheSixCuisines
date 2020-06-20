@@ -12,6 +12,7 @@ using TSC.Game.Other;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using UnityUtils;
 
 /// <summary>
@@ -65,6 +66,11 @@ public class GameSceneManager : MonoBehaviour
     /// The manager for the camera.
     /// </summary>
     public CameraManager cameraManager;
+
+    /// <summary>
+    /// The text displaying the current level.
+    /// </summary>
+    public Text currentLevelText;
 
     /// <summary>
     /// The current turn number.
@@ -189,9 +195,13 @@ public class GameSceneManager : MonoBehaviour
         this.cameraManager.targetZoom = this.cameraManager.managedCamera.orthographicSize;
     }
 
+    /// <summary>
+    /// Return the Level info object stored in this scene.
+    /// </summary>
+    /// <returns>the Level info object stored in this scene.</returns>
     private static Level GetLevelInfo()
     {
-// Load all information on the current level being played.
+        // Load all information on the current level being played.
         // Extract information on this current level from the LevelInfo object.
         GameObject levelInfo = GameObject.Find("LevelInfo");
 
@@ -205,7 +215,7 @@ public class GameSceneManager : MonoBehaviour
         // If no level info is available, set all level variables to certain default values.
         else
         {
-            level = Level.CreateLevel1();
+            level = Level.LoadLevel(1);
         }
 
         return level;
@@ -232,6 +242,9 @@ public class GameSceneManager : MonoBehaviour
         this.gameState.acquiredDishes = level.startingDishes.ToHashSet();
         this.gameState.cashOnHand = level.startingCash;
 
+        // Set the current level in the UI.
+        currentLevelText.text = $"Level {level.level}";
+        
         // Initialize info on the current turn, the amount of cash the player has on hand, as well as the amount of 
         // food the player has in their inventory.
         this.LoadAndInitializeScene(this.gameState);

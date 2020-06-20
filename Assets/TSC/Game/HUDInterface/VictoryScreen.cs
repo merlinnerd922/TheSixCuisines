@@ -22,7 +22,8 @@ public class VictoryScreen : MonoBehaviour
         this.Deactivate();
 
         // Initialize all the variables for a new game.
-        this.gameSceneManager.LoadNewGameFromNewGameState(Level.CreateLevel1());
+        this.gameSceneManager.LoadNewGameFromNewGameState(Level.LoadLevel(this.gameSceneManager.gameState
+        .levelBeingPlayed.level));
     }
 
 }

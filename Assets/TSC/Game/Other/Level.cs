@@ -53,10 +53,11 @@ namespace TSC.Game.Other
         /// <summary>
         /// Extract and return level information stored in a saved JSON file.
         /// </summary>
+        /// <param name="levelToCreate">The level to load.</param>
         /// <returns>An object containing level information, as stored in a saved JSON file.</returns>
-        public static Level CreateLevel1()
+        public static Level LoadLevel(int levelToCreate)
         {
-            TextAsset textAsset = Resources.Load<TextAsset>("Data/Levels/Level1");
+            TextAsset textAsset = Resources.Load<TextAsset>($"Data/Levels/Level{levelToCreate}");
             string textFile = textAsset.text;
             return JsonConvert.DeserializeObject<Level>(textFile);
         }

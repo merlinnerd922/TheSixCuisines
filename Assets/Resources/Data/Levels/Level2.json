@@ -1,11 +1,11 @@
 {
-  "moneyGoal": 500,
+  "moneyGoal": 1000,
   "startingCash": 100,
-  "level": 1,
+  "level": 2,
   "startingDishes": [
     "FRENCH_FRIES"
   ],
   "dishDomain": [
-    "FRENCH_FRIES"
+    "POTATO_SOUP", "FRENCH_FRIES", "BURGER"
   ]
 }

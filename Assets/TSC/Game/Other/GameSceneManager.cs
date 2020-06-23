@@ -205,11 +205,15 @@ public class GameSceneManager : MonoBehaviour
         // Extract information on this current level from the LevelInfo object.
         GameObject levelInfo = GameObject.Find("LevelInfo");
 
-        // Set all relevant level information.
+        // Set all relevant level information. 
         Level level;
         if (levelInfo != null)
         {
             level = levelInfo.GetComponent<LevelInfoObject>().level;
+            
+            // Be sure to delete the Level object afterwards, as it is no longer needed. Moreover, this element
+            // would be duplicated if this scene is loaded again, so we want to avoid duplicates.
+            DestroyImmediate(levelInfo);
         }
 
         // If no level info is available, set all level variables to certain default values.

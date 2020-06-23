@@ -8,5 +8,6 @@
   "dishDomain": [
     "POTATO_SOUP", "FRENCH_FRIES", "BURGER"
   ],
-  "customerCount" : 20
+  "customerCount" : 20,
+  "victoryCondition": "CASH"
 }

@@ -8,5 +8,6 @@
   "dishDomain": [
     "FRENCH_FRIES"
   ],
-  "customerCount" : 10
+  "customerCount" : 10,
+  "victoryCondition": "CASH"
 }

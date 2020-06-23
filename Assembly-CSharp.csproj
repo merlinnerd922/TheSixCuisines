@@ -126,6 +126,7 @@
      <Compile Include="Assets\TSC\Game\Other\GameSceneManager.cs" />
      <Compile Include="Assets\TSC\Game\Other\GenericNoticeDisplay.cs" />
      <Compile Include="Assets\TSC\Game\Other\Level.cs" />
+     <Compile Include="Assets\TSC\Game\Other\VictoryCondition.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\GameState.cs" />
      <Compile Include="Assets\TSC\Game\SaveGame\SaveFile.cs" />
      <Compile Include="Assets\TSC\LevelInfoObject.cs" />

@@ -1,4 +1,5 @@
 ﻿using Extend;
+using TSC.Game.Other;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +8,21 @@ using UnityEngine.UI;
 /// </summary>
 public class CashOnHand : MonoBehaviour
 {
-/// <summary>
-/// The progress bar for keeping track of how close the user is to their target cash goal.
-/// </summary>
+    /// <summary>
+    /// The progress bar for keeping track of how close the user is to their target cash goal.
+    /// </summary>
     public ProgressBar progressBar;
 
     /// <summary>
     /// The amount of cash the player has on hand, as displayed in the UI.
     /// </summary>
     public float cashOnHand;
+
+    /// <summary>
+    /// The game scene manager managing this cash on hand object.
+    /// </summary>
+    public GameSceneManager gameSceneManager;
+    
 
     /// <summary>
     /// The text displaying the player's current cash on hand.
@@ -31,9 +38,17 @@ public class CashOnHand : MonoBehaviour
         this.cashOnHand = cashOnHandToSet;
         this.cashOnHandText.text = $"${cashOnHandToSet}";
         
-        // Set the progress of the user in reaching their target cash goal.
-        this.progressBar.SetCashOnHandProgress(cashOnHandToSet, this.progressBar.targetCashOnHand);
+        // Set the progress of the user in reaching their target cash goal, if the victory condition is a cash goal.
+        if (this._victoryCondition == VictoryCondition.CASH)
+        {
+            this.progressBar.SetCashOnHandProgress(cashOnHandToSet, this.progressBar.targetCashOnHand);
+        }
     }
+
+    /// <summary>
+    /// The victory condition type that must be fulfilled to win a level.
+    /// </summary>
+    private VictoryCondition _victoryCondition => this.gameSceneManager.gameState.levelBeingPlayed.victoryCondition;
 
     /// <summary>
     /// Decrement the amount of cash the player has on hand by <paramref name="amountToDecrement"/>.

@@ -37,6 +37,9 @@ public class ProgressBar : MonoBehaviour
     /// </summary>
     public VictoryScreen victoryScreen;
 
+    /// <summary>
+    /// The amount of cash the player has on hand.
+    /// </summary>
     public float cashOnHand;
 
     /// <summary>
@@ -44,7 +47,7 @@ public class ProgressBar : MonoBehaviour
     /// </summary>
     /// <param name="cashOnHandToSet">The value to set the amount of cash the player has on hand.</param>
     /// <param name="_targetCashOnHand">
-    /// The target amount of cash that the player should get to win the level/</param>
+    /// The target amount of cash that the player should get to win the level.</param>
     public void SetCashOnHandProgress(float cashOnHandToSet, float _targetCashOnHand)
     {
         this.cashOnHand = cashOnHandToSet;
@@ -53,8 +56,19 @@ public class ProgressBar : MonoBehaviour
         // Set the text display of the user's progress.
         this.progressText.text = $"Progress : ${cashOnHandToSet}/${_targetCashOnHand}";
 
+        // Set the progress that the player has achieved in terms of a cash goal through a percentage.
+        this.SetProgressPercentage(cashOnHandToSet / _targetCashOnHand);
+    }
+
+    /// <summary>
+    /// Set the victory progress that the user has made towards victory to <paramref name="progress"/>. 
+    /// </summary>
+    /// <param name="progress">The progress that the user has made, as a float between 0 and 1 (sometimes greater
+    /// than one, if the user has exceeded the goal).</param>
+    private void SetProgressPercentage(float progress)
+    {
         // Cap the maximum amount of the fill of the progress bar by 100% from above.
-        float progressPercentage = Mathf.Min(cashOnHandToSet / _targetCashOnHand, 1f);
+        float progressPercentage = Mathf.Min(progress, 1f);
 
         // Finally, set the width of the RectTransform of the progress bar foreground accordingly.
         this.foregroundRectTransform.SetAnchorMaxX(progressPercentage);

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Helper.ExtendSpace;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using UnityEngine;
@@ -44,6 +46,11 @@ namespace TSC.Game.Other
         public List<Dish> startingDishes;
 
         /// <summary>
+        /// The type of victory condition that must be fulfilled to beat the level.
+        /// </summary>
+        public VictoryCondition victoryCondition;
+
+        /// <summary>
         /// The number of customers in a level.
         /// </summary>
         public int customerCount;
@@ -62,7 +69,22 @@ namespace TSC.Game.Other
         {
             TextAsset textAsset = Resources.Load<TextAsset>($"Data/Levels/Level{levelToCreate}");
             string textFile = textAsset.text;
-            return JsonConvert.DeserializeObject<Level>(textFile);
+            Level returnedLevel = JsonConvert.DeserializeObject<Level>(textFile);
+            ValidateLevel(returnedLevel);
+            return returnedLevel;
+        }
+
+        /// <summary>
+        /// Validate the provided level object. Throw an Exception if one of the validations isn't met.
+        /// </summary>
+        /// <param name="returnedLevel"></param>
+        [UsedImplicitly]
+        private static void ValidateLevel(Level returnedLevel)
+        {
+            if (returnedLevel.victoryCondition == null)
+            {
+                throw new RuntimeException("The victory condition must be supplied!");
+            }
         }
 
     }

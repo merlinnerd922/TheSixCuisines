@@ -272,7 +272,12 @@ public class GameSceneManager : MonoBehaviour
         
         // Set how much cash the player has on hand and their target cash goal.
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
-        this.SetCashGoal(this.gameState.levelBeingPlayed.moneyGoal);
+
+        // For cash victory conditions, set the victory condition goal.
+        if (this.gameState.levelBeingPlayed.victoryCondition == VictoryCondition.CASH)
+        {
+            this.SetCashGoal(this.gameState.levelBeingPlayed.moneyGoal);
+        }
 
         // Load the UI for the menu display.
         // Clear out the menu because we're currently loading the dish menu anew.

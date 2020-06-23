@@ -7,5 +7,6 @@
   ],
   "dishDomain": [
     "POTATO_SOUP", "FRENCH_FRIES", "BURGER", "FRIED_CHICKEN"
-  ]
+  ],
+  "customerCount" : 25
 }

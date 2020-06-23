@@ -301,15 +301,25 @@ public class GameSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculate and set the number of customers that are projected to come to the restaurant.
+    /// Set the number of customers that are projected to come to the restaurant. That value is stored in the level object's
+    /// "customerCount".
     /// </summary>
     private void CalculateCustomerAmount()
+    {
+        this.hudMenuManager.trendsDisplay.SetNumberOfEstimatedCustomers(this.gameState.levelBeingPlayed.customerCount);
+    }
+
+    /// <summary>
+    /// Calculate and return the number of estimated customers slated to come to this restaurant based on the map.
+    /// </summary>
+    /// <returns>The number of customers expected to come to the restaurant, based on the map's condos.</returns>
+    private int CalculateCustomersFromMap()
     {
         int numberOfCustomers = 0;
 
         // Retrieve all tiles within the tilemap.
-        BoundsInt bounds = tilemap.cellBounds;
-        TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
+        BoundsInt bounds = this.tilemap.cellBounds;
+        TileBase[] allTiles = this.tilemap.GetTilesBlock(bounds);
 
         // For each tile in the tilemap, if the tile is a condo tile, then increment the number of customers by 3.
         for (int x = 0; x < bounds.size.x; x++)
@@ -327,8 +337,7 @@ public class GameSceneManager : MonoBehaviour
             }
         }
 
-        // Finally, when we're done calculating the number of customers, set that number accordingly.
-        this.hudMenuManager.trendsDisplay.SetNumberOfEstimatedCustomers(numberOfCustomers);
+        return numberOfCustomers;
     }
 
     /// <summary>

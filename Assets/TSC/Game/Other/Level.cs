@@ -43,7 +43,10 @@ namespace TSC.Game.Other
         /// </summary>
         public List<Dish> startingDishes;
 
-        public Dish startingDish;
+        /// <summary>
+        /// The number of customers in a level.
+        /// </summary>
+        public int customerCount;
 
         /// <summary>
         /// The amount of cash that the player starts with.

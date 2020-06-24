@@ -61,6 +61,17 @@ namespace TSC.Game.Other
         public int startingCash;
 
         /// <summary>
+        /// For dish victories, the number of dishes that must be sold of a particular type to win a level.
+        /// </summary>
+        [FormerlySerializedAs("dishCountGoal")]
+        public int victoryDishCount;
+
+        /// <summary>
+        /// The dish that must be purchased in a specific quantity to win the level.
+        /// </summary>
+        public Dish victoryDish;
+
+        /// <summary>
         /// Extract and return level information stored in a saved JSON file.
         /// </summary>
         /// <param name="levelToCreate">The level to load.</param>
@@ -68,6 +79,13 @@ namespace TSC.Game.Other
         public static Level LoadLevel(int levelToCreate)
         {
             TextAsset textAsset = Resources.Load<TextAsset>($"Data/Levels/Level{levelToCreate}");
+            
+            // Do nothing if the level doesn't quite exist.
+            if (textAsset == null)
+            {
+                return null;
+            }
+            
             string textFile = textAsset.text;
             Level returnedLevel = JsonConvert.DeserializeObject<Level>(textFile);
             ValidateLevel(returnedLevel);
@@ -77,7 +95,7 @@ namespace TSC.Game.Other
         /// <summary>
         /// Validate the provided level object. Throw an Exception if one of the validations isn't met.
         /// </summary>
-        /// <param name="returnedLevel"></param>
+        /// <param name="returnedLevel">The level to validate.</param>
         [UsedImplicitly]
         private static void ValidateLevel(Level returnedLevel)
         {

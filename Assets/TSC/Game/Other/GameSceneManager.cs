@@ -169,6 +169,13 @@ public class GameSceneManager : MonoBehaviour
         // Then, decrement the dish's amount by the amount that customers bought.
         this.gameState.cashOnHand += numberOfCustomersToBuyDish * dish.GetRetailPrice();
         this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
+
+        // For dish victory conditions, increment the amount of the dish purchased.
+        if (this.gameState.levelBeingPlayed.victoryCondition == VictoryCondition.DISH &&
+            this.gameState.levelBeingPlayed.victoryDish == dish)
+        {
+            SetDishCountSoFar(this.progressBar.dishesSoldSoFar + numberOfCustomers);
+        }
     }
 
     /// <summary>
@@ -210,7 +217,7 @@ public class GameSceneManager : MonoBehaviour
         if (levelInfo != null)
         {
             level = levelInfo.GetComponent<LevelInfoObject>().level;
-            
+
             // Be sure to delete the Level object afterwards, as it is no longer needed. Moreover, this element
             // would be duplicated if this scene is loaded again, so we want to avoid duplicates.
             DestroyImmediate(levelInfo);
@@ -248,7 +255,7 @@ public class GameSceneManager : MonoBehaviour
 
         // Set the current level in the UI.
         currentLevelText.text = $"Level {level.level}";
-        
+
         // Initialize info on the current turn, the amount of cash the player has on hand, as well as the amount of 
         // food the player has in their inventory.
         this.LoadAndInitializeScene(this.gameState);
@@ -263,20 +270,26 @@ public class GameSceneManager : MonoBehaviour
     {
         // Set the game state to match the given game state.
         this.gameState = _gameState;
-        
+
         // Initialize the starting turn number, iff it isn't set.
         this.gameState.InitializeFieldsIfNull();
 
         // Set all the UI displays for all the elements in the save file.
         this.SetCurrentTurn(this.gameState.turnNumber);
-        
+
         // Set how much cash the player has on hand and their target cash goal.
-        this.cashOnHandDisplay.SetCashOnHand(this.gameState.cashOnHand);
+        this.SetCashOnHand(this.gameState.cashOnHand);
 
         // For cash victory conditions, set the victory condition goal.
-        if (this.gameState.levelBeingPlayed.victoryCondition == VictoryCondition.CASH)
+        Level gameStateLevelBeingPlayed = this.gameState.levelBeingPlayed;
+        if (gameStateLevelBeingPlayed.victoryCondition == VictoryCondition.CASH)
         {
-            this.SetCashGoal(this.gameState.levelBeingPlayed.moneyGoal);
+            this.SetCashGoal(gameStateLevelBeingPlayed.moneyGoal);
+        }
+        else
+        {
+            this.SetVictoryDish(gameStateLevelBeingPlayed.victoryDish);
+            this.SetDishProgress(0, gameStateLevelBeingPlayed.victoryDishCount);
         }
 
         // Load the UI for the menu display.
@@ -290,10 +303,42 @@ public class GameSceneManager : MonoBehaviour
         this.CalculateCustomerAmount();
 
         // Initialize info on the recipes not purchased.
-        this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes(this.gameState.levelBeingPlayed.dishDomain);
+        this.hudMenuManager.newDishesDisplay.LoadUnboughtDishes(gameStateLevelBeingPlayed.dishDomain);
 
         // Initialize information on the decor the user HASN'T bought.
         this.hudMenuManager.decorDisplay.Initialize(this.gameState);
+    }
+
+    /// <summary>
+    /// Set the victory dish required to be purchased for victory to <paramref name="victoryDish"/>.
+    /// </summary>
+    /// <param name="victoryDish">The dish to set the victory dish to.</param>
+    private void SetVictoryDish(Dish victoryDish)
+    {
+        this.progressBar.SetVictoryDish(victoryDish);
+    }
+
+    /// <summary>
+    /// Set the sold dish count and target dish count to <paramref name="dishesSoldSoFar"/> and <paramref name="victoryDishCount"/>,
+    /// respectively.
+    /// </summary>
+    /// <param name="dishesSoldSoFar">The amount of dishes sold so far.</param>
+    /// <param name="victoryDishCount">The number of dishes that must be purchased for a victory.</param>
+    private void SetDishProgress(int dishesSoldSoFar, int victoryDishCount)
+    {
+        this.progressBar.dishesSoldSoFar = dishesSoldSoFar;
+        this.progressBar.victoryDishCount = victoryDishCount;
+        this.progressBar.SetDishesProgress(this.progressBar.dishesSoldSoFar, victoryDishCount);
+    }
+
+    /// <summary>
+    /// Set the count of the number of victory dishes sold so far to <paramref name="dishesSoldSoFar"/>. 
+    /// </summary>
+    /// <param name="dishesSoldSoFar">The value to set the number of dishes sold so far to.</param>
+    private void SetDishCountSoFar(int dishesSoldSoFar)
+    {
+        this.progressBar.dishesSoldSoFar = dishesSoldSoFar;
+        this.progressBar.SetDishesProgress(dishesSoldSoFar, this.progressBar.victoryDishCount);
     }
 
     /// <summary>

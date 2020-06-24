@@ -51,6 +51,13 @@ public class LevelSelectorManager : MonoBehaviour
     {
         // Store information on the level that's about to be played in a script within the level info GameObject.
         this.levelInfoScript.level = Level.LoadLevel(this._currentSelectedLevel);
+        
+        // Do nothing if the level doesn't exist.
+        if (this.levelInfoScript.level == null)
+        {
+            Debug.Log("Level does not exist.");
+            return;
+        }
 
         // Convert the level info object to a root-level object so that it can be persisted across scenes.
         GameObject _levelInfoObject = this.levelInfoScript.gameObject;
@@ -64,7 +71,7 @@ public class LevelSelectorManager : MonoBehaviour
     /// <summary>
     /// The maximum available level to the player.
     /// </summary>
-    private int MAX_LEVEL = 3;
+    private int MAX_LEVEL = 100;
 
     /// <summary>
     /// Decrement the currently selected level.

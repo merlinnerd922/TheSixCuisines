@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Extend;
+using Helper;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -43,6 +44,23 @@ public class ProgressBar : MonoBehaviour
     public float cashOnHand;
 
     /// <summary>
+    /// The number of the victory dish sold so far.
+    /// </summary>
+    public int dishesSoldSoFar;
+
+
+    /// <summary>
+    /// The number of dishes to sell to win the level.
+    /// </summary>
+    [FormerlySerializedAs("targetDishesSold")]
+    public int victoryDishCount;
+
+    /// <summary>
+    /// The dish required to be purchased in a specific quantity to ensure victory.
+    /// </summary>
+    private Dish victoryDish;
+
+    /// <summary>
     /// Set the cash on hand that the player has to <paramref name="cashOnHandToSet"/>, and update the player's progress accordingly.
     /// </summary>
     /// <param name="cashOnHandToSet">The value to set the amount of cash the player has on hand.</param>
@@ -78,6 +96,34 @@ public class ProgressBar : MonoBehaviour
         {
             this.victoryScreen.Activate();
         }
+    }
+
+    /// <summary>
+    /// Set the sold dish count and target dish count to <paramref name="_dishesSoldSoFar"/> and <paramref name="_victoryDishCount"/>,
+    /// respectively.
+    /// </summary>
+    /// <param name="_dishesSoldSoFar">The amount of dishes sold so far.</param>
+    /// <param name="_victoryDishCount">The number of dishes that must be purchased for a victory.</param>
+    public void SetDishesProgress(int _dishesSoldSoFar, int _victoryDishCount)
+    {
+        this.dishesSoldSoFar = _dishesSoldSoFar;
+        this.victoryDishCount = _victoryDishCount;
+
+        // Set the text display of the user's progress.
+        this.progressText.text =
+            $"{this.dishesSoldSoFar}/{this.victoryDishCount} {this.victoryDish.ToTitleCaseSpacedString()} Sold";
+
+        // Set the progress that the player has achieved in dish sales in terms of a percentage.
+        this.SetProgressPercentage((float) this.dishesSoldSoFar / this.victoryDishCount);
+    }
+
+    /// <summary>
+    /// Set the dish required to be purchased by customers for achieving victory to <paramref name="_victoryDish"/>.
+    /// </summary>
+    /// <param name="_victoryDish">The dish required to be purchased by customers in a certain quantity to win a level.</param>
+    public void SetVictoryDish(Dish _victoryDish)
+    {
+        this.victoryDish = _victoryDish;
     }
 
 }

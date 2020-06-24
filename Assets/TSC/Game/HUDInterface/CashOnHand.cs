@@ -33,7 +33,7 @@ public class CashOnHand : MonoBehaviour
     /// Set the value of the player's current cash on hand to <paramref name="cashOnHandToSet"/>.
     /// </summary>
     /// <param name="cashOnHandToSet">The value to set the player's current cash on hand to.</param>
-    public void SetCashOnHand(float cashOnHandToSet)
+    internal void SetCashOnHand(float cashOnHandToSet)
     {
         this.cashOnHand = cashOnHandToSet;
         this.cashOnHandText.text = $"${cashOnHandToSet}";

@@ -16,6 +16,13 @@ namespace TSC.Game.Menu
             SceneManager.LoadScene("Scenes/MainHubScene");
         }
 
+        /// <summary>
+        /// Go to the setup scene.
+        /// </summary>
+        public void GoToSetupScene()
+        {
+            SceneManager.LoadScene("Scenes/SetupGame");
+        }
 
     }
 

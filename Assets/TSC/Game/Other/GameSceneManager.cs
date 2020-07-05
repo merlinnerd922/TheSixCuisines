@@ -85,11 +85,12 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public void IncrementTurn()
     {
-        // Have a random number of customers buy food, within +-10 customers of the estimated number of customers
+        // Have a random number of customers buy food, within +-5 customers of the estimated number of customers
         // estimated to arrive.
         int estimatedCustomers = this.hudMenuManager.trendsDisplay.estimatedNumberOfCustomers;
+        int customerIntervalRadius = 5;
         int numberOfCustomers =
-            NumberRandomizer.GetIntBetweenExclusive(estimatedCustomers - 10, estimatedCustomers + 10);
+            NumberRandomizer.GetIntBetweenExclusive(estimatedCustomers - customerIntervalRadius, estimatedCustomers + customerIntervalRadius);
 
         // Have the generated customers buy a dish.
         this.DoBuyDishes(numberOfCustomers);

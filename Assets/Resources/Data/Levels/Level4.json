@@ -2,13 +2,13 @@
   "startingCash": 200,
   "level": 4,
   "startingDishes": [
-    "FRENCH_FRIES", "POTATO_SOUP"
+    "FRENCH_FRIES"
   ],
   "dishDomain": [
-    "POTATO_SOUP", "FRENCH_FRIES", "BURGER", "FRIED_CHICKEN"
+    "FRENCH_FRIES", "FRIED_CHICKEN"
   ],
   "customerCount" : 25,
   "victoryCondition": "DISH",
-  "victoryDish": "FRENCH_FRIES",
+  "victoryDish": "FRIED_CHICKEN",
   "victoryDishCount": 100
 }
